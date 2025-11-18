@@ -1,0 +1,46 @@
+[gd_scene load_steps=2 format=3 uid="uid://bv525pq6kkxm5"]
+
+[ext_resource type="Script" uid="uid://b55o1w0clfmel" path="res://map/scripts/map.gd" id="1_l8r71"]
+
+[node name="MapScene" type="Node2D"]
+light_mask = 2
+script = ExtResource("1_l8r71")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_right = 2004.0
+offset_bottom = 1000.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="MapView" type="Control" parent="ScrollContainer"]
+custom_minimum_size = Vector2(2000, 5000)
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+
+[node name="Paths" type="Line2D" parent="ScrollContainer/MapView"]
+
+[node name="NodeContainer" type="Control" parent="ScrollContainer/MapView"]
+layout_mode = 1
+anchor_right = 0.04
+anchor_bottom = 0.02
+mouse_filter = 2
+
+[node name="LegendPanel" type="Control" parent="."]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 3
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 924.0
+offset_top = 66.0
+offset_right = 1224.0
+offset_bottom = 366.0
+grow_horizontal = 0
+grow_vertical = 2
