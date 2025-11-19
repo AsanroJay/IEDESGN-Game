@@ -17,3 +17,4 @@ var row_index 		#which layer of the tree its on
 var column_index			#which column slot
 var image_path 			#for image paths
 var connections = []	#connection to other nodes
+var view = null

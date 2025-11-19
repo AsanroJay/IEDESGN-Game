@@ -9,6 +9,7 @@ anchors_preset = 0
 script = ExtResource("1_r4nyj")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_dktu2")
