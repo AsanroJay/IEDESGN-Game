@@ -1,6 +1,5 @@
 extends Node2D
 
-
 var map_scene
 
 const DOT_SPACING := 24.0
