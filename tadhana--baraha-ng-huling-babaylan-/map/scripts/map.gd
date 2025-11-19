@@ -77,7 +77,6 @@ func connect_nodes():
 			var target = get_closest_node(node, next_layer)
 			node.connections.append(target)
 
-			# Optional extra connections 
 			# Connect left
 			if randf() < 0.35:
 				var left = get_adjacent_node(node, next_layer, -1)
@@ -90,6 +89,24 @@ func connect_nodes():
 				if right:
 					node.connections.append(right)
 	
+	for layer in range(map_tree.size() - 1):
+		var current_layer = map_tree[layer]
+		var next_layer = map_tree[layer + 1]
+
+		for next_node in next_layer:
+			var has_parent = false
+
+			# check all previous layer nodes
+			for node in current_layer:
+				if next_node in node.connections:
+					has_parent = true
+					break
+
+			# if no parent, connect to closest parent
+			if not has_parent:
+				var closest = reverse_get_closest_node(next_node, current_layer)
+				closest.connections.append(next_node)
+	
 	
 func get_closest_node(node, next_layer):
 	var col = node.column_index
@@ -99,6 +116,15 @@ func get_closest_node(node, next_layer):
 
 	# otherwise clamp to last index (use closest available)
 	return next_layer[next_layer.size() - 1]
+	
+func reverse_get_closest_node(child_node, prev_layer):
+	var col = child_node.column_index
+	
+	if col < prev_layer.size():
+		return prev_layer[col]
+
+	return prev_layer[prev_layer.size() - 1]
+
 
 func get_adjacent_node(node, next_layer, offset):
 	var new_col = node.column_index + offset

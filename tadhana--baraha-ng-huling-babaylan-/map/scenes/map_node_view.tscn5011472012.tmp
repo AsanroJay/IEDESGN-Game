@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdpjpiyaj5cp7"]
+
+[ext_resource type="Script" uid="uid://dah53ca5ydwjd" path="res://map/scripts/map_node_view.gd" id="1_r4nyj"]
+[ext_resource type="Texture2D" uid="uid://6ad82roi423j" path="res://map/assets/mapnode_default.png" id="2_dktu2"]
+
+[node name="MapNodeView" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_r4nyj")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_dktu2")
+expand_mode = 1
+stretch_mode = 5
