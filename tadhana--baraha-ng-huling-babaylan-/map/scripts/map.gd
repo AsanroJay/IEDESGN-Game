@@ -138,14 +138,20 @@ func get_node_position(row: int, col: int) -> Vector2:
 	# tweak later
 	var start_x := 200
 	var start_y := 200
-	var spacing_x := 300
-	var spacing_y := 250
+	var spacing_x = randomize_x_spacing()
+	var spacing_y = randomize_y_spacing()
 
 	var x = start_x + (col * spacing_x)
 	var max_rows := 12
 	var y = start_y + ((max_rows - row) * spacing_y)
 
 	return Vector2(x, y)
+	
+func randomize_x_spacing():
+	return randf_range(275,300)
+	
+func randomize_y_spacing():
+	return randf_range(290,300)
 	 
 func spawn_node_visuals():
 	print("Spawning visuals...")
