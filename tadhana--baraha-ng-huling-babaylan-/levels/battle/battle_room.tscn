@@ -1,3 +1,53 @@
-[gd_scene format=3 uid="uid://dywmkr2eoj5m8"]
+[gd_scene load_steps=4 format=3 uid="uid://dywmkr2eoj5m8"]
 
-[node name="EncounterRoom" type="Node2D"]
+[ext_resource type="Script" uid="uid://do126ggh2pnsw" path="res://levels/battle/battle_room.gd" id="1_el3db"]
+[ext_resource type="Texture2D" uid="uid://dwj6wqhboqx6d" path="res://levels/battle/assets/level_background.jpg" id="2_b5xrt"]
+[ext_resource type="Texture2D" uid="uid://cynuam4ahhhjb" path="res://levels/battle/assets/navbar.png" id="3_b5xrt"]
+
+[node name="BattleRoom" type="Node2D"]
+script = ExtResource("1_el3db")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_left = -8.0
+offset_top = 37.0
+offset_right = 1161.0
+offset_bottom = 655.0
+texture = ExtResource("2_b5xrt")
+
+[node name="PlayerContainer" type="Node2D" parent="."]
+
+[node name="EnemyContainer" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="PlayerHUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="EnemyHUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NavbarTemp" type="TextureRect" parent="."]
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1152.0
+offset_bottom = 44.0
+texture = ExtResource("3_b5xrt")
+expand_mode = 1
+
+[node name="Map Button" type="Button" parent="NavbarTemp"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.09900001
+anchor_bottom = 0.21100001
+offset_left = 1025.0
+offset_top = 6.0
+offset_right = 941.85297
+offset_bottom = 27.505
+
+[connection signal="pressed" from="NavbarTemp/Map Button" to="." method="_on_map_button_pressed"]

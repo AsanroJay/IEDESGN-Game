@@ -166,8 +166,13 @@ func spawn_node_visuals():
 			view.position = get_node_position(node.row_index, node.column_index)
 			node.view = view
 			node_container.add_child(view)
+			view.node_clicked.connect(_on_node_clicked)
+
 			
 	$ScrollContainer/MapView/Paths.queue_redraw()
+
+func _on_node_clicked(node):
+	GameManager.start_battle_from_node(node)
 	
 func _ready():
 	print("MAP READY")

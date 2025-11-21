@@ -4,10 +4,13 @@ class_name MapNodeView
 var map_node  # reference to  MapNode data
 @onready var texture_rect = $TextureRect #texture/image holder
 
+signal node_clicked(node)
 
-func enter_scene():
-	pass
-	
+func _gui_input(event):
+	if event is InputEventMouseButton and event.pressed:
+		emit_signal("node_clicked", map_node)
+
+
 func set_node_data(node):
 	map_node = node
 	
