@@ -57,7 +57,6 @@ bbcode_enabled = true
 text = "[img=24x24]res://map/assets/mapnode_encounter.png[/img] Enemy"
 
 [node name="Buffed" type="RichTextLabel" parent="LegendPanel"]
-layout_mode = 0
 offset_left = 90.0
 offset_top = 61.0
 offset_right = 247.0
@@ -66,7 +65,6 @@ bbcode_enabled = true
 text = "[img=24x24]res://map/assets/mapnode_buffed.png[/img] Buffed Enemy"
 
 [node name="Mystery" type="RichTextLabel" parent="LegendPanel"]
-layout_mode = 0
 offset_left = 89.0
 offset_top = 145.0
 offset_right = 246.0
@@ -76,7 +74,6 @@ text = "[img=24x24]res://map/assets/mapnode_mystery.png[/img]  Random
 "
 
 [node name="Boss" type="RichTextLabel" parent="LegendPanel"]
-layout_mode = 0
 offset_left = 90.0
 offset_top = 91.0
 offset_right = 247.0
@@ -86,7 +83,6 @@ text = "[img=24x24]res://map/assets/mapnode_boss.png[/img]  Boss
 "
 
 [node name="Shop" type="RichTextLabel" parent="LegendPanel"]
-layout_mode = 0
 offset_left = 90.0
 offset_top = 118.0
 offset_right = 247.0
@@ -96,7 +92,6 @@ text = "[img=24x24]res://map/assets/mapnode_shop.png[/img]  Shop
 "
 
 [node name="Rest Site" type="RichTextLabel" parent="LegendPanel"]
-layout_mode = 0
 offset_left = 89.0
 offset_top = 175.0
 offset_right = 246.0
@@ -105,7 +100,6 @@ bbcode_enabled = true
 text = "[img=24x24]res://map/assets/mapnode_rest.png[/img]  Rest"
 
 [node name="Legend" type="RichTextLabel" parent="LegendPanel"]
-layout_mode = 0
 offset_left = 138.0
 offset_top = 4.0
 offset_right = 203.0

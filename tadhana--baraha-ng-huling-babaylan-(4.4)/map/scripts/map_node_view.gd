@@ -5,9 +5,6 @@ var map_node  # reference to  MapNode data
 @onready var texture_rect = $TextureRect #texture/image holder
 
 
-func enter_scene():
-	pass
-	
 func set_node_data(node):
 	map_node = node
 	
