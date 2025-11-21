@@ -14,6 +14,28 @@ func load_map():
 
 	map_scene.visible = true
 	state = GameState.MAP
+	
+
+func enter_room(node):
+	var type = node.type
+	match type:
+		"encounter": 
+			print("Entering encounter...")
+			start_battle_from_node(node)
+		"buffed": 
+			print("Entering buffed encounter...")
+		"shop": 
+			print("Entering shop...")
+		"rest": 
+			print("Entering rest site...")
+		"mystery": 
+			print("Entering random encounter...")
+		"boss": 
+			print("Entering boss fight...")
+		_: 
+			print("Not a room type!")
+		
+			
 
 func start_battle_from_node(node):
 	state = GameState.BATTLE

@@ -172,7 +172,7 @@ func spawn_node_visuals():
 	$ScrollContainer/MapView/Paths.queue_redraw()
 
 func _on_node_clicked(node):
-	GameManager.start_battle_from_node(node)
+	GameManager.enter_room(node)
 	
 func _ready():
 	print("MAP READY")
