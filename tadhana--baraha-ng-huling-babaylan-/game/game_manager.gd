@@ -26,6 +26,7 @@ func enter_room(node):
 			print("Entering buffed encounter...")
 		"shop": 
 			print("Entering shop...")
+			enter_shop(node)
 		"rest": 
 			print("Entering rest site...")
 		"mystery": 
@@ -76,7 +77,15 @@ func generate_random_encounter(node):
 		enter_rest_site(node)
 
 func enter_shop(node):
-	pass
+	state = GameState.SHOP
+	
+	if map_scene:
+		map_scene.visible = false
+		
+	current_room = load("res://levels/shop/shop.tscn").instantiate()
+	get_tree().root.add_child(current_room)
+		
+	current_room.load_shop_room(node,player)
 	
 func enter_rest_site(node):
 	pass

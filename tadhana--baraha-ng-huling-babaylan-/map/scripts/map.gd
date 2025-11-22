@@ -161,7 +161,7 @@ func spawn_node_visuals():
 	for layer in map_tree:
 		for node in layer:
 			var view = MapNodeViewScene.instantiate()
-			print("View:", view) 
+			#print("View:", view) this is a debug print
 			view.set_node_data(node)
 			view.position = get_node_position(node.row_index, node.column_index)
 			node.view = view

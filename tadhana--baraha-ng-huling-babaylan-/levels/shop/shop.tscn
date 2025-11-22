@@ -1,0 +1,73 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxcxnkeatlu8i"]
+
+[ext_resource type="Script" uid="uid://dhx3a63hbojgf" path="res://levels/shop/shop.gd" id="1_2tlbo"]
+[ext_resource type="Texture2D" uid="uid://dwj6wqhboqx6d" path="res://levels/battle/assets/level_background.jpg" id="2_7w5nn"]
+[ext_resource type="Texture2D" uid="uid://byu02uwjk8n6t" path="res://levels/shop/assets/ShopKeeper.png" id="3_7w5nn"]
+[ext_resource type="Texture2D" uid="uid://cynuam4ahhhjb" path="res://levels/battle/assets/navbar.png" id="3_ab8xu"]
+
+[node name="Shop" type="Node2D"]
+script = ExtResource("1_2tlbo")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_top = 40.0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_7w5nn")
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerContainer" type="Node2D" parent="."]
+
+[node name="PlayerNode" type="Node2D" parent="PlayerContainer"]
+
+[node name="PlayerSpawn" type="Marker2D" parent="PlayerContainer"]
+position = Vector2(246, 433)
+
+[node name="ShopKeeperContainer" type="Node2D" parent="."]
+position = Vector2(1, -2)
+
+[node name="OpenShop" type="Button" parent="ShopKeeperContainer"]
+offset_left = 809.0
+offset_top = 285.0
+offset_right = 825.9388
+offset_bottom = 293.94992
+scale = Vector2(18.773518, 20.558859)
+
+[node name="TextureRect" type="TextureRect" parent="ShopKeeperContainer"]
+offset_left = 800.0
+offset_top = 278.0
+offset_right = 1075.0
+offset_bottom = 475.0
+texture = ExtResource("3_7w5nn")
+expand_mode = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="PlayerHUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NavbarTemp" type="TextureRect" parent="."]
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1152.0
+offset_bottom = 44.0
+texture = ExtResource("3_ab8xu")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Map Button" type="Button" parent="NavbarTemp"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.09900001
+anchor_bottom = 0.21100001
+offset_left = 1025.0
+offset_top = 6.0
+offset_right = 941.85297
+offset_bottom = 27.505
+metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="ShopKeeperContainer/OpenShop" to="." method="_on_open_shop_mouse_entered"]
+[connection signal="pressed" from="ShopKeeperContainer/OpenShop" to="." method="_on_open_shop_pressed"]
+[connection signal="pressed" from="NavbarTemp/Map Button" to="." method="_on_map_button_pressed"]
