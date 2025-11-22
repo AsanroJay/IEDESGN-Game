@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://0l1iyigv0lbv"]
+
+[ext_resource type="Script" uid="uid://dqbbbb2cpqgu6" path="res://entity/player/player_node.gd" id="1_5161t"]
+[ext_resource type="Texture2D" uid="uid://b0xt0islmkkkx" path="res://entity/player/assets/player.png" id="2_2ttcw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rnhdi"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2ttcw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_2ttcw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_2ttcw"]
+colors = PackedColorArray(0, 0, 0, 0.7254902, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rnhdi"]
+gradient = SubResource("Gradient_2ttcw")
+height = 32
+fill = 1
+fill_from = Vector2(0.5046729, 0.43925235)
+
+[node name="PlayerNode" type="Node2D"]
+script = ExtResource("1_5161t")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rnhdi")
+animation = &"idle"
+
+[node name="Shadow" type="Sprite2D" parent="."]
+position = Vector2(2, 118.99999)
+scale = Vector2(3.8906248, 1.0836362)
+texture = SubResource("GradientTexture2D_rnhdi")

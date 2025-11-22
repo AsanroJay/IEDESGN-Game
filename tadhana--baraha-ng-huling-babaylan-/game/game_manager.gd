@@ -30,6 +30,7 @@ func enter_room(node):
 			print("Entering rest site...")
 		"mystery": 
 			print("Entering random encounter...")
+			generate_random_encounter(node)
 		"boss": 
 			print("Entering boss fight...")
 		_: 
@@ -61,6 +62,24 @@ func return_to_map():
 
 	state = GameState.MAP
 
+func generate_random_encounter(node):
+	var rand_num = randf_range(0,1)
+	
+	if rand_num >= 0.4:
+		print("Random encounter room: Battle")
+		start_battle_from_node(node)
+	elif rand_num > 0.2 and rand_num < 0.4:
+		print("Random encounter room: Shop")
+		enter_shop(node)
+	else:
+		print("Random encounter room: Rest Site")
+		enter_rest_site(node)
+
+func enter_shop(node):
+	pass
+	
+func enter_rest_site(node):
+	pass
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
