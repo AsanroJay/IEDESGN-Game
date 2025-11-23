@@ -8,12 +8,18 @@ enum GameState { MAP, BATTLE, SHOP, REST, BOSS }
 var state = GameState.MAP
 
 func load_map():
+	if player == null:
+		player = Player.new()
+		print("Player initialized:", player)
+		
 	if map_scene == null:
 		map_scene = load("res://map/scenes/map.tscn").instantiate()
+		print("Map initialized")
 		get_tree().root.add_child(map_scene)
 
 	map_scene.visible = true
 	state = GameState.MAP
+	
 	
 
 func enter_room(node):
@@ -92,4 +98,4 @@ func enter_rest_site(node):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	load_map()

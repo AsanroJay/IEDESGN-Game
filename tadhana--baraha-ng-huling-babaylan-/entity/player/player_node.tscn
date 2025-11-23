@@ -28,7 +28,7 @@ animations = [{
 }]
 
 [sub_resource type="Gradient" id="Gradient_2ttcw"]
-colors = PackedColorArray(0, 0, 0, 0.7254902, 0, 0, 0, 0)
+colors = PackedColorArray(0, 0, 0, 0.5294118, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_rnhdi"]
 gradient = SubResource("Gradient_2ttcw")
@@ -40,10 +40,12 @@ fill_from = Vector2(0.5046729, 0.43925235)
 script = ExtResource("1_5161t")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -1)
+scale = Vector2(0.708, 0.75)
 sprite_frames = SubResource("SpriteFrames_rnhdi")
 animation = &"idle"
 
 [node name="Shadow" type="Sprite2D" parent="."]
-position = Vector2(2, 118.99999)
-scale = Vector2(3.8906248, 1.0836362)
+position = Vector2(6, 92)
+scale = Vector2(3.3554685, 0.7396595)
 texture = SubResource("GradientTexture2D_rnhdi")

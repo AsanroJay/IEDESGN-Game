@@ -31,4 +31,5 @@ func load_enemy_data(type):
 	animation_data = db[type]
 	entity_name = animation_data["name"]
 	hp = animation_data["hp"]
+	max_hp = animation_data["hp"]
 	mana = animation_data["mana"]

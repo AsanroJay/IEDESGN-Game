@@ -6,6 +6,7 @@ var deck = []
 var hp: int = 0
 var mana: int = 0
 var block: int = 0
+var max_hp: int = 0
 
 var statuses := {}
 

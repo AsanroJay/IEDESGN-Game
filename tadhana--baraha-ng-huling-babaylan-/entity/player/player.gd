@@ -6,23 +6,37 @@ var discard_pile = []
 var draw_pile = []
 var gold
 #Constructor
-func _init(name) -> void:
-	entity_name = name
-	gold = 0
+func _init() -> void:
+	entity_name = "Player"
+	hp = 50
+	max_hp = 50
+	mana = 3
+	
+	_initialize_starting_deck()
+	
 
-func set_enemy_type(enemy_name: String):
-	name = enemy_name
+func _initialize_starting_deck():
+	# Attack cards
+	for i in range(4):
+		var atk = {
+			"name": "Attack",
+			"type": "attack",
+			"image_path": "res://cards/assets/default_card.png",
+			"damage": 6,
+			"cost": 1
+		}
+		deck.append(atk)
 
-	match enemy_name:
-		"sigbin":
-			sprite_path = "res://enemy/assets/sigbin.png" 
-		"white lady":
-			sprite_path = "res://enemy/assets/white lady.png"
-		"mananaggal":
-			sprite_path = "res://enemy/assets/mananaggal.png"
-		_:
-			sprite_path = "res://enemy/assets/default_enemy.png"
-
+	# Defense cards
+	for i in range(4):
+		var def = {
+			"name": "Defend",
+			"type": "defend",
+			"image_path": "res://cards/assets/default_card.png",
+			"block": 5,
+			"cost": 1
+		}
+		deck.append(def)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
