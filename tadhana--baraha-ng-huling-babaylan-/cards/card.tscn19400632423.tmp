@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://baopxpx14ykfd" path="res://cards/card_node.gd" id="1_ivai2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5k631"]
-size = Vector2(40, 100)
+size = Vector2(60, 120)
 
 [node name="CardScene" type="Area2D"]
 script = ExtResource("1_ivai2")

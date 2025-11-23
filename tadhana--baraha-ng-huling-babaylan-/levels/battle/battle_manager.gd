@@ -51,7 +51,7 @@ func start_battle(battleroom, node_info, player_ref):
 	# Draw starting hand
 	player_entity.draw_pile = player_entity.deck.duplicate()
 	player_entity.draw_pile.shuffle()
-	draw_starting_hand(5)
+	draw_starting_hand(7)
 	
 	print("Battle initialized successfully with enemy:", enemy_type)
 
