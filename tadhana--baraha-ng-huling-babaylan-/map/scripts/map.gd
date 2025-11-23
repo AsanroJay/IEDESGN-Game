@@ -171,6 +171,10 @@ func spawn_node_visuals():
 			
 	$ScrollContainer/MapView/Paths.queue_redraw()
 
+func snap_to_bottom_layer():
+	var scroll := $ScrollContainer
+	scroll.scroll_vertical = scroll.get_v_scroll_bar().max_value
+
 func _on_node_clicked(node):
 	GameManager.enter_room(node)
 	
@@ -179,6 +183,9 @@ func _ready():
 	print("Loaded scene:", MapNodeViewScene)
 	generate_random_map()
 	$ScrollContainer/MapView/Paths.map_scene = self
+	await get_tree().process_frame
+	snap_to_bottom_layer()
+
 
 	
 	

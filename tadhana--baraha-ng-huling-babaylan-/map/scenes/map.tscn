@@ -5,6 +5,7 @@
 
 [node name="MapScene" type="Node2D"]
 light_mask = 2
+position = Vector2(1, 1)
 script = ExtResource("1_l8r71")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
@@ -19,7 +20,7 @@ grow_vertical = 2
 horizontal_scroll_mode = 0
 
 [node name="MapView" type="Control" parent="ScrollContainer"]
-custom_minimum_size = Vector2(2000, 5000)
+custom_minimum_size = Vector2(2000, 4000)
 layout_mode = 2
 size_flags_stretch_ratio = 0.0
 
