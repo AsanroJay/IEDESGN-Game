@@ -14,17 +14,17 @@ func load_enemy_data(type):
 			"mana": 0,
 			"frames": "res://entity/enemy/animations/default_frames.tres"
 		},
-		"sigbin": {
-			"name": "Sigbin",
-			"hp": 60,
+		"aswang": {
+			"name": "Aswang",
+			"hp": 50,
 			"mana": 0,
-			"frames": "res://entity/enemy/animations/sigbin_frames.tres"
+			"frames": "res://entity/enemy/animations/aswang.tres"
 		},
-		"white_lady": {
-			"name": "White Lady",
-			"hp": 75,
+		"mananaggal": {
+			"name": "Manananggal",
+			"hp": 30,
 			"mana": 0,
-			"frames": "res://entity/enemy/animations/white_lady_frames.tres"
+			"frames": "res://entity/enemy/animations/manananggal.tres"
 		}
 	}
 

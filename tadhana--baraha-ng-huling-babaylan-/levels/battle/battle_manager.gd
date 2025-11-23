@@ -60,8 +60,8 @@ func start_battle(battleroom, node_info, player_ref):
 
 func generate_random_enemy(node_info):
 	var layer_rules = {
-		1: ["default"],
-		2: ["default"],
+		1: ["default","aswang"],
+		2: ["default","aswang"],
 		3: ["default"],
 		4: ["default"],
 		5: ["default"],

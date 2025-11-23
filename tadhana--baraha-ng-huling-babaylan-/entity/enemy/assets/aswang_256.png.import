@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://copf0c5umi2u8"
-path="res://.godot/imported/mapnode_shop.png-10e88b1a354e0a372d4169c773c77aa1.ctex"
+uid="uid://crsv8slov1by7"
+path="res://.godot/imported/aswang_256.png-ce049bb241a7f7df6e818180522de291.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://map/assets/mapnode_shop.png"
-dest_files=["res://.godot/imported/mapnode_shop.png-10e88b1a354e0a372d4169c773c77aa1.ctex"]
+source_file="res://entity/enemy/assets/aswang_256.png"
+dest_files=["res://.godot/imported/aswang_256.png-ce049bb241a7f7df6e818180522de291.ctex"]
 
 [params]
 
