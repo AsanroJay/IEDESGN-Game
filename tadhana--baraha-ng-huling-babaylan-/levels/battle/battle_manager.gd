@@ -11,6 +11,7 @@ var PlayerNodeScene = preload("res://entity/player/player_node.tscn")
 var EnemyNodeScene  = preload("res://entity/enemy/enemy_node.tscn")
 var HealthBarScene = preload("res://components/health bar/health_bar.tscn")
 var CardScene = preload("res://cards/card.tscn")
+var ManaCountScene = preload("res://components/mana count/mana_counter.tscn")
 
 # Card system
 const HAND_LIMIT := 8
@@ -46,12 +47,12 @@ func start_battle(battleroom, node_info, player_ref):
 	enemy_node.global_position = enemy_spawn
 
 	# HUD
-	setup_entity_ui()
+	setup_ui()
 
 	# Draw starting hand
 	player_entity.draw_pile = player_entity.deck.duplicate()
 	player_entity.draw_pile.shuffle()
-	draw_starting_hand(7)
+	draw_starting_hand(5)
 	
 	print("Battle initialized successfully with enemy:", enemy_type)
 
@@ -78,7 +79,7 @@ func generate_random_enemy(node_info):
 	return list[i]
 
 
-func setup_entity_ui():
+func setup_ui():
 	# PLAYER HEALTH BAR
 	var player_healthbar = HealthBarScene.instantiate()
 	battleroom_ref.get_node("UI/PlayerHUD").add_child(player_healthbar)
@@ -88,7 +89,10 @@ func setup_entity_ui():
 	var enemy_healthbar = HealthBarScene.instantiate()
 	battleroom_ref.get_node("UI/EnemyHUD").add_child(enemy_healthbar)
 	enemy_healthbar.set_hp(enemy_entity.hp, enemy_entity.max_hp)
-
+	
+	var mana_container = ManaCountScene.instantiate()
+	battleroom_ref.get_node("UI/ManaContainer").add_child(mana_container)
+	mana_container.set_mana(player_entity.mana)
 
 
 func get_hand_container():

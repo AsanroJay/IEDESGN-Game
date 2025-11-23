@@ -65,11 +65,13 @@ grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("3_tp6sv")
 
-[node name="ManaCounter" type="Control" parent="UI"]
+[node name="ManaContainer" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 126.0
+offset_top = 470.0
+offset_right = 188.0
+offset_bottom = 529.0
 
 [node name="NavbarTemp" type="TextureRect" parent="."]
 offset_left = -1.0
