@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bv525pq6kkxm5"]
+[gd_scene load_steps=4 format=3 uid="uid://bv525pq6kkxm5"]
 
 [ext_resource type="Script" uid="uid://b55o1w0clfmel" path="res://map/scripts/map.gd" id="1_l8r71"]
 [ext_resource type="Script" uid="uid://7f3hl5p0r677" path="res://map/scripts/paths.gd" id="2_44ped"]
+[ext_resource type="Texture2D" uid="uid://cva47g0y0c02d" path="res://map/assets/Map BG.png" id="3_almsb"]
 
 [node name="MapScene" type="Node2D"]
 light_mask = 2
@@ -41,36 +42,35 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 1043.0
-offset_top = -2.0
-offset_right = 1281.0
-offset_bottom = 253.0
+offset_left = 1059.0
+offset_right = 1280.0
+offset_bottom = 220.0
 grow_horizontal = 0
 grow_vertical = 2
 
 [node name="Enemy" type="RichTextLabel" parent="LegendPanel"]
 layout_mode = 0
-offset_left = 91.0
+offset_left = 54.0
 offset_top = 34.0
-offset_right = 251.0
+offset_right = 214.0
 offset_bottom = 67.0
 bbcode_enabled = true
 text = "[img=24x24]res://map/assets/mapnode_encounter.png[/img] Enemy"
 
 [node name="Buffed" type="RichTextLabel" parent="LegendPanel"]
 layout_mode = 0
-offset_left = 90.0
+offset_left = 53.0
 offset_top = 61.0
-offset_right = 247.0
+offset_right = 210.0
 offset_bottom = 88.0
 bbcode_enabled = true
 text = "[img=24x24]res://map/assets/mapnode_buffed.png[/img] Buffed Enemy"
 
 [node name="Mystery" type="RichTextLabel" parent="LegendPanel"]
 layout_mode = 0
-offset_left = 89.0
+offset_left = 52.0
 offset_top = 145.0
-offset_right = 246.0
+offset_right = 209.0
 offset_bottom = 172.0
 bbcode_enabled = true
 text = "[img=24x24]res://map/assets/mapnode_mystery.png[/img]  Random
@@ -78,19 +78,19 @@ text = "[img=24x24]res://map/assets/mapnode_mystery.png[/img]  Random
 
 [node name="Boss" type="RichTextLabel" parent="LegendPanel"]
 layout_mode = 0
-offset_left = 90.0
-offset_top = 91.0
-offset_right = 247.0
-offset_bottom = 118.0
+offset_left = 53.0
+offset_top = 90.0
+offset_right = 210.0
+offset_bottom = 117.0
 bbcode_enabled = true
 text = "[img=24x24]res://map/assets/mapnode_boss.png[/img]  Boss
 "
 
 [node name="Shop" type="RichTextLabel" parent="LegendPanel"]
 layout_mode = 0
-offset_left = 90.0
+offset_left = 53.0
 offset_top = 118.0
-offset_right = 247.0
+offset_right = 210.0
 offset_bottom = 145.0
 bbcode_enabled = true
 text = "[img=24x24]res://map/assets/mapnode_shop.png[/img]  Shop
@@ -98,19 +98,32 @@ text = "[img=24x24]res://map/assets/mapnode_shop.png[/img]  Shop
 
 [node name="Rest Site" type="RichTextLabel" parent="LegendPanel"]
 layout_mode = 0
-offset_left = 89.0
+offset_left = 52.0
 offset_top = 175.0
-offset_right = 246.0
+offset_right = 209.0
 offset_bottom = 202.0
 bbcode_enabled = true
 text = "[img=24x24]res://map/assets/mapnode_rest.png[/img]  Rest"
 
 [node name="Legend" type="RichTextLabel" parent="LegendPanel"]
 layout_mode = 0
-offset_left = 138.0
+offset_left = 101.0
 offset_top = 4.0
-offset_right = 203.0
+offset_right = 166.0
 offset_bottom = 37.0
 bbcode_enabled = true
 text = "Legend
 "
+
+[node name="LegendBackground" type="TextureRect" parent="LegendPanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MapBackground" type="TextureRect" parent="."]
+z_index = -1
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+texture = ExtResource("3_almsb")
+expand_mode = 1

@@ -12,6 +12,7 @@ var image_dict = {
 var location
 var map_tree = [] 
 var background_image
+var current_node: MapNode = null
 
 func generate_random_map() -> void:
 	map_tree.clear()
@@ -144,8 +145,13 @@ func get_node_position(row: int, col: int) -> Vector2:
 	var x = start_x + (col * spacing_x)
 	var max_rows := 12
 	var y = start_y + ((max_rows - row) * spacing_y)
-
+	
+	# --- BOSS CENTER OVERRIDE ---
+	if row == 12:
+		# center between col 1 and 2 (1.5)
+		x = start_x + (1.5 * spacing_x)
 	return Vector2(x, y)
+	
 	
 func randomize_x_spacing():
 	return randf_range(275,300)
@@ -174,14 +180,49 @@ func spawn_node_visuals():
 func snap_to_bottom_layer():
 	var scroll := $ScrollContainer
 	scroll.scroll_vertical = scroll.get_v_scroll_bar().max_value
+	
+func is_node_clickable(node: MapNode) -> bool:
+	# Layer 1 always clickable 
+	if current_node == null and node.row_index == 1:
+		return true
 
-func _on_node_clicked(node):
-	GameManager.enter_room(node)
+	# Connected forward nodes clickable
+	if current_node != null and node in current_node.connections:
+		return true
+
+	return false
+
+func highlight_clickable_nodes():
+	for layer in map_tree:
+		for node in layer:
+			if is_node_clickable(node):
+				node.view.pulse()
+				node.view.set_clickable(true)
+			else:
+				node.view.stop_pulse()
+				node.view.set_clickable(false)
+
+
+func _on_node_clicked(clicked_node: MapNode):
+	if not is_node_clickable(clicked_node):
+		return
+
+	# move current node forward
+	current_node = clicked_node
+	
+	# update pulses / clickable nodes
+	highlight_clickable_nodes()
+
+	# Let game manager handle entering the room
+	GameManager.enter_room(clicked_node)
+
 	
 func _ready():
 	print("MAP READY")
 	print("Loaded scene:", MapNodeViewScene)
 	generate_random_map()
+	current_node = null   # player hasn't chosen a path yet
+	highlight_clickable_nodes()
 	$ScrollContainer/MapView/Paths.map_scene = self
 	await get_tree().process_frame
 	snap_to_bottom_layer()
