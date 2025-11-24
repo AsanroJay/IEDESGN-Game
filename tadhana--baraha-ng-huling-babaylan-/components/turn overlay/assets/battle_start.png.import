@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b205abavyl6y4"
-path="res://.godot/imported/mapnode_mystery.png-4671a8ea608e68c74e0dacff73d2ac87.ctex"
+uid="uid://bgcsa1rjm7lae"
+path="res://.godot/imported/battle_start.png-d0276901c30ec3f1aee69f82f417fec9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://map/assets/mapnode_mystery.png"
-dest_files=["res://.godot/imported/mapnode_mystery.png-4671a8ea608e68c74e0dacff73d2ac87.ctex"]
+source_file="res://components/turn overlay/assets/battle_start.png"
+dest_files=["res://.godot/imported/battle_start.png-d0276901c30ec3f1aee69f82f417fec9.ctex"]
 
 [params]
 

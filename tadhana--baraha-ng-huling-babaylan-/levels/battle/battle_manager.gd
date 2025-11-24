@@ -12,10 +12,15 @@ var EnemyNodeScene  = preload("res://entity/enemy/enemy_node.tscn")
 var HealthBarScene = preload("res://components/health bar/health_bar.tscn")
 var CardScene = preload("res://cards/card.tscn")
 var ManaCountScene = preload("res://components/mana count/mana_counter.tscn")
+var TurnOverlayScene := preload("res://components/turn overlay/turn_overlay.tscn")
 
 # Card system
 const HAND_LIMIT := 8
 var hand_cards: Array = []
+
+#Battle Loop Variables
+var is_player_turn := true
+var turn_counter: int = 1
 
 
 func start_battle(battleroom, node_info, player_ref):
@@ -48,14 +53,50 @@ func start_battle(battleroom, node_info, player_ref):
 
 	# HUD
 	setup_ui()
+	
+	#Start Battle Overlay
+	show_turn_overlay("[b][img=64x64]res://components/turn overlay/assets/battle_start.png[/img][color=yellow]BATTLE START![/color][/b]",1)
 
 	# Draw starting hand
 	player_entity.draw_pile = player_entity.deck.duplicate()
 	player_entity.draw_pile.shuffle()
 	draw_starting_hand(5)
+	battle_loop()
+	
 	
 	print("Battle initialized successfully with enemy:", enemy_type)
 
+
+func battle_loop():
+	await start_player_turn()
+	
+func start_player_turn() -> void:
+	is_player_turn = true
+
+	if turn_counter > 1:
+		show_turn_overlay("[b][color=cyan]PLAYER TURN[/color][/b]",0.4)
+
+	# Reset mana
+	battleroom_ref.get_node("UI/ManaContainer").get_child(0).set_mana(player_entity.mana)
+
+	# 🔥 WAIT for player to finish their turn (button press)
+	#await wait_for_player_end_turn()
+
+	#await start_enemy_turn()
+
+func start_enemy_turn() -> void:
+	is_player_turn = false
+
+	show_turn_overlay("[b][color=red]ENEMY TURN[/color][/b]",0.4)
+
+	# 🔥 Wait for overlay + enemy action
+	await get_tree().create_timer(1.0).timeout
+	#enemy_attack()
+
+   # End of enemy turn → back to player
+ 	#start_player_turn()
+
+	
 
 
 func generate_random_enemy(node_info):
@@ -158,3 +199,9 @@ func remove_card_from_hand(card_node):
 	card_node.queue_free()
 
 	get_hand_container().arrange_cards()
+	
+func show_turn_overlay(text: String,duration):
+	var overlay = TurnOverlayScene.instantiate()
+	battleroom_ref.add_child(overlay)
+	overlay.show_overlay(text,duration)
+	

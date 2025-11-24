@@ -8,8 +8,8 @@ class_name CardNode
 var card_data
 var base_position: Vector2                   # fan resting position
 
-const CARD_WIDTH := 140.0
-const CARD_HEIGHT := 180.0
+const CARD_WIDTH := 160.0
+const CARD_HEIGHT := 200.0
 
 @export var hover_lift := -80.0              # how high it pops out
 @export var hover_scale := 1.15              # enlarge factor

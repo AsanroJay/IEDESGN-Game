@@ -5,6 +5,7 @@ var player_node
 
 var PlayerNodeScene = preload("res://entity/player/player_node.tscn")
 
+
 func load_shop_room(node_info, player_ref):
 	# store player entity
 	player_entity = player_ref
@@ -33,6 +34,13 @@ func _on_open_shop_pressed() -> void:
 	pass # Replace with function body.
 
 
-func _on_open_shop_mouse_entered() -> void:
-	#draw subtle button highlight
-	pass # Replace with function body.
+func _on_hover_area_mouse_entered() -> void:
+	var sprite = $ShopKeeperContainer/TextureRect
+	# white highlight
+	sprite.modulate = Color(1.2, 1.2, 1.2)
+
+
+func _on_hover_area_mouse_exited() -> void:
+	var sprite = $ShopKeeperContainer/TextureRect
+	# white highlight
+	sprite.modulate = Color(1, 1, 1)

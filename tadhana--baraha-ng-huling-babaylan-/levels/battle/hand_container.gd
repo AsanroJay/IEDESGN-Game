@@ -2,7 +2,7 @@ extends Control
 
 @export var max_fan_angle := 25.0     # degrees left/right
 @export var radius := 400.0           # distance from pivot
-@export var y_offset := -150.0           # move fan up/down
+@export var y_offset := -75.0           # move fan up/down
 
 func arrange_cards():
 	var cards = get_children()

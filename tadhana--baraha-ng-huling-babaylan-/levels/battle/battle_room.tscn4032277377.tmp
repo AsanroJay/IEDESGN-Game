@@ -1,18 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://dywmkr2eoj5m8"]
+[gd_scene load_steps=5 format=3 uid="uid://dywmkr2eoj5m8"]
 
 [ext_resource type="Script" uid="uid://do126ggh2pnsw" path="res://levels/battle/battle_room.gd" id="1_el3db"]
 [ext_resource type="Texture2D" uid="uid://dwj6wqhboqx6d" path="res://levels/battle/assets/level_background.jpg" id="2_b5xrt"]
 [ext_resource type="Texture2D" uid="uid://cynuam4ahhhjb" path="res://levels/battle/assets/navbar.png" id="3_b5xrt"]
 [ext_resource type="Script" uid="uid://bpua3l347sm3j" path="res://levels/battle/hand_container.gd" id="3_tp6sv"]
 
-[sub_resource type="Gradient" id="Gradient_tp6sv"]
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jtw3m"]
-gradient = SubResource("Gradient_tp6sv")
-
 [node name="BattleRoom" type="Node2D"]
-position = Vector2(2, 0)
 script = ExtResource("1_el3db")
 
 [node name="Background" type="TextureRect" parent="."]
@@ -91,19 +84,16 @@ expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Map Button" type="Button" parent="NavbarTemp"]
-z_index = -1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0859375
-anchor_top = -0.06666667
-anchor_right = 0.20714612
-anchor_bottom = 1.0554445
+anchor_left = 0.0828125
+anchor_top = -0.044444446
+anchor_right = 0.18181252
+anchor_bottom = 0.16655557
 offset_left = 1025.0
 offset_top = 6.0
 offset_right = 941.85297
 offset_bottom = 27.505
-scale = Vector2(0.5826147, 0.45576385)
-icon = SubResource("GradientTexture2D_jtw3m")
 metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="NavbarTemp/Map Button" to="." method="_on_map_button_pressed"]
