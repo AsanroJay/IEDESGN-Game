@@ -163,6 +163,11 @@ func draw_card():
 	var hand = get_hand_container()
 	hand.add_child(card_node)
 	card_node.set_card(card_data)
+	
+	card_node.set_play_area(
+	battleroom_ref.get_node("PlayArea"),
+	battleroom_ref.get_node("PlayArea/SnapPoint")
+)
 
 	
 

@@ -5,6 +5,10 @@ class_name CardNode
 @onready var shape := $CollisionShape2D
 @onready var sprite_holder := $CardSpriteHolder
 
+var play_area: Area2D
+var snap_point: Node2D
+
+
 var card_data
 var base_position: Vector2                   # fan resting position
 var base_rotation := 0.0
@@ -148,10 +152,37 @@ func _unhandled_input(event):
 			is_dragging = false
 
 			if is_in_play_area:
-				emit_signal("card_played", self)
+				snap_to_play_area_and_emit()
 			else:
 				return_to_hand()
 				
+func set_play_area(play_area_ref: Area2D, snap_point_ref: Node2D):
+	play_area = play_area_ref
+	snap_point = snap_point_ref
+
+
+func snap_to_play_area_and_emit():
+	if play_area == null or snap_point == null:
+		push_error("CardNode: PlayArea or SnapPoint not set!")
+		return_to_hand()
+		return
+
+	var target_pos = snap_point.global_position
+
+	var tween = create_tween()
+	tween.tween_property(self, "global_position", target_pos, 0.15).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	tween.parallel().tween_property(
+		sprite_holder, "scale",
+		holder_original_scale * 1.15, 0.15
+	)
+
+	await tween.finished
+	emit_signal("card_played", self)
+
+
+
+			
 func return_to_hand():
 	var tween = create_tween()
 

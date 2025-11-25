@@ -12,7 +12,7 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
 gradient = SubResource("Gradient_tp6sv")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tp6sv"]
-size = Vector2(238, 226.125)
+size = Vector2(383, 161.25)
 
 [node name="BattleRoom" type="Node2D"]
 position = Vector2(2, 0)
@@ -111,11 +111,11 @@ metadata/_edit_use_anchors_ = true
 [node name="PlayArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
-position = Vector2(660, 285.9375)
+position = Vector2(657, 266.375)
 shape = SubResource("RectangleShape2D_tp6sv")
 
 [node name="SnapPoint" type="Marker2D" parent="PlayArea"]
-position = Vector2(657, 268)
+position = Vector2(658, 285)
 
 [connection signal="pressed" from="NavbarTemp/Map Button" to="." method="_on_map_button_pressed"]
 [connection signal="area_entered" from="PlayArea" to="." method="_on_play_area_area_entered"]
