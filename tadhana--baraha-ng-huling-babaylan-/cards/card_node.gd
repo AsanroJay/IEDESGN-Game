@@ -7,7 +7,9 @@ class_name CardNode
 
 var card_data
 var base_position: Vector2                   # fan resting position
+var base_rotation := 0.0
 
+	
 const CARD_WIDTH := 160.0
 const CARD_HEIGHT := 200.0
 
@@ -17,6 +19,14 @@ const CARD_HEIGHT := 200.0
 var original_sprite_scale := Vector2.ZERO     # how big sprite is after fitting to 140×180
 var holder_original_scale := Vector2.ONE      # sprite_holder starts at (1,1)
 var is_hovered := false
+
+var is_in_play_area := false
+var is_dragging := false
+var drag_start_pos := Vector2.ZERO
+var drag_threshold := 10.0
+
+
+signal card_played(card)
 
 
 # ------------------------------------------------------
@@ -64,6 +74,9 @@ func _on_mouse_exited():
 
 
 func hover_enter():
+	if is_dragging:
+		return
+
 	var tween = create_tween()
 
 	# white highlight
@@ -89,6 +102,10 @@ func hover_enter():
 
 
 func hover_exit():
+	
+	if is_dragging:
+		return
+
 	var tween = create_tween()
 
 	# remove highlight
@@ -110,3 +127,44 @@ func hover_exit():
 		holder_original_scale,
 		0.15
 	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	
+
+func _input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed and is_hovered:
+				is_dragging = true
+				z_index = 2000        # bring card to top layer
+				sprite_holder.position = Vector2.ZERO  # avoid offset from hover
+				rotation = 0
+				
+func _process(delta):
+	if is_dragging:
+		global_position = get_global_mouse_position()
+		
+func _unhandled_input(event):
+	if is_dragging and event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
+			is_dragging = false
+
+			if is_in_play_area:
+				emit_signal("card_played", self)
+			else:
+				return_to_hand()
+				
+func return_to_hand():
+	var tween = create_tween()
+
+	# return to fan position
+	tween.tween_property(self, "global_position", base_position, 0.2)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	# reset sprite holder scale
+	tween.parallel().tween_property(
+		sprite_holder, "scale", holder_original_scale, 0.2
+	)
+	tween.parallel().tween_property(
+		sprite_holder, "position", Vector2.ZERO, 0.2
+	)
+
+	z_index = 0

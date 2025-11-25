@@ -25,3 +25,13 @@ func _ready():
 
 func _on_map_button_pressed():
 	GameManager.return_to_map()
+
+
+func _on_play_area_area_entered(area: Area2D) -> void:
+	if area is CardNode:
+		area.is_in_play_area = true
+		
+
+func _on_play_area_area_exited(area: Area2D) -> void:
+	if area is CardNode:
+		area.is_in_play_area = false
