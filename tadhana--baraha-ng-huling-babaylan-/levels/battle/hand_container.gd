@@ -32,7 +32,7 @@ func arrange_cards():
 		)
 
 		# store fan resting data
-		card.base_position = pos
+		card.base_position = card.get_parent().global_position + pos
 		card.base_rotation = angle  # ⭐ IMPORTANT
 
 		var tween = create_tween()

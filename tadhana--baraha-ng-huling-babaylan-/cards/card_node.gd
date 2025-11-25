@@ -155,16 +155,12 @@ func _unhandled_input(event):
 func return_to_hand():
 	var tween = create_tween()
 
-	# return to fan position
-	tween.tween_property(self, "global_position", base_position, 0.2)\
-		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "global_position", base_position, 0.2)
 
-	# reset sprite holder scale
-	tween.parallel().tween_property(
-		sprite_holder, "scale", holder_original_scale, 0.2
-	)
-	tween.parallel().tween_property(
-		sprite_holder, "position", Vector2.ZERO, 0.2
-	)
+	# ⭐ restore fan rotation
+	tween.parallel().tween_property(self, "rotation", base_rotation, 0.2)
+
+	tween.parallel().tween_property(sprite_holder, "scale", holder_original_scale, 0.2)
+	tween.parallel().tween_property(sprite_holder, "position", Vector2.ZERO, 0.2)
 
 	z_index = 0

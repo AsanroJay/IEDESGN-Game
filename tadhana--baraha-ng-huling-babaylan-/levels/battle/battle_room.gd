@@ -29,9 +29,11 @@ func _on_map_button_pressed():
 
 func _on_play_area_area_entered(area: Area2D) -> void:
 	if area is CardNode:
+		print("Card entered collision area")
 		area.is_in_play_area = true
 		
 
 func _on_play_area_area_exited(area: Area2D) -> void:
 	if area is CardNode:
+		print("Card exited collision area")
 		area.is_in_play_area = false
