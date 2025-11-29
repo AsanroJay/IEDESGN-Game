@@ -50,7 +50,10 @@ func start_battle(battleroom, node_info, player_ref):
 	enemy_node.set_entity(enemy_entity)
 	var enemy_spawn = battleroom_ref.get_node("EnemyContainer/EnemySpawn").global_position
 	enemy_node.global_position = enemy_spawn
-
+	
+	#Reset stats
+	player_entity.hp = player_entity.max_hp
+	player_entity.mana = player_entity.max_mana
 	# HUD
 	setup_ui()
 	
@@ -77,9 +80,9 @@ func start_player_turn() -> void:
 		show_turn_overlay("[b][color=cyan]PLAYER TURN[/color][/b]",0.4)
 
 	# Reset mana
-	battleroom_ref.get_node("UI/ManaContainer").get_child(0).set_mana(player_entity.mana)
+	battleroom_ref.get_node("UI/ManaContainer").get_child(0).set_mana(player_entity.mana,player_entity.max_mana)
 
-	# 🔥 WAIT for player to finish their turn (button press)
+	# WAIT for player to finish their turn (button press)
 	#await wait_for_player_end_turn()
 
 	#await start_enemy_turn()
@@ -89,7 +92,7 @@ func start_enemy_turn() -> void:
 
 	show_turn_overlay("[b][color=red]ENEMY TURN[/color][/b]",0.4)
 
-	# 🔥 Wait for overlay + enemy action
+	# Wait for overlay + enemy action
 	await get_tree().create_timer(1.0).timeout
 	#enemy_attack()
 
@@ -133,7 +136,7 @@ func setup_ui():
 	
 	var mana_container = ManaCountScene.instantiate()
 	battleroom_ref.get_node("UI/ManaContainer").add_child(mana_container)
-	mana_container.set_mana(player_entity.mana)
+	mana_container.set_mana(player_entity.mana, player_entity.max_mana)
 
 
 func get_hand_container():
@@ -163,6 +166,9 @@ func draw_card():
 	var hand = get_hand_container()
 	hand.add_child(card_node)
 	card_node.set_card(card_data)
+	
+	#Connect to play card logic
+	card_node.card_played.connect(_on_card_played)
 	
 	card_node.set_play_area(
 	battleroom_ref.get_node("PlayArea"),
@@ -210,3 +216,54 @@ func show_turn_overlay(text: String,duration):
 	battleroom_ref.add_child(overlay)
 	overlay.show_overlay(text,duration)
 	
+# -----------------------------
+# 		CARD BATTLE LOGIC
+# -----------------------------
+func _on_card_played(card_node):
+	print("Card played: ", card_node.card_data)
+
+	# Check mana
+	var cost = card_node.card_data.get("cost", 0)
+	if player_entity.mana < cost:
+		print("Not enough mana!")
+		#TODO: implememt a text pop up saying not enough mana
+		card_node.return_to_hand()
+		return
+
+	# Deduct mana
+	player_entity.mana -= cost
+	battleroom_ref.get_node("UI/ManaContainer").get_child(0).set_mana(player_entity.mana,player_entity.max_mana)
+
+	# Apply effects depending on card type
+	var type = card_node.card_data.get("type", "")
+
+	match type:
+		"attack":
+			#TODO: animation effect on attack
+			_play_attack_card(card_node)
+		"defend":
+			#TODO: animation effect on block
+			_play_defend_card(card_node)
+		"spell":
+			#TODO: animation effect on spell
+			_play_spell_card(card_node)
+		_:
+			print("Unknown card type: ", type)
+
+	# Remove card from hand & move to discard
+	remove_card_from_hand(card_node)
+
+func _play_attack_card(card_node):
+	var dmg = card_node.card_data.get("damage", 0)
+	print("Attack card deals ", dmg, " damage!")
+	enemy_entity.take_damage(dmg)
+	#enemy_node.play_hit_animation()
+	
+func _play_defend_card(card_node):
+	var block = card_node.card_data.get("block", 0)
+	print("Gained ", block, " block!")
+	player_entity.add_block(block)
+
+func _play_spell_card(card_node):
+	print("Spell card activated: ", card_node.card_data["name"])
+	# Add your buff logic here

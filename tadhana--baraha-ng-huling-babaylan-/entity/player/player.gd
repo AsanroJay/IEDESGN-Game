@@ -5,12 +5,14 @@ var sprite_path : String = "res://player/assets/player.png"
 var discard_pile = []
 var draw_pile = []
 var gold
+var max_mana
 #Constructor
 func _init() -> void:
 	entity_name = "Player"
 	hp = 50
 	max_hp = 50
 	mana = 3
+	max_mana = 3
 	
 	_initialize_starting_deck()
 	
@@ -38,6 +40,5 @@ func _initialize_starting_deck():
 		}
 		deck.append(def)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func add_block(block_amt):
+	block += block_amt

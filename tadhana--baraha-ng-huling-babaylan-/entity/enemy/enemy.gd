@@ -33,3 +33,8 @@ func load_enemy_data(type):
 	hp = animation_data["hp"]
 	max_hp = animation_data["hp"]
 	mana = animation_data["mana"]
+	
+func take_damage(damage):
+	print("Enemy taking " + str(damage) + "damage!")
+	hp -= damage
+	

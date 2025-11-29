@@ -2,11 +2,10 @@ extends Control
 
 @onready var count = $ManaCount
 
-var default_mana 
-var current_mana
+var current_mana := 0
+var max_mana := 0
 
-func set_mana(mana) -> void:
-	default_mana = mana
-	current_mana = default_mana
-	count.text = str(current_mana) + " / " + str(default_mana)
-	
+func set_mana(current: int, maxv: int) -> void:
+	current_mana = current
+	max_mana = maxv
+	count.text = "%d / %d" % [current_mana, max_mana]
