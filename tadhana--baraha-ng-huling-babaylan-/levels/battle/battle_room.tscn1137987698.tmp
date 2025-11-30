@@ -33,7 +33,7 @@ metadata/_edit_use_anchors_ = true
 [node name="PlayerNode" type="Node2D" parent="PlayerContainer"]
 
 [node name="PlayerSpawn" type="Marker2D" parent="PlayerContainer"]
-position = Vector2(292, 458)
+position = Vector2(268, 404)
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 position = Vector2(1, -2)
@@ -42,25 +42,25 @@ position = Vector2(1, -2)
 position = Vector2(3, -1)
 
 [node name="EnemySpawn" type="Marker2D" parent="EnemyContainer"]
-position = Vector2(960, 471)
+position = Vector2(1102, 432)
 
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="PlayerHUD" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 301.0
-offset_top = 531.0
-offset_right = 526.0
-offset_bottom = 556.0
+offset_left = 269.0
+offset_top = 486.0
+offset_right = 494.0
+offset_bottom = 511.0
 
 [node name="EnemyHUD" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 965.0
-offset_top = 545.0
-offset_right = 1190.0
-offset_bottom = 570.0
+offset_left = 1108.0
+offset_top = 522.0
+offset_right = 1333.0
+offset_bottom = 547.0
 
 [node name="HandContainer" type="Control" parent="UI"]
 layout_mode = 3

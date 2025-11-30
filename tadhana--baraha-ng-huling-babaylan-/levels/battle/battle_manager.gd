@@ -20,8 +20,11 @@ var hand_cards: Array = []
 
 #Battle Loop Variables
 var is_player_turn := true
+var card_input_enabled := true
 var turn_counter: int = 1
 
+var player_healthbar
+var enemy_healthbar
 
 func start_battle(battleroom, node_info, player_ref):
 	# store battleroom reference
@@ -75,6 +78,7 @@ func battle_loop():
 	
 func start_player_turn() -> void:
 	is_player_turn = true
+	card_input_enabled = true
 
 	if turn_counter > 1:
 		show_turn_overlay("[b][color=cyan]PLAYER TURN[/color][/b]",0.4)
@@ -87,8 +91,22 @@ func start_player_turn() -> void:
 
 	#await start_enemy_turn()
 
+func end_player_turn():
+	if !is_player_turn:
+		return # prevent double clicks
+	
+	print("Player ends turn.")
+	is_player_turn = false
+	
+	# Disable the button during enemy turn
+	battleroom_ref.get_node("UI/EndTurnButton").disabled = true
+
+	await start_enemy_turn()
+
+
 func start_enemy_turn() -> void:
 	is_player_turn = false
+	card_input_enabled = false
 
 	show_turn_overlay("[b][color=red]ENEMY TURN[/color][/b]",0.4)
 
@@ -125,12 +143,12 @@ func generate_random_enemy(node_info):
 
 func setup_ui():
 	# PLAYER HEALTH BAR
-	var player_healthbar = HealthBarScene.instantiate()
+	player_healthbar = HealthBarScene.instantiate()
 	battleroom_ref.get_node("UI/PlayerHUD").add_child(player_healthbar)
 	player_healthbar.set_hp(player_entity.hp, player_entity.max_hp)
 
 	# ENEMY HEALTH BAR
-	var enemy_healthbar = HealthBarScene.instantiate()
+	enemy_healthbar = HealthBarScene.instantiate()
 	battleroom_ref.get_node("UI/EnemyHUD").add_child(enemy_healthbar)
 	enemy_healthbar.set_hp(enemy_entity.hp, enemy_entity.max_hp)
 	
@@ -173,7 +191,9 @@ func draw_card():
 	card_node.set_play_area(
 	battleroom_ref.get_node("PlayArea"),
 	battleroom_ref.get_node("PlayArea/SnapPoint")
-)
+	)
+	
+	card_node.battle_manager = self
 
 	
 
@@ -228,6 +248,7 @@ func _on_card_played(card_node):
 		print("Not enough mana!")
 		#TODO: implememt a text pop up saying not enough mana
 		card_node.return_to_hand()
+		
 		return
 
 	# Deduct mana
@@ -239,7 +260,6 @@ func _on_card_played(card_node):
 
 	match type:
 		"attack":
-			#TODO: animation effect on attack
 			_play_attack_card(card_node)
 		"defend":
 			#TODO: animation effect on block
@@ -252,12 +272,19 @@ func _on_card_played(card_node):
 
 	# Remove card from hand & move to discard
 	remove_card_from_hand(card_node)
+	get_hand_container().arrange_cards()
+
 
 func _play_attack_card(card_node):
 	var dmg = card_node.card_data.get("damage", 0)
 	print("Attack card deals ", dmg, " damage!")
+	
+	#PLAYER ANIMATION
+	player_node.play_attack_animation()
+	#ENEMY ANIMATIONS
 	enemy_entity.take_damage(dmg)
-	#enemy_node.play_hit_animation()
+	enemy_healthbar.set_hp(enemy_entity.hp, enemy_entity.max_hp) #healthbar 
+	enemy_node.play_hit_animation()
 	
 func _play_defend_card(card_node):
 	var block = card_node.card_data.get("block", 0)

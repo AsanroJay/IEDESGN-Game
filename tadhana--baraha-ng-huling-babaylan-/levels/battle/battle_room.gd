@@ -37,3 +37,7 @@ func _on_play_area_area_exited(area: Area2D) -> void:
 	if area is CardNode:
 		print("Card exited collision area")
 		area.is_in_play_area = false
+
+
+func _on_end_turn_button_pressed() -> void:
+	battle_manager.end_player_turn()

@@ -32,7 +32,7 @@ var drag_threshold := 10.0
 
 signal card_played(card)
 
-
+var battle_manager
 # ------------------------------------------------------
 # CARD INITIALIZATION
 # ------------------------------------------------------
@@ -134,6 +134,9 @@ func hover_exit():
 	
 
 func _input_event(viewport, event, shape_idx):
+	if not battle_manager.card_input_enabled:
+		return
+	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed and is_hovered:
@@ -143,10 +146,16 @@ func _input_event(viewport, event, shape_idx):
 				rotation = 0
 				
 func _process(delta):
+	if not battle_manager.card_input_enabled:
+		return
+	
 	if is_dragging:
 		global_position = get_global_mouse_position()
 		
 func _unhandled_input(event):
+	if not battle_manager.card_input_enabled:
+		return
+		
 	if is_dragging and event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and !event.pressed:
 			is_dragging = false
