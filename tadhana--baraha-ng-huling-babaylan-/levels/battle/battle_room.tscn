@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dywmkr2eoj5m8"]
+[gd_scene load_steps=10 format=3 uid="uid://dywmkr2eoj5m8"]
 
 [ext_resource type="Script" uid="uid://do126ggh2pnsw" path="res://levels/battle/battle_room.gd" id="1_el3db"]
 [ext_resource type="Texture2D" uid="uid://d2658ri3w2vsm" path="res://levels/battle/assets/Level 1 - forest.png" id="2_tp6sv"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://bpua3l347sm3j" path="res://levels/battle/hand_container.gd" id="3_tp6sv"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tp6sv"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jtw3m"]
 
 [sub_resource type="Gradient" id="Gradient_tp6sv"]
 colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0)
@@ -94,6 +96,30 @@ offset_bottom = 614.0
 text = "End Turn"
 icon = SubResource("PlaceholderTexture2D_tp6sv")
 
+[node name="FloatingTextLayer" type="Node2D" parent="UI"]
+
+[node name="OpenDrawPile" type="Button" parent="UI"]
+offset_left = 1040.0
+offset_top = 655.0
+offset_right = 1095.0
+offset_bottom = 695.0
+text = "Draw"
+icon = SubResource("PlaceholderTexture2D_jtw3m")
+
+[node name="OpenDiscardPile" type="Button" parent="UI"]
+offset_left = 112.0
+offset_top = 653.0
+offset_right = 179.0
+offset_bottom = 693.0
+text = "Discard"
+
+[node name="OpenExhaustPile" type="Button" parent="UI"]
+offset_left = 1125.0
+offset_top = 662.0
+offset_right = 1195.0
+offset_bottom = 702.0
+text = "Exhaust"
+
 [node name="NavbarTemp" type="TextureRect" parent="."]
 offset_left = -1.0
 offset_top = -1.0
@@ -129,6 +155,9 @@ shape = SubResource("RectangleShape2D_tp6sv")
 position = Vector2(650, 300)
 
 [connection signal="pressed" from="UI/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="UI/OpenDrawPile" to="." method="_on_open_draw_pile_pressed"]
+[connection signal="pressed" from="UI/OpenDiscardPile" to="." method="_on_open_discard_pile_pressed"]
+[connection signal="pressed" from="UI/OpenExhaustPile" to="." method="_on_open_exhaust_pile_pressed"]
 [connection signal="pressed" from="NavbarTemp/Map Button" to="." method="_on_map_button_pressed"]
 [connection signal="area_entered" from="PlayArea" to="." method="_on_play_area_area_entered"]
 [connection signal="area_exited" from="PlayArea" to="." method="_on_play_area_area_exited"]

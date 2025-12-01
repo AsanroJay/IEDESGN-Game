@@ -36,7 +36,8 @@ func start_battle(battleroom, node_info, player_ref):
 	# CREATE PLAYER VISUAL NODE
 	player_node = PlayerNodeScene.instantiate()
 	battleroom_ref.get_node("PlayerContainer").add_child(player_node)
-
+	
+	player_node.battle_room = battleroom_ref  
 	player_node.set_entity(player_entity)
 	var spawn_point = battleroom_ref.get_node("PlayerContainer/PlayerSpawn").global_position
 	player_node.global_position = spawn_point
@@ -290,7 +291,8 @@ func _play_defend_card(card_node):
 	var block = card_node.card_data.get("block", 0)
 	print("Gained ", block, " block!")
 	player_entity.add_block(block)
+	player_node.play_add_block_animation(block)
 
 func _play_spell_card(card_node):
 	print("Spell card activated: ", card_node.card_data["name"])
-	# Add your buff logic here
+	# Add  buff logic here

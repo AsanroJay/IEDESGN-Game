@@ -41,3 +41,18 @@ func _on_play_area_area_exited(area: Area2D) -> void:
 
 func _on_end_turn_button_pressed() -> void:
 	battle_manager.end_player_turn()
+
+
+func _on_open_draw_pile_pressed() -> void:
+	#TODO: Open Draw Pile
+	pass
+
+
+func _on_open_discard_pile_pressed() -> void:
+	#TODO: Open Discard Pile
+	pass 
+
+
+func _on_open_exhaust_pile_pressed() -> void:
+	#TODO: Open Exhaust Pile
+	pass 
