@@ -35,12 +35,12 @@ func _on_open_shop_pressed() -> void:
 
 
 func _on_hover_area_mouse_entered() -> void:
-	var sprite = $ShopKeeperContainer/TextureRect
+	var sprite = $ShopKeeperContainer
 	# white highlight
 	sprite.modulate = Color(1.2, 1.2, 1.2)
 
 
 func _on_hover_area_mouse_exited() -> void:
-	var sprite = $ShopKeeperContainer/TextureRect
+	var sprite = $ShopKeeperContainer
 	# white highlight
 	sprite.modulate = Color(1, 1, 1)

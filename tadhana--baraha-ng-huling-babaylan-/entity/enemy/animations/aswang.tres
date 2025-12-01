@@ -1,6 +1,15 @@
-[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://cifhgoc88ldcp"]
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://cifhgoc88ldcp"]
 
-[ext_resource type="Texture2D" uid="uid://crsv8slov1by7" path="res://entity/enemy/assets/aswang_256.png" id="1_m5bgy"]
+[ext_resource type="Texture2D" uid="uid://c1wk1xpu0wu0u" path="res://entity/enemy/assets/aswang frames/1.png" id="1_rl23t"]
+[ext_resource type="Texture2D" uid="uid://pci5bmrlobqg" path="res://entity/enemy/assets/aswang frames/2.png" id="2_g84t0"]
+[ext_resource type="Texture2D" uid="uid://tdosatnvxsd7" path="res://entity/enemy/assets/aswang frames/3.png" id="3_mdviw"]
+[ext_resource type="Texture2D" uid="uid://ce0bxog5r78kf" path="res://entity/enemy/assets/aswang frames/4.png" id="4_ugaiv"]
+[ext_resource type="Texture2D" uid="uid://dwmtqkeqw3g7k" path="res://entity/enemy/assets/aswang frames/5.png" id="5_i8ia8"]
+[ext_resource type="Texture2D" uid="uid://bd7v70g5kb7yg" path="res://entity/enemy/assets/aswang frames/6.png" id="6_q71x0"]
+[ext_resource type="Texture2D" uid="uid://n3ngn572k3h1" path="res://entity/enemy/assets/aswang frames/7.png" id="7_iw6t8"]
+[ext_resource type="Texture2D" uid="uid://bpiqmjecn5yor" path="res://entity/enemy/assets/aswang frames/8.png" id="8_tr0wh"]
+[ext_resource type="Texture2D" uid="uid://dqggfk6qqa77q" path="res://entity/enemy/assets/aswang frames/9.png" id="9_wkynt"]
+[ext_resource type="Texture2D" uid="uid://dubd3rnmm5t5" path="res://entity/enemy/assets/aswang frames/10 and then loopback from 9-1.png" id="10_ulqvu"]
 
 [resource]
 animations = [{
@@ -11,18 +20,36 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_m5bgy")
+"texture": ExtResource("1_rl23t")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_m5bgy")
+"texture": ExtResource("2_g84t0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_m5bgy")
+"texture": ExtResource("3_mdviw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("1_m5bgy")
+"texture": ExtResource("4_ugaiv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_i8ia8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_q71x0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_iw6t8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tr0wh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_wkynt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_ulqvu")
 }],
 "loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 12.0
 }]

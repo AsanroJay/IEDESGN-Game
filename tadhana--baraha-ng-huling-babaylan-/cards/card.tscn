@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://b82uyn3bip36e"]
+[gd_scene load_steps=4 format=3 uid="uid://b82uyn3bip36e"]
 
 [ext_resource type="Script" uid="uid://baopxpx14ykfd" path="res://cards/card_node.gd" id="1_ivai2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5k631"]
 size = Vector2(25, 5)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ivai2"]
+size = Vector2(100, 1)
 
 [node name="CardScene" type="Area2D"]
 script = ExtResource("1_ivai2")
@@ -17,6 +20,7 @@ position = Vector2(1, 0)
 
 [node name="CardSprite" type="Sprite2D" parent="CardSpriteHolder"]
 position = Vector2(-1, 0)
+texture = SubResource("PlaceholderTexture2D_ivai2")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

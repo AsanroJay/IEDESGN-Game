@@ -1,12 +1,12 @@
 [gd_scene load_steps=6 format=3 uid="uid://dxcxnkeatlu8i"]
 
 [ext_resource type="Script" uid="uid://dhx3a63hbojgf" path="res://levels/shop/shop.gd" id="1_2tlbo"]
-[ext_resource type="Texture2D" uid="uid://d2658ri3w2vsm" path="res://levels/battle/assets/Level 1 - forest.png" id="2_7w5nn"]
+[ext_resource type="Texture2D" uid="uid://b4xkatxv8ptuv" path="res://levels/shop/assets/[SHOP] Level 1 - forest.png" id="2_7w5nn"]
 [ext_resource type="Texture2D" uid="uid://byu02uwjk8n6t" path="res://levels/shop/assets/ShopKeeper.png" id="3_7w5nn"]
 [ext_resource type="Texture2D" uid="uid://cynuam4ahhhjb" path="res://levels/battle/assets/navbar.png" id="3_ab8xu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7w5nn"]
-size = Vector2(275, 200)
+size = Vector2(361.76788, 401.19092)
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_2tlbo")
@@ -24,12 +24,14 @@ metadata/_edit_use_anchors_ = true
 [node name="PlayerNode" type="Node2D" parent="PlayerContainer"]
 
 [node name="PlayerSpawn" type="Marker2D" parent="PlayerContainer"]
-position = Vector2(246, 433)
+position = Vector2(291, 533)
 
 [node name="ShopKeeperContainer" type="Node2D" parent="."]
-position = Vector2(3, 42)
+position = Vector2(-439, -180)
+scale = Vector2(0.99434656, 0.996046)
 
 [node name="TextureRect" type="TextureRect" parent="ShopKeeperContainer"]
+visible = false
 offset_left = 904.0
 offset_top = 365.0
 offset_right = 1179.0
@@ -42,14 +44,15 @@ expand_mode = 1
 z_index = -1
 offset_left = 903.0
 offset_top = 363.0
-offset_right = 917.70154
-offset_bottom = 372.67953
+offset_right = 922.4513
+offset_bottom = 381.28516
 scale = Vector2(18.773518, 20.558859)
 
 [node name="HoverArea" type="Area2D" parent="ShopKeeperContainer"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShopKeeperContainer/HoverArea"]
-position = Vector2(1039, 465)
+position = Vector2(1088.2913, 549.3701)
+scale = Vector2(1, 1.0000001)
 shape = SubResource("RectangleShape2D_7w5nn")
 
 [node name="UI" type="CanvasLayer" parent="."]

@@ -157,7 +157,6 @@ position = Vector2(650, 300)
 [connection signal="pressed" from="UI/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="UI/OpenDrawPile" to="." method="_on_open_draw_pile_pressed"]
 [connection signal="pressed" from="UI/OpenDiscardPile" to="." method="_on_open_discard_pile_pressed"]
-[connection signal="pressed" from="UI/OpenExhaustPile" to="." method="_on_open_exhaust_pile_pressed"]
 [connection signal="pressed" from="NavbarTemp/Map Button" to="." method="_on_map_button_pressed"]
 [connection signal="area_entered" from="PlayArea" to="." method="_on_play_area_area_entered"]
 [connection signal="area_exited" from="PlayArea" to="." method="_on_play_area_area_exited"]

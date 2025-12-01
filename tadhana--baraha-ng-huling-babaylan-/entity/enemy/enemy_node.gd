@@ -4,6 +4,9 @@ class_name EnemyNode
 var entity
 @onready var anim = $Sprite
 
+
+
+
 func set_entity(e):
 	entity = e
 
@@ -12,6 +15,7 @@ func set_entity(e):
 	anim.sprite_frames = load(frames_path)
 
 	anim.play("idle")
+
 
 func play_hit_animation():
 	var tween = create_tween()
