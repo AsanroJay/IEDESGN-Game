@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jx5at0skftbv"
-path="res://.godot/imported/energy.PNG-3add6b9d7479bdfbb92669230f80a1b2.ctex"
+uid="uid://palh7f5qpw0o"
+path="res://.godot/imported/Map.PNG-5230a97ad30c1ee28abcba6e40a35c13.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://components/mana count/energy.PNG"
-dest_files=["res://.godot/imported/energy.PNG-3add6b9d7479bdfbb92669230f80a1b2.ctex"]
+source_file="res://levels/level_assets/Map.PNG"
+dest_files=["res://.godot/imported/Map.PNG-5230a97ad30c1ee28abcba6e40a35c13.ctex"]
 
 [params]
 

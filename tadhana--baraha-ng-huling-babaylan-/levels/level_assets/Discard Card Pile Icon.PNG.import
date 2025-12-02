@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jx5at0skftbv"
-path="res://.godot/imported/energy.PNG-3add6b9d7479bdfbb92669230f80a1b2.ctex"
+uid="uid://bl72om1fmn1mo"
+path="res://.godot/imported/Discard Card Pile Icon.PNG-7138e0108b63e7c19beda44211ecb786.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://components/mana count/energy.PNG"
-dest_files=["res://.godot/imported/energy.PNG-3add6b9d7479bdfbb92669230f80a1b2.ctex"]
+source_file="res://levels/level_assets/Discard Card Pile Icon.PNG"
+dest_files=["res://.godot/imported/Discard Card Pile Icon.PNG-7138e0108b63e7c19beda44211ecb786.ctex"]
 
 [params]
 

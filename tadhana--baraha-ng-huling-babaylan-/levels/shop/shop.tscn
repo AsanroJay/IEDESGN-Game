@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dxcxnkeatlu8i"]
+[gd_scene load_steps=9 format=3 uid="uid://dxcxnkeatlu8i"]
 
 [ext_resource type="Script" uid="uid://dhx3a63hbojgf" path="res://levels/shop/shop.gd" id="1_2tlbo"]
 [ext_resource type="Texture2D" uid="uid://b4xkatxv8ptuv" path="res://levels/shop/assets/[SHOP] Level 1 - forest.png" id="2_7w5nn"]
 [ext_resource type="Texture2D" uid="uid://byu02uwjk8n6t" path="res://levels/shop/assets/ShopKeeper.png" id="3_7w5nn"]
-[ext_resource type="Texture2D" uid="uid://cynuam4ahhhjb" path="res://levels/battle/assets/navbar.png" id="3_ab8xu"]
+[ext_resource type="Texture2D" uid="uid://d3oulld6kfkd" path="res://levels/battle/assets/Navigation Bar (Forest Level).PNG" id="4_7w5nn"]
+[ext_resource type="Texture2D" uid="uid://cv207s263gq4q" path="res://levels/shop/assets/Map.PNG" id="5_ab8xu"]
+[ext_resource type="Texture2D" uid="uid://gpjsp6epuj5y" path="res://levels/level_assets/Settings.PNG" id="6_sap14"]
+[ext_resource type="Texture2D" uid="uid://c8atkyi8i7kic" path="res://levels/level_assets/Gold.PNG" id="7_ljrys"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7w5nn"]
 size = Vector2(361.76788, 401.19092)
@@ -121,7 +124,7 @@ offset_left = -2.0
 offset_top = -2.0
 offset_right = 1278.0
 offset_bottom = 43.0
-texture = ExtResource("3_ab8xu")
+texture = ExtResource("4_7w5nn")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -129,14 +132,51 @@ metadata/_edit_use_anchors_ = true
 z_index = -1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.0828125
-anchor_right = 0.18181252
-anchor_bottom = 0.21100003
-offset_left = 1025.0
-offset_top = 6.0
-offset_right = 941.85297
-offset_bottom = 27.505
-metadata/_edit_use_anchors_ = true
+anchor_left = 0.11015625
+anchor_right = 0.20636487
+anchor_bottom = 0.3887778
+offset_left = 1024.0
+offset_right = 940.85297
+offset_bottom = 21.505
+
+[node name="MapIcon" type="TextureRect" parent="NavbarTemp"]
+layout_mode = 0
+offset_left = 1175.0
+offset_top = 1.0
+offset_right = 1215.0
+offset_bottom = 41.0
+mouse_filter = 2
+texture = ExtResource("5_ab8xu")
+expand_mode = 1
+
+[node name="SettingsIcon" type="TextureRect" parent="NavbarTemp"]
+layout_mode = 0
+offset_left = 1223.0
+offset_top = 1.0
+offset_right = 1263.0
+offset_bottom = 41.0
+mouse_filter = 2
+texture = ExtResource("6_sap14")
+expand_mode = 1
+
+[node name="GoldCounter" type="Label" parent="NavbarTemp"]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 1.0
+offset_right = 463.0
+offset_bottom = 42.0
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoldIcon" type="TextureRect" parent="NavbarTemp"]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 1.0
+offset_right = 495.0
+offset_bottom = 41.0
+texture = ExtResource("7_ljrys")
+expand_mode = 1
 
 [connection signal="mouse_entered" from="ShopKeeperContainer/TextureRect" to="." method="_on_texture_rect_mouse_entered"]
 [connection signal="mouse_exited" from="ShopKeeperContainer/TextureRect" to="." method="_on_texture_rect_mouse_exited"]

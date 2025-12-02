@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b8y6l12kgrear"]
 
 [ext_resource type="Script" uid="uid://btgefpol7tgss" path="res://components/mana count/mana_counter.gd" id="1_yu3oy"]
-[ext_resource type="Texture2D" uid="uid://c23ho4ygc0vm5" path="res://components/mana count/energy.png" id="2_snici"]
+[ext_resource type="Texture2D" uid="uid://jx5at0skftbv" path="res://components/mana count/energy.PNG" id="2_yu3oy"]
 
 [node name="ManaCounter" type="Control"]
 layout_mode = 3
@@ -12,10 +12,11 @@ script = ExtResource("1_yu3oy")
 layout_mode = 0
 offset_left = -37.0
 offset_top = -40.0
-offset_right = 228.12732
-offset_bottom = 229.91357
+offset_right = 243.0
+offset_bottom = 240.0
 scale = Vector2(0.27156764, 0.26675206)
-texture = ExtResource("2_snici")
+texture = ExtResource("2_yu3oy")
+expand_mode = 1
 
 [node name="ManaCount" type="Label" parent="."]
 layout_mode = 0

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jx5at0skftbv"
-path="res://.godot/imported/energy.PNG-3add6b9d7479bdfbb92669230f80a1b2.ctex"
+uid="uid://cukq51l47mxrx"
+path="res://.godot/imported/Exhaust Card Pile Icon.PNG-b2995eae64d1500c12cd30842668a9cd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://components/mana count/energy.PNG"
-dest_files=["res://.godot/imported/energy.PNG-3add6b9d7479bdfbb92669230f80a1b2.ctex"]
+source_file="res://levels/level_assets/Exhaust Card Pile Icon.PNG"
+dest_files=["res://.godot/imported/Exhaust Card Pile Icon.PNG-b2995eae64d1500c12cd30842668a9cd.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jx5at0skftbv"
-path="res://.godot/imported/energy.PNG-3add6b9d7479bdfbb92669230f80a1b2.ctex"
+uid="uid://c8atkyi8i7kic"
+path="res://.godot/imported/Gold.PNG-54984f7aa5fdb7614d0f1e780b2f83f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://components/mana count/energy.PNG"
-dest_files=["res://.godot/imported/energy.PNG-3add6b9d7479bdfbb92669230f80a1b2.ctex"]
+source_file="res://levels/level_assets/Gold.PNG"
+dest_files=["res://.godot/imported/Gold.PNG-54984f7aa5fdb7614d0f1e780b2f83f7.ctex"]
 
 [params]
 

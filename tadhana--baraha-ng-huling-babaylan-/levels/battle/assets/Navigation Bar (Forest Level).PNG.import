@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jx5at0skftbv"
-path="res://.godot/imported/energy.PNG-3add6b9d7479bdfbb92669230f80a1b2.ctex"
+uid="uid://d3oulld6kfkd"
+path="res://.godot/imported/Navigation Bar (Forest Level).PNG-d9bb9ef8686988c99d12e808359a051c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://components/mana count/energy.PNG"
-dest_files=["res://.godot/imported/energy.PNG-3add6b9d7479bdfbb92669230f80a1b2.ctex"]
+source_file="res://levels/battle/assets/Navigation Bar (Forest Level).PNG"
+dest_files=["res://.godot/imported/Navigation Bar (Forest Level).PNG-d9bb9ef8686988c99d12e808359a051c.ctex"]
 
 [params]
 
