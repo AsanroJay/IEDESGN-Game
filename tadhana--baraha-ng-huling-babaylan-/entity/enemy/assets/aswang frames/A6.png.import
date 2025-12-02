@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwmtqkeqw3g7k"
-path="res://.godot/imported/5.png-f76e77edfd298b2a16dab4174c5cf26b.ctex"
+uid="uid://deefbb4p0k03i"
+path="res://.godot/imported/A6.png-af2890966d5ba480116757c29e2e4097.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entity/enemy/assets/aswang frames/5.png"
-dest_files=["res://.godot/imported/5.png-f76e77edfd298b2a16dab4174c5cf26b.ctex"]
+source_file="res://entity/enemy/assets/aswang frames/A6.png"
+dest_files=["res://.godot/imported/A6.png-af2890966d5ba480116757c29e2e4097.ctex"]
 
 [params]
 

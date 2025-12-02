@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dubd3rnmm5t5"
-path="res://.godot/imported/10 and then loopback from 9-1.png-f66401e88588ee74ccd65807d0e6e0d0.ctex"
+uid="uid://lnmqj3tsqy2p"
+path="res://.godot/imported/M11.png-80e274dd42ecdb1ab7aec0a5f85679c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entity/enemy/assets/aswang frames/10 and then loopback from 9-1.png"
-dest_files=["res://.godot/imported/10 and then loopback from 9-1.png-f66401e88588ee74ccd65807d0e6e0d0.ctex"]
+source_file="res://entity/enemy/assets/manananggal frames/M11.png"
+dest_files=["res://.godot/imported/M11.png-80e274dd42ecdb1ab7aec0a5f85679c2.ctex"]
 
 [params]
 

@@ -24,9 +24,9 @@ func load_enemy_data(type):
 			"mana": 0,
 			"frames": "res://entity/enemy/animations/aswang.tres"
 		},
-		"mananaggal": {
+		"manananggal": {
 			"name": "Manananggal",
-			"hp": 30,
+			"hp": 40,
 			"mana": 0,
 			"frames": "res://entity/enemy/animations/manananggal.tres"
 		}

@@ -25,6 +25,7 @@ func load_shop_room(node_info, player_ref):
 	var spawn_point = get_node("PlayerContainer/PlayerSpawn").global_position
 	player_node.global_position = spawn_point
 	
+	shop_panel.visible = false
 
 	
 
@@ -42,7 +43,7 @@ func _on_open_shop_pressed() -> void:
 	_show_shop_panel()
 
 func _generate_shop_inventory():
-	var shop_inventory = [
+	shop_inventory = [
 		CardDatabase.CARDS["sibat"].duplicate(true),
 		CardDatabase.CARDS["hilot"].duplicate(true),
 		CardDatabase.CARDS["kulam"].duplicate(true)
@@ -92,9 +93,6 @@ func _attempt_buy(card_data):
 func _show_shop_panel():
 	shop_panel.visible = true
 
-func _on_close_shop_pressed():
-	shop_panel.visible = false
-
 
 func _on_hover_area_mouse_entered() -> void:
 	var sprite = $ShopKeeperContainer
@@ -106,3 +104,7 @@ func _on_hover_area_mouse_exited() -> void:
 	var sprite = $ShopKeeperContainer
 	# white highlight
 	sprite.modulate = Color(1, 1, 1)
+
+
+func _on_close_button_pressed() -> void:
+	shop_panel.visible = false
