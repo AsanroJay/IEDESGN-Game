@@ -13,6 +13,7 @@ func _init() -> void:
 	max_hp = 50
 	mana = 3
 	max_mana = 3
+	gold = 99
 	
 	_initialize_starting_deck()
 	

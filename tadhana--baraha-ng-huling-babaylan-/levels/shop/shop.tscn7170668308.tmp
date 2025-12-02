@@ -73,10 +73,8 @@ offset_bottom = 40.0
 
 [node name="ColorRect" type="ColorRect" parent="UI/ShopPanel"]
 layout_mode = 0
-offset_left = 226.0
-offset_top = 120.0
-offset_right = 1044.0
-offset_bottom = 654.0
+offset_right = 519.0
+offset_bottom = 284.0
 color = Color(0.07058824, 0.07058824, 0.07058824, 0.6627451)
 
 [node name="Panel" type="Panel" parent="UI/ShopPanel"]
