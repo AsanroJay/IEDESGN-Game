@@ -1,0 +1,122 @@
+[gd_resource type="SpriteFrames" load_steps=29 format=3 uid="uid://buunvq3jed07e"]
+
+[ext_resource type="Texture2D" uid="uid://buqdj3rhfhxwr" path="res://entity/enemy/assets/white lady frames/Frame 1.png" id="1_8kmn1"]
+[ext_resource type="Texture2D" uid="uid://cjrv8rrd3gpcf" path="res://entity/enemy/assets/white lady frames/Frame 2.png" id="2_xnpdj"]
+[ext_resource type="Texture2D" uid="uid://wyy1b52ypapm" path="res://entity/enemy/assets/white lady frames/Frame 3.png" id="3_yusdu"]
+[ext_resource type="Texture2D" uid="uid://cfjjoduijg0f7" path="res://entity/enemy/assets/white lady frames/Frame 4.png" id="4_tow3x"]
+[ext_resource type="Texture2D" uid="uid://dtq0p2hk0ufwr" path="res://entity/enemy/assets/white lady frames/Frame 5.png" id="5_0o73n"]
+[ext_resource type="Texture2D" uid="uid://vargjgh6vopw" path="res://entity/enemy/assets/white lady frames/Frame 6.png" id="6_s06n2"]
+[ext_resource type="Texture2D" uid="uid://bnpik6ltju0po" path="res://entity/enemy/assets/white lady frames/Frame 7.png" id="7_4qftj"]
+[ext_resource type="Texture2D" uid="uid://3ruahgq7tgvr" path="res://entity/enemy/assets/white lady frames/Frame 8.png" id="8_70pqt"]
+[ext_resource type="Texture2D" uid="uid://dh1i7vx4wh586" path="res://entity/enemy/assets/white lady frames/Frame 9.png" id="9_bdnb2"]
+[ext_resource type="Texture2D" uid="uid://yh2k8httf0cc" path="res://entity/enemy/assets/white lady frames/Frame 10.png" id="10_4gajj"]
+[ext_resource type="Texture2D" uid="uid://dolii3yhrsk4w" path="res://entity/enemy/assets/white lady frames/Frame 11.png" id="11_g4tgx"]
+[ext_resource type="Texture2D" uid="uid://txpd4dacim3g" path="res://entity/enemy/assets/white lady frames/Frame 12.png" id="12_8gqb2"]
+[ext_resource type="Texture2D" uid="uid://bm24lm1y1ean3" path="res://entity/enemy/assets/white lady frames/Frame 13.png" id="13_vu0im"]
+[ext_resource type="Texture2D" uid="uid://cb38t40ulgn73" path="res://entity/enemy/assets/white lady frames/Frame 14.png" id="14_46bx4"]
+[ext_resource type="Texture2D" uid="uid://blnyt2apjygok" path="res://entity/enemy/assets/white lady frames/Frame 15.png" id="15_4ygu3"]
+[ext_resource type="Texture2D" uid="uid://dsw6w7ovivr7d" path="res://entity/enemy/assets/white lady frames/Frame 16.png" id="16_s0nfc"]
+[ext_resource type="Texture2D" uid="uid://d12swyrs1ev12" path="res://entity/enemy/assets/white lady frames/Frame 17.png" id="17_aqjsc"]
+[ext_resource type="Texture2D" uid="uid://wc433c6lj2yc" path="res://entity/enemy/assets/white lady frames/Frame 18.png" id="18_kr5wf"]
+[ext_resource type="Texture2D" uid="uid://fghq0odhusld" path="res://entity/enemy/assets/white lady frames/Frame 19.png" id="19_gf5dc"]
+[ext_resource type="Texture2D" uid="uid://dplc7nt82lq7e" path="res://entity/enemy/assets/white lady frames/Frame 20.png" id="20_k5bbt"]
+[ext_resource type="Texture2D" uid="uid://c1un1bmgubw0t" path="res://entity/enemy/assets/white lady frames/Frame 21.png" id="21_h6w5q"]
+[ext_resource type="Texture2D" uid="uid://24wae3toryh7" path="res://entity/enemy/assets/white lady frames/Frame 22.png" id="22_r5mik"]
+[ext_resource type="Texture2D" uid="uid://wldjeitdvw52" path="res://entity/enemy/assets/white lady frames/Frame 23.png" id="23_e6pmu"]
+[ext_resource type="Texture2D" uid="uid://dijf7tqdhxokq" path="res://entity/enemy/assets/white lady frames/Frame 24.png" id="24_xm7p1"]
+[ext_resource type="Texture2D" uid="uid://cmmge4rdm4vu" path="res://entity/enemy/assets/white lady frames/Frame 25.png" id="25_k013u"]
+[ext_resource type="Texture2D" uid="uid://n7mb7xo4e5hj" path="res://entity/enemy/assets/white lady frames/Frame 26.png" id="26_un4n1"]
+[ext_resource type="Texture2D" uid="uid://bf8vesbywt477" path="res://entity/enemy/assets/white lady frames/Frame 27.png" id="27_hqgyh"]
+[ext_resource type="Texture2D" uid="uid://s7pomvlo4u51" path="res://entity/enemy/assets/white lady frames/Frame 28.png" id="28_oj410"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8kmn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xnpdj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_yusdu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tow3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0o73n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_s06n2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_4qftj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_70pqt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_bdnb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_4gajj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_g4tgx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_8gqb2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_vu0im")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_46bx4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_4ygu3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_s0nfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_aqjsc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_kr5wf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_gf5dc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_k5bbt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_h6w5q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_r5mik")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_e6pmu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_xm7p1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_k013u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_un4n1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_hqgyh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_oj410")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 28.0
+}]

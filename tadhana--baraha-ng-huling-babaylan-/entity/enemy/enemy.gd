@@ -29,6 +29,18 @@ func load_enemy_data(type):
 			"hp": 40,
 			"mana": 0,
 			"frames": "res://entity/enemy/animations/manananggal.tres"
+		},
+		"white_lady": {
+			"name": "White Lady",
+			"hp": 40,
+			"mana": 0,
+			"frames": "res://entity/enemy/animations/white_lady.tres"
+		},
+		"kapre": {
+			"name": "Kapre",
+			"hp": 40,
+			"mana": 0,
+			"frames": "res://entity/enemy/animations/kapre.tres"
 		}
 	}
 
