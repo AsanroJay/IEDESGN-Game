@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=12 format=3 uid="uid://c7deyjj3ihhys"]
+[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://c7deyjj3ihhys"]
 
 [ext_resource type="Texture2D" uid="uid://x7a2jpjfipil" path="res://entity/enemy/assets/kapre frames/Frame 1.png" id="1_aeekn"]
 [ext_resource type="Texture2D" uid="uid://bjlyg5ifra4u" path="res://entity/enemy/assets/kapre frames/Frame 2.png" id="2_o7jof"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cnaojhr0vjhix" path="res://entity/enemy/assets/kapre frames/Frame 9.png" id="9_ajend"]
 [ext_resource type="Texture2D" uid="uid://dlkxrd3fspc5w" path="res://entity/enemy/assets/kapre frames/Frame 10.png" id="10_5is58"]
 [ext_resource type="Texture2D" uid="uid://d11pca1tmm58j" path="res://entity/enemy/assets/kapre frames/Frame 11.png" id="11_cjk2n"]
+[ext_resource type="Texture2D" uid="uid://c8sagq0ukgmhg" path="res://entity/enemy/assets/591610022_1412139827233564_2019253539415711499_n.png" id="12_o7jof"]
 
 [resource]
 animations = [{
@@ -49,6 +50,14 @@ animations = [{
 "texture": ExtResource("11_cjk2n")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"default",
 "speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_o7jof")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
 }]

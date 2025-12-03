@@ -123,7 +123,7 @@ func start_enemy_turn() -> void:
 
 func generate_random_enemy(node_info):
 	var layer_rules = {
-		1: ["white_lady"],
+		1: ["kapre"],
 		2: ["manananggal","aswang","kapre","white_lady"],
 		3: ["manananggal"],
 		4: ["default"],
