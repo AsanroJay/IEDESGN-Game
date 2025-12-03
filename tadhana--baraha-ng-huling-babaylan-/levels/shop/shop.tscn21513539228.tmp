@@ -105,19 +105,16 @@ offset_bottom = 637.0
 
 [node name="PanelBackground" type="TextureRect" parent="UI/ShopPanel/Panel"]
 layout_mode = 0
-offset_left = 8.0
-offset_top = -8.0
-offset_right = 960.0
-offset_bottom = 592.0
+offset_right = 883.0
+offset_bottom = 557.0
 texture = ExtResource("4_yvagp")
 
 [node name="CardsContainer" type="GridContainer" parent="UI/ShopPanel/Panel"]
 layout_mode = 0
-offset_left = 80.0
-offset_top = 184.0
-offset_right = 696.0
-offset_bottom = 520.0
-columns = 3
+offset_left = 82.0
+offset_top = 194.0
+offset_right = 654.0
+offset_bottom = 511.0
 
 [node name="VScrollBar" type="VScrollBar" parent="UI/ShopPanel/Panel/CardsContainer"]
 layout_mode = 2
@@ -146,28 +143,26 @@ expand_mode = 1
 
 [node name="RerollButton" type="Button" parent="UI/ShopPanel/Panel"]
 layout_mode = 0
-offset_left = 736.0
-offset_top = 456.0
-offset_right = 872.0
-offset_bottom = 506.0
+offset_left = 696.0
+offset_top = 464.0
+offset_right = 832.0
+offset_bottom = 514.0
 text = "Reroll
 "
 
 [node name="RemoveCardButton" type="Button" parent="UI/ShopPanel/Panel"]
 layout_mode = 0
-offset_left = 736.0
+offset_left = 696.0
 offset_top = 376.0
-offset_right = 872.0
+offset_right = 832.0
 offset_bottom = 426.0
 text = "Remove Card
 "
 
 [node name="InfoLabel" type="Label" parent="UI/ShopPanel/Panel"]
 layout_mode = 0
-offset_left = 400.0
-offset_top = 120.0
-offset_right = 440.0
-offset_bottom = 143.0
+offset_right = 40.0
+offset_bottom = 23.0
 
 [node name="NavbarTemp" type="TextureRect" parent="."]
 offset_left = -2.0

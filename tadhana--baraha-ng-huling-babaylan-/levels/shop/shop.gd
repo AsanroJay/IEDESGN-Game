@@ -4,12 +4,16 @@ var player_entity
 var player_node
 
 var PlayerNodeScene = preload("res://entity/player/player_node.tscn")
+var ShopCardItemScene = preload("res://components/shop card item/shop_card_item.tscn")
+
 
 @onready var shop_panel = $UI/ShopPanel
 @onready var shop_cards_container = $UI/ShopPanel/Panel/CardsContainer
 @onready var shop_info = $UI/ShopPanel/Panel/InfoLabel
 
+
 var shop_inventory = []
+
 
 
 
@@ -41,18 +45,27 @@ func _on_open_shop_pressed() -> void:
 	print("Shop button clicked!")
 	_generate_shop_inventory()
 	_show_shop_panel()
+	
+func reroll_cards():
+	#Empty array first
+	shop_inventory.clear()
+	
+	#shop_inventory	
 
 func _generate_shop_inventory():
 	shop_inventory = [
-		CardDatabase.CARDS["sibat"].duplicate(true),
-		CardDatabase.CARDS["hilot"].duplicate(true),
-		CardDatabase.CARDS["kulam"].duplicate(true)
+		CardDatabase.CARDS["default"].duplicate(true),
+		CardDatabase.CARDS["default"].duplicate(true),
+		CardDatabase.CARDS["default"].duplicate(true),
+		CardDatabase.CARDS["default"].duplicate(true),
+		CardDatabase.CARDS["default"].duplicate(true),
+		CardDatabase.CARDS["default"].duplicate(true),
 	]
 
 	# Add default prices
 	for c in shop_inventory:
 		if not c.has("shop_cost"):
-			c["shop_cost"] = 40 + randi_range(0,20)
+			c["shop_cost"] = 24 + randi_range(10,15) * c["cost"]
 
 	# Clear UI container
 	for child in shop_cards_container.get_children():
@@ -60,21 +73,15 @@ func _generate_shop_inventory():
 
 	# Create shop UI buttons
 	for card_data in shop_inventory:
-		var card_button = create_shop_button(card_data)
-		shop_cards_container.add_child(card_button)
+		var item = create_shop_item(card_data)
 
 
-func create_shop_button(card_data):
-	var btn = Button.new()
+func create_shop_item(card_data):
+	var item = ShopCardItemScene.instantiate()
+	shop_cards_container.add_child(item)
+	item.setup(card_data, _attempt_buy)
 
-	btn.text = "%s\nCost: %d gold" % [card_data.card_name, card_data.shop_cost]
-	btn.custom_minimum_size = Vector2(220, 120)
 
-	btn.connect("pressed", func():
-		_attempt_buy(card_data)
-	)
-
-	return btn
 
 func _attempt_buy(card_data):
 	var price = card_data["shop_cost"]
@@ -85,7 +92,7 @@ func _attempt_buy(card_data):
 
 	# Deduct gold
 	player_entity.gold -= price
-	shop_info.text = "Purchased %s!" % card_data.card_name
+	shop_info.text = "Purchased %s!" % card_data["card_name"]
 
 	# Add to deck
 	player_entity.deck.append(card_data)
