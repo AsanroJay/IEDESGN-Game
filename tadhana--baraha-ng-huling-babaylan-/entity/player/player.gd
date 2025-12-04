@@ -23,13 +23,14 @@ func _initialize_starting_deck():
 	# Attack cards
 	for i in range(3):
 		var atk = {
-		"card_name": "Sibat",
+		"card_name": "Hiwa ng Manananggal",
 		"type": "attack",
-		"cost": 1,
-		"image_path": "res://cards/assets/sibat.png",
+		"cost": 2,
+		"image_path": "res://cards/assets/hiwa_ng_manananggal.png",
 		"property": "physical",
 		"effects": [
-			["damage", 5]
+			["damage", 4],
+			["bleed", 3]
 		],
 		"exhaust": false
 	}
@@ -37,18 +38,17 @@ func _initialize_starting_deck():
 
 	# Defense cards
 	for i in range(3):
-		var def=  {
-		"card_name": "Suntok ng Kapre",
-		"type": "attack",
-		"cost": 2,
-		"image_path": "res://cards/assets/suntok_ng_kapre.png",
-		"property": "physical",
+		var def=   {
+		"card_name": "Kalasag",
+		"type": "block",
+		"cost": 1,
+		"image_path": "res://cards/assets/kalasag.png",
+		"property": "debuff",
 		"effects": [
-			["damage", 7],
-			["pierce_armor"]
+			["block",5],
 		],
 		"exhaust": false
-		}
+	}
 		deck.append(def)
 		
 	for i in range(3):

@@ -26,6 +26,19 @@ signal block_changed(new_block_value)
 func apply_damage(amount: int, property: String = "physical", is_piercing: bool = false) -> int:
 	var multiplier: float = 1.0
 	
+	if property == "true_damage":
+		var incoming_damage = amount    # raw amount
+		var damage_to_hp = amount   # fully bypass block
+		hp = max(0, hp - damage_to_hp)
+		last_unblocked_damage = damage_to_hp
+
+		print(entity_name, " takes TRUE DAMAGE ", damage_to_hp, " → HP:", hp, " Block:", block)
+
+		if is_dead():
+			print(entity_name, " has been defeated!")
+
+		return damage_to_hp
+	
 	# 1. Check Global Modifiers (Vulnerable)
 	if statuses.has("Vulnerable"):
 		multiplier = 1.5 
@@ -98,7 +111,8 @@ func has_status(status_name: String) -> bool:
 func is_dead() -> bool:
 	return hp <= 0
 
-func resolve_turn_start_effects(battle_manager) -> void:
+func resolve_turn_start_effects(battle_manager) -> Dictionary:
+	var result := {"bleed": 0}
 	var effects_to_remove = []
 	var damage_from_effects = 0
 	
@@ -108,26 +122,17 @@ func resolve_turn_start_effects(battle_manager) -> void:
 		match name:
 			"Bleed":
 				damage_from_effects += amount
+				result["bleed"] += amount
 				statuses[name] -= 1
 				print(entity_name, " bleeds for ", amount)
 			
-			"Poison":
-				# Poison typically decays duration, not damage amount
-				# Assuming you stored duration in a separate key or handled logic differently
-				# For now, simplistic implementation:
-				damage_from_effects += amount
-				statuses["PoisonDuration"] -= 1 # You need to manage the duration key
-				if statuses["PoisonDuration"] <= 0:
-					effects_to_remove.append(name)
-					effects_to_remove.append("PoisonDuration")
-					
 			"Stun":
 				statuses[name] -= 1
-				
+
 			_:
 				statuses[name] -= 1
 
-		if statuses.has(name) and statuses[name] <= 0 and not name in effects_to_remove:
+		if statuses[name] <= 0:
 			effects_to_remove.append(name)
 			
 	if damage_from_effects > 0:
@@ -136,9 +141,4 @@ func resolve_turn_start_effects(battle_manager) -> void:
 	for name in effects_to_remove:
 		statuses.erase(name)
 
-	# Update UI logic here
-	if damage_from_effects > 0:
-		if self == battle_manager.player_entity:
-			battle_manager.update_player_health_display()
-		elif self == battle_manager.enemy_entity:
-			battle_manager.update_enemy_health_display()
+	return result

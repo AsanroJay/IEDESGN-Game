@@ -3,8 +3,8 @@ class_name EnemyNode
 
 var entity
 @onready var anim = $Sprite
-
-
+var battle_room
+var FloatingText = preload("res://components/floating text/floating_text.tscn")
 
 
 func set_entity(e):
@@ -34,3 +34,11 @@ func play_hit_animation():
 	tween.tween_property(self, "position", original_pos + Vector2(10, 0), 0.05)
 	tween.tween_property(self, "position", original_pos - Vector2(10, 0), 0.05)
 	tween.tween_property(self, "position", original_pos, 0.05)
+	
+func show_floating_text(text: String, color: Color = Color.WHITE, y_offset := -60):
+	var pop = FloatingText.instantiate()
+	var ui_layer = battle_room.get_node("UI/FloatingTextLayer")
+	ui_layer.add_child(pop)
+
+	pop.global_position = global_position + Vector2(0, y_offset)
+	pop.show_text(text, color)

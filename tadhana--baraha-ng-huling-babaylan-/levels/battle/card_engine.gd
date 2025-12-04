@@ -89,15 +89,6 @@ func _process_effect(effect_name: String, params: Array, property, is_piercing, 
 			target.add_status("Bleed", stacks)
 			print("CardEngine: Applied Bleed", stacks)
 
-		# ---------------------------------------------------------
-		# POISON (DOT with stronger decay)
-		# ---------------------------------------------------------
-		"poison":
-			var stacks = params[0]
-			var duration = params[1]
-			target.add_status("Poison", stacks)
-			target.add_status("PoisonDuration", duration)
-			print("CardEngine: Applied Poison", stacks, "for", duration, "turns.")
 
 		# ---------------------------------------------------------
 		# STUN

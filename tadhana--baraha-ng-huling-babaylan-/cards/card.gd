@@ -268,8 +268,20 @@ var CARDS = {
 		"image_path": "res://cards/assets/hikap.png",
 		"property": "debuff",
 		"effects": [
-			["block_attack"],
+			["block",5],
 			["draw", 1]
+		],
+		"exhaust": false
+	},
+	
+	"kalasag": {
+		"card_name": "Kalasag",
+		"type": "spell",
+		"cost": 1,
+		"image_path": "res://cards/assets/kalasag.png",
+		"property": "debuff",
+		"effects": [
+			["block",5],
 		],
 		"exhaust": false
 	},
