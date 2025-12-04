@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dxcxnkeatlu8i"]
+[gd_scene load_steps=25 format=3 uid="uid://dxcxnkeatlu8i"]
 
 [ext_resource type="Script" uid="uid://dhx3a63hbojgf" path="res://levels/shop/shop.gd" id="1_2tlbo"]
 [ext_resource type="Texture2D" uid="uid://b4xkatxv8ptuv" path="res://levels/shop/assets/[SHOP] Level 1 - forest.png" id="2_7w5nn"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://c2ptmxqmpsi23" path="res://levels/shop/assets/Shop Keeper Sprite.png" id="7_1rw7m"]
 [ext_resource type="Texture2D" uid="uid://c8atkyi8i7kic" path="res://levels/level_assets/Gold.PNG" id="7_ljrys"]
 [ext_resource type="Texture2D" uid="uid://btkxg14gwvllb" path="res://levels/shop/assets/SkipEncounter.PNG" id="12_1rw7m"]
+[ext_resource type="SpriteFrames" uid="uid://c0f6wrqtsvn6x" path="res://levels/shop/animations/shop_alert.tres" id="13_ij3ee"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7w5nn"]
 size = Vector2(361.76788, 401.19092)
@@ -263,6 +264,13 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_do1m6")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_qqd32")
 icon = ExtResource("12_1rw7m")
 icon_alignment = 1
+
+[node name="Pointer" type="AnimatedSprite2D" parent="."]
+position = Vector2(656, 112)
+scale = Vector2(0.09410425, 0.09699567)
+sprite_frames = ExtResource("13_ij3ee")
+frame = 15
+frame_progress = 0.9273339
 
 [connection signal="mouse_entered" from="ShopKeeperContainer/TextureRect" to="." method="_on_texture_rect_mouse_entered"]
 [connection signal="mouse_exited" from="ShopKeeperContainer/TextureRect" to="." method="_on_texture_rect_mouse_exited"]

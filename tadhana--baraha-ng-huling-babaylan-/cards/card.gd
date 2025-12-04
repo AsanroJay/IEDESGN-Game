@@ -148,7 +148,7 @@ var CARDS = {
 		"card_name": "Baha ni Magwayen",
 		"type": "spell",
 		"cost": 3,
-		"image_path": "res://cards/assets/baha.png",
+		"image_path": "res://cards/assets/baha_ni_magwayen.png",
 		"property": "magic",
 		"effects": [
 			["flood", 2, 3],
@@ -161,7 +161,7 @@ var CARDS = {
 		"card_name": "Apoy ni Agui",
 		"type": "spell",
 		"cost": 3,
-		"image_path": "res://cards/assets/apoy.png",
+		"image_path": "res://cards/assets/apoy_ni_agui.png",
 		"property": "magic",
 		"effects": [
 			["burn", 2, 3],
@@ -174,7 +174,7 @@ var CARDS = {
 		"card_name": "Lindol ni Panlinugon",
 		"type": "attack",
 		"cost": 3,
-		"image_path": "res://cards/assets/lindol.png",
+		"image_path": "res://cards/assets/lindol_ni_panlinugon.png",
 		"property": "magic",
 		"effects": [
 			["damage", 6],
@@ -227,7 +227,7 @@ var CARDS = {
 		"card_name": "Tulong ng Duwende",
 		"type": "spell",
 		"cost": 2,
-		"image_path": "res://cards/assets/tulong.png",
+		"image_path": "res://cards/assets/tulong_ng_duwende.png",
 		"property": "buff",
 		"effects": [
 			["fetch_card_cost0"]
@@ -239,7 +239,7 @@ var CARDS = {
 		"card_name": "Dasal para kay Anagolay",
 		"type": "spell",
 		"cost": 3,
-		"image_path": "res://cards/assets/dasal.png",
+		"image_path": "res://cards/assets/dasal_para_kay_anagolay.png",
 		"property": "buff",
 		"effects": [
 			["add_random_cards_cost0", 2]
@@ -251,7 +251,7 @@ var CARDS = {
 		"card_name": "Ginhawa ng Anino",
 		"type": "spell",
 		"cost": 3,
-		"image_path": "res://cards/assets/ginhawa.png",
+		"image_path": "res://cards/assets/ginhawa_ng_anino.png",
 		"property": "buff",
 		"effects": [
 			["set_hand_cost_zero"]
@@ -340,7 +340,7 @@ var CARDS = {
 		"card_name": "Pitik ng Barang",
 		"type": "spell",
 		"cost": 2,
-		"image_path": "res://cards/assets/pitik.png",
+		"image_path": "res://cards/assets/pitik_ng_barang.png",
 		"property": "debuff",
 		"effects": [
 			["confuse", 0.50]

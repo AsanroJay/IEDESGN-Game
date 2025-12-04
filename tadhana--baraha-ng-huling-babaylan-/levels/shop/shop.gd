@@ -11,6 +11,7 @@ var ShopCardItemScene = preload("res://components/shop card item/shop_card_item.
 @onready var shop_cards_container = $UI/ShopPanel/Panel/CardsContainer
 @onready var shop_info = $UI/ShopPanel/Panel/InfoLabel
 @onready var skip_button = $SkipButton
+@onready var pointer = $Pointer
 
 
 var shop_inventory = []
@@ -34,6 +35,8 @@ func load_shop_room(node_info, player_ref):
 	
 	shop_panel.visible = false
 	skip_button.visible = true
+	pointer.visible = true
+	pointer.play("default")
 
 	
 
@@ -120,6 +123,7 @@ func _attempt_buy(card_data):
 func _show_shop_panel():
 	shop_panel.visible = true
 	skip_button.visible = false
+	pointer.visible = false
 
 
 func _on_hover_area_mouse_entered() -> void:
