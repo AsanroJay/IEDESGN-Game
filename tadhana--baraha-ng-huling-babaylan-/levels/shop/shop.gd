@@ -12,7 +12,7 @@ var ShopCardItemScene = preload("res://components/shop card item/shop_card_item.
 @onready var shop_info = $UI/ShopPanel/Panel/InfoLabel
 @onready var skip_button = $SkipButton
 @onready var pointer = $Pointer
-
+@onready var gold_counter = $NavbarTemp/GoldCounter
 
 var shop_inventory = []
 var reroll_cost = 30
@@ -37,7 +37,8 @@ func load_shop_room(node_info, player_ref):
 	skip_button.visible = true
 	pointer.visible = true
 	pointer.play("default")
-
+	
+	gold_counter.text = str(player_entity.gold)
 	
 
 
@@ -62,7 +63,7 @@ func reroll_cards():
 
 	# Regenerate new shop inventory + UI
 	_generate_shop_inventory()
-
+	gold_counter.text = str(player_entity.gold)
 	shop_info.text = "Shop rerolled for %d gold!" % reroll_cost
 
 	
@@ -115,6 +116,7 @@ func _attempt_buy(card_data):
 
 	# Deduct gold
 	player_entity.gold -= price
+	gold_counter.text = str(player_entity.gold)
 	shop_info.text = "Purchased %s!" % card_data["card_name"]
 
 	# Add to deck
