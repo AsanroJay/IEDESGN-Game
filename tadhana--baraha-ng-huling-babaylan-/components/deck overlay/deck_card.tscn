@@ -2,9 +2,25 @@
 
 [ext_resource type="Script" uid="uid://ct10oygvuxetj" path="res://components/deck overlay/deck_card.gd" id="1_2v3d8"]
 
-[node name="DeckCard" type="TextureButton"]
-offset_top = -1.0
-offset_right = 120.0
-offset_bottom = 179.0
-stretch_mode = 0
+[node name="DeckCard" type="VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(150, 200)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -75.0
+offset_right = 75.0
+offset_bottom = 200.0
+grow_horizontal = 2
+scale = Vector2(1.0012469, 0.99029124)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
 script = ExtResource("1_2v3d8")
+
+[node name="CardImage" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(70, 120)
+layout_mode = 2
+size_flags_vertical = 3
+expand_mode = 1
+stretch_mode = 4

@@ -2,53 +2,51 @@ extends Node2D
 class_name DeckOverlay
 
 @onready var title_label = $Panel/TitleLabel
-@onready var card_container = $Panel/GridContainer
+@onready var scroll_container = $Panel/ScrollContainer
+@onready var card_container = $Panel/ScrollContainer/GridContainer
 @onready var close_button = $Panel/CloseButton
 
 var DeckCardScene = preload("res://components/deck overlay/deck_card.tscn")
 
 signal overlay_closed
-signal card_selected(card_data)   
-
+signal card_selected(card_data)
 
 
 func _ready():
 	visible = false
-	await get_tree().process_frame  #
-	await get_tree().process_frame  
 
-	close_button = $Panel/CloseButton
-	title_label = $Panel/TitleLabel
-	card_container = $Panel/GridContainer
+	# Wait 1 frame so children fully initialize
+	await get_tree().process_frame
 
-	print("DeckOverlay Loaded Correctly:")
-	print(" - title_label =", title_label)
-	print(" - card_container =", card_container)
-	print(" - close_button =", close_button)
+	print("\n[DeckOverlay Loaded]")
+	print(" Title Label:", title_label)
+	print(" ScrollContainer:", scroll_container)
+	print(" GridContainer:", card_container)
+	print(" CloseButton:", close_button)
 
-	if close_button:
-		close_button.pressed.connect(_on_close)
-
+	close_button.pressed.connect(_on_close)
 
 
 func open_overlay(title: String, cards: Array, selectable := false):
 	title_label.text = title
 	visible = true
 
-	# Clear previous cards
+	# Clear old cards
 	for c in card_container.get_children():
 		c.queue_free()
 
-	# Populate new cards
+	# Add card entries
 	for card_data in cards:
 		var card_entry = DeckCardScene.instantiate()
-
-		# Add to grid setup to avoid onready issues
 		card_container.add_child(card_entry)
 		card_entry.setup(card_data)
 
 		if selectable:
 			card_entry.card_clicked.connect(_on_card_clicked)
+
+	# Force ScrollContainer to update scrollbars after cards added
+	await get_tree().process_frame
+	scroll_container.ensure_control_visible(card_container)
 
 
 func _on_card_clicked(card_data):

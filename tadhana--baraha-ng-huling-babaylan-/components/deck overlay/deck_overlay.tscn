@@ -3,35 +3,44 @@
 [ext_resource type="Script" uid="uid://ca7ah0puflxdx" path="res://components/deck overlay/deck_overlay.gd" id="1_bwvpo"]
 
 [node name="DeckOverlay" type="Node2D"]
+z_index = 5
 position = Vector2(203, 187)
 script = ExtResource("1_bwvpo")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_right = 519.0
-offset_bottom = 284.0
+offset_left = 41.0
+offset_top = -184.0
+offset_right = 891.0
+offset_bottom = 536.0
 color = Color(0.07058824, 0.07058824, 0.07058824, 0.6627451)
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 140.0
+offset_left = 40.0
 offset_top = -187.0
-offset_right = 780.0
+offset_right = 890.0
 offset_bottom = 533.0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_mode = 0
+offset_top = 40.0
+offset_right = 850.0
+offset_bottom = 1952.0
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="Panel/ScrollContainer"]
+z_index = 1
+custom_minimum_size = Vector2(850, 1500)
+layout_mode = 2
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 40
+columns = 5
 
 [node name="TitleLabel" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 217.0
-offset_top = 7.0
-offset_right = 295.0
-offset_bottom = 30.0
-
-[node name="GridContainer" type="GridContainer" parent="Panel"]
-layout_mode = 0
-offset_left = 54.0
-offset_top = 18.0
-offset_right = 443.0
-offset_bottom = 229.0
-columns = 3
+offset_left = 402.0
+offset_top = 11.0
+offset_right = 480.0
+offset_bottom = 34.0
 
 [node name="CloseButton" type="Button" parent="Panel"]
 layout_mode = 0

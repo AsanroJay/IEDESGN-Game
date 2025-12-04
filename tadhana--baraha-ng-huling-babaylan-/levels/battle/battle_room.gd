@@ -14,6 +14,7 @@ var deck = []
 var draw_pile = []
 var discard_pile = []
 var exhaust_pile = []
+var show_pile_flag = false
 
 
 func start_battle_from_node(node_info, player_ref):
@@ -63,6 +64,11 @@ func _on_open_exhaust_pile_pressed() -> void:
 
 
 func show_pile(title: String, pile: Array):
+	if show_pile_flag == true:
+		return
+		
+	set_ui_visible(false)
+	show_pile_flag = true
 	var overlay = DeckOverlayScene.instantiate()
 	add_child(overlay)
 
@@ -71,4 +77,8 @@ func show_pile(title: String, pile: Array):
 	# Destroy overlay when closed
 	overlay.overlay_closed.connect(func():
 		overlay.queue_free()
+		show_pile_flag = false
+		set_ui_visible(true)
 	)
+func set_ui_visible(is_visible: bool):
+	$UI.visible = is_visible
