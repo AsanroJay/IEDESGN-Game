@@ -52,6 +52,7 @@ func start_battle(battleroom, node_info, player_ref):
 
 	# CREATE ENEMY VISUAL NODE
 	enemy_node = EnemyNodeScene.instantiate()
+	enemy_node.battle_room = battleroom_ref  
 	battleroom_ref.get_node("EnemyContainer").add_child(enemy_node)
 
 	enemy_node.set_entity(enemy_entity)
@@ -84,19 +85,32 @@ func battle_loop():
 	await start_player_turn()
 	
 func start_player_turn() -> void:
+	process_turn_start_effects(player_entity,player_node)
+
+
+	
 	is_player_turn = true
 	card_input_enabled = true
 
 	if turn_counter > 1:
-		show_turn_overlay("[b][color=cyan]PLAYER TURN[/color][/b]",0.4)
+		show_turn_overlay("[b][color=cyan]PLAYER TURN[/color][/b]", 0.4)
+		await get_tree().create_timer(0.4).timeout 
 
 	# Reset mana
-	battleroom_ref.get_node("UI/ManaContainer").get_child(0).set_mana(player_entity.mana,player_entity.max_mana)
+	battleroom_ref.get_node("UI/ManaContainer").get_child(0).set_mana(player_entity.max_mana, player_entity.max_mana)
+	player_entity.mana = player_entity.max_mana
+	
+	#Reset block
+	player_entity.block = 0
+	
+	#Reenable end turn button
+	battleroom_ref.get_node("UI/EndTurnButton").disabled = false
+	
+	# Draw until hand has 6 cards
+	draw_until_hand_size(6)
+	
 
-	# WAIT for player to finish their turn (button press)
-	#await wait_for_player_end_turn()
 
-	#await start_enemy_turn()
 
 func end_player_turn():
 	if !is_player_turn:
@@ -112,8 +126,12 @@ func end_player_turn():
 
 
 func start_enemy_turn() -> void:
+	process_turn_start_effects(enemy_entity,enemy_node)
+	
 	is_player_turn = false
 	card_input_enabled = false
+	
+	
 
 	show_turn_overlay("[b][color=red]ENEMY TURN[/color][/b]",0.4)
 
@@ -122,7 +140,8 @@ func start_enemy_turn() -> void:
 	#enemy_attack()
 
    # End of enemy turn → back to player
- 	#start_player_turn()
+	print("Skip to player turn")
+	await start_player_turn()
 
 	
 
@@ -214,6 +233,10 @@ func draw_starting_hand(amount = 5):
 	for i in range(amount):
 		draw_card()
 
+func draw_until_hand_size(target_size: int) -> void:
+	var hand = battleroom_ref.get_node("UI/HandContainer")
+	while hand.get_child_count() < target_size:
+		draw_card()
 
 
 func reshuffle_discard_into_draw():
@@ -237,12 +260,44 @@ func remove_card_from_hand(card_node):
 	card_node.queue_free()
 
 	get_hand_container().arrange_cards()
-	
+
+
+# -----------------------------
+# 		UI RELATED LOGIC
+# -----------------------------
 func show_turn_overlay(text: String,duration):
 	var overlay = TurnOverlayScene.instantiate()
 	battleroom_ref.add_child(overlay)
 	overlay.show_overlay(text,duration)
-	
+
+func update_player_health_display():
+	player_healthbar.set_hp(player_entity.hp, player_entity.max_hp)
+
+func update_enemy_health_display():
+	enemy_healthbar.set_hp(enemy_entity.hp, enemy_entity.max_hp)
+
+func process_turn_start_effects(entity, entity_node):
+	var result = entity.resolve_turn_start_effects(self)
+
+	# --- BLEED ---
+	if result.get("bleed", 0) > 0:
+		entity_node.show_floating_text(
+			"Bleed  -" + str(result["bleed"]) + " HP",
+			Color.RED
+		)
+
+	# --- FUTURE EFFECTS ---
+	# if result.get("burn_damage", 0) > 0:
+	#     entity_node.show_floating_text("🔥" + str(result["burn_damage"]), Color.ORANGE)
+
+	# if result.get("poison_tick", 0) > 0:
+	#     entity_node.show_floating_text("☠ " + str(result["poison_tick"]), Color.GREEN)
+
+	# After animations → update UI
+	update_player_health_display()
+	update_enemy_health_display()
+
+
 # -----------------------------
 # 		CARD BATTLE LOGIC
 # -----------------------------
@@ -312,7 +367,8 @@ func _play_card_animation(card_type: String, caster, target):
 			player_node.play_add_block_animation(5) # no block number needed
 
 		"spell":
-			player_node.play_spell_animation()
+			pass 
+			#TODO : player_node.play_spell_animation()
 
 		_:
 			print("No animation for card type:", card_type)
