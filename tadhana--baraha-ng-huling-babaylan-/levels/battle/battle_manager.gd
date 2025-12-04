@@ -252,11 +252,18 @@ func reshuffle_discard_into_draw():
 
 
 
-func remove_card_from_hand(card_node):
+func remove_card_from_hand(card_node, exhausted: bool = false):
 	if card_node in hand_cards:
 		hand_cards.erase(card_node)
+	
+	if exhausted:
+		card_node.play_exhaust_animation()
+		await get_tree().create_timer(0.3).timeout # allow animation to finish
 
-	player_entity.discard_pile.append(card_node.card_data)
+		player_entity.exhaust_pile.append(card_node.card_data)
+	else:
+		player_entity.discard_pile.append(card_node.card_data)
+
 	card_node.queue_free()
 
 	get_hand_container().arrange_cards()
@@ -341,9 +348,17 @@ func _on_card_played(card_node):
 	_update_ui_after_effects()
 
 	# ----------------------------------------------------
-	# 4. Move card to discard
+	# 4. Move card to discard or exhaust
 	# ----------------------------------------------------
-	remove_card_from_hand(card_node)
+	var exhausted := false
+	var effects = card_node.card_data.get("effects", [])
+	for effect_def in effects:
+		if typeof(effect_def) == TYPE_ARRAY and effect_def.size() > 0 and effect_def[0] == "exhaust":
+			exhausted = true
+			break
+
+	remove_card_from_hand(card_node, exhausted)
+
 	get_hand_container().arrange_cards()
 
 func _update_ui_after_effects():

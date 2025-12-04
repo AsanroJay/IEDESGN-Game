@@ -22,25 +22,9 @@ func _init() -> void:
 func _initialize_starting_deck():
 	# Attack cards
 	for i in range(3):
-		var atk = {
-		"card_name": "Hiwa ng Manananggal",
-		"type": "attack",
-		"cost": 2,
-		"image_path": "res://cards/assets/hiwa_ng_manananggal.png",
-		"property": "physical",
-		"effects": [
-			["damage", 4],
-			["bleed", 3]
-		],
-		"exhaust": false
-	}
-		deck.append(atk)
-
-	# Defense cards
-	for i in range(3):
-		var def=   {
+		var def = {
 		"card_name": "Kalasag",
-		"type": "block",
+		"type": "spell",
 		"cost": 1,
 		"image_path": "res://cards/assets/kalasag.png",
 		"property": "debuff",
@@ -50,20 +34,50 @@ func _initialize_starting_deck():
 		"exhaust": false
 	}
 		deck.append(def)
+
+	# Defense cards
+	for i in range(3):
+		var atk=  {
+		"card_name": "Sibat",
+		"type": "attack",
+		"cost": 1,
+		"image_path": "res://cards/assets/sibat.png",
+		"property": "physical",
+		"effects": [
+			["damage", 5]
+		],
+		"exhaust": false
+	}
+		deck.append(atk)
 		
 	for i in range(3):
 		var sipa = {
-		"card_name": "Sipa ng Tikbalang",
+		"card_name": "Kagat ng Bakunawa",
 		"type": "attack",
-		"cost": 2,
-		"image_path": "res://cards/assets/sipa_ng_tikbalang.png",
+		"cost": 3,
+		"image_path": "res://cards/assets/kagat_ng_bakunawa.png",
 		"property": "physical",
 		"effects": [
-			["damage", 4],
-			["draw", 2]
+			["bleed", 7]
 		],
 		"exhaust": false
-		}
+	}
+
+		deck.append(sipa)
+		
+	for i in range(2):
+		var sipa =  {
+		"card_name": "Kagat ng Aswang",
+		"type": "attack",
+		"cost": 3,
+		"image_path": "res://cards/assets/kagat_ng_aswang.png",
+		"property": "physical",
+		"effects": [
+			["damage", 7],
+			["lifesteal_unblocked"]
+		],
+		"exhaust": false
+	}
 
 		deck.append(sipa)
 

@@ -192,7 +192,8 @@ const CARDS = {
 		"image_path": "res://cards/assets/hilot.png",
 		"property": "buff",
 		"effects": [
-			["heal", 5]
+			["heal", 5],
+			["exhaust"]
 		],
 		"exhaust": true
 	},

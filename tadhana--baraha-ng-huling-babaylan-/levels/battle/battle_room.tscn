@@ -57,8 +57,9 @@ position = Vector2(8, 0)
 script = ExtResource("1_el3db")
 
 [node name="Background" type="TextureRect" parent="."]
+offset_left = -8.0
 offset_top = 40.0
-offset_right = 1280.0
+offset_right = 1272.0
 offset_bottom = 720.0
 texture = ExtResource("2_tp6sv")
 expand_mode = 1
@@ -210,10 +211,9 @@ texture = ExtResource("6_e3gt6")
 expand_mode = 1
 
 [node name="NavbarTemp" type="TextureRect" parent="."]
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 1279.0
-offset_bottom = 44.0
+offset_left = -8.0
+offset_right = 1272.0
+offset_bottom = 45.0
 texture = ExtResource("4_tp6sv")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true

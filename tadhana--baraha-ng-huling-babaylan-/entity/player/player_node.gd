@@ -26,6 +26,9 @@ func play_attack_animation():
 	# Snap back
 	tween.tween_property(self, "position", original_pos, 0.1)
 	
+	
+
+	
 func show_floating_text(text: String, color: Color = Color.WHITE, y_offset := -60):
 	var pop = FloatingText.instantiate()
 	var ui_layer = battle_room.get_node("UI/FloatingTextLayer")

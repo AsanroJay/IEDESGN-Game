@@ -55,7 +55,13 @@ func _process_effect(effect_name: String, params: Array, property, is_piercing, 
 			if healed > 0:
 				caster.heal(healed)
 				battle_manager.update_player_health_display()
-			print("CardEngine: Lifesteal healed", healed)
+				
+			if caster == battle_manager.player_entity:
+				battle_manager.player_node.show_floating_text("Healed +" + str(healed) + " HP", Color.GREEN, -60)
+			else:
+				battle_manager.enemy_node.show_floating_text("Healed +" + str(healed) + " HP", Color.GREEN, -60)
+				
+			print("CardEngine: Lifesteal healed: ", healed)
 		# ---------------------------------------------------------
 		# BLOCK
 		# ---------------------------------------------------------
@@ -70,7 +76,11 @@ func _process_effect(effect_name: String, params: Array, property, is_piercing, 
 		"heal":
 			var amount = params[0]
 			caster.heal(amount)
-			print("CardEngine: Healed", amount)
+			
+			if caster == battle_manager.player_entity:
+				battle_manager.player_node.show_floating_text("Healed +" + str(amount) + " HP", Color.GREEN, -60)
+			else:
+				battle_manager.enemy_node.show_floating_text("Healed +" + str(amount) + " HP", Color.GREEN, -60)
 
 		# ---------------------------------------------------------
 		# DRAW CARDS
