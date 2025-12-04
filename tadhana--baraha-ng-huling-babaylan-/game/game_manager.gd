@@ -58,7 +58,15 @@ func start_battle_from_node(node):
 	# load battle room
 	current_room = load("res://levels/battle/battle_room.tscn").instantiate()
 	get_tree().root.add_child(current_room)
-
+	
+	# DEBUG: Check what script is actually attached
+	var room_script = current_room.get_script()
+	if room_script:
+		print("GameManager: Normal battle room script path:", room_script.resource_path)
+		print("GameManager: Normal battle room class name:", current_room.get_class())
+	else:
+		print("ERROR: Normal battle room has no script!")
+	
 	# pass info to room and the global player
 	current_room.start_battle_from_node(node, player)
 	print("GameManager: Normal battle room loaded and started")

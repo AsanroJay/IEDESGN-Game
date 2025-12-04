@@ -4,9 +4,13 @@ class_name BattleRoom
 # Preload BattleManager (NOT entity nodes)
 # CRITICAL: This MUST be the normal battle manager, not the buffed one!
 const NORMAL_BATTLE_MANAGER_PATH = "res://levels/battle/battle_manager.gd"
-var BattleManagerScene = load(NORMAL_BATTLE_MANAGER_PATH) as GDScript
+var BattleManagerScene = preload(NORMAL_BATTLE_MANAGER_PATH)
 var DeckOverlayScene = preload("res://components/deck overlay/deck_overlay.tscn")
 var battle_manager
+
+func _init():
+	print("Normal BattleRoom script _init() called")
+	print("Normal BattleRoom: Will load manager from:", NORMAL_BATTLE_MANAGER_PATH)
 
 var player
 var enemy 
@@ -25,17 +29,26 @@ func start_battle_from_node(node_info, player_ref):
 	print("Normal BattleRoom: BattleManagerScene is:", BattleManagerScene)
 	if BattleManagerScene:
 		print("Normal BattleRoom: BattleManagerScene resource_path:", BattleManagerScene.resource_path)
+		print("Normal BattleRoom: BattleManagerScene script path check:", BattleManagerScene.resource_path)
+	
+	# CRITICAL: Verify we're loading the correct script
+	var expected_path = "res://levels/battle/battle_manager.gd"
+	if BattleManagerScene.resource_path != expected_path:
+		print("ERROR! Wrong script loaded! Expected:", expected_path, "Got:", BattleManagerScene.resource_path)
+		push_error("CRITICAL: Normal battle room is loading wrong manager!")
+	
 	# Create BattleManager instance
 	battle_manager = BattleManagerScene.new()
 	print("Normal BattleRoom: Created battle_manager instance:", battle_manager)
 	print("Normal BattleRoom: battle_manager script path:", battle_manager.get_script().get_path())
 	
 	# Verify we got the correct manager
-	if battle_manager.has_method("get") and battle_manager.get("BATTLE_TYPE"):
-		var battle_type = battle_manager.get("BATTLE_TYPE")
+	if battle_manager.has_method("get") and "BATTLE_TYPE" in battle_manager:
+		var battle_type = battle_manager.BATTLE_TYPE
 		print("Normal BattleRoom: Detected battle manager type:", battle_type)
 		if battle_type != "NORMAL":
 			print("ERROR! Wrong battle manager loaded! Expected NORMAL, got:", battle_type)
+			push_error("CRITICAL: Wrong battle manager type!")
 	else:
 		print("WARNING: Could not verify battle manager type")
 
