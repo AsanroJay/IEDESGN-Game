@@ -17,7 +17,7 @@ func show_text(text: String, color: Color = Color.WHITE):
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 	# fade out
-	tween.parallel().tween_property(label, "modulate", Color(color.r, color.g, color.b, 0), 1.0)
+	tween.parallel().tween_property(label, "modulate", Color(color.r, color.g, color.b, 0), 1.5)
 
 	await tween.finished
 	queue_free()
