@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://baopxpx14ykfd" path="res://cards/card_node.gd" id="1_ivai2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5k631"]
-size = Vector2(25, 5)
+size = Vector2(16, 8.625)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ivai2"]
 size = Vector2(100, 1)
@@ -12,7 +12,7 @@ size = Vector2(100, 1)
 script = ExtResource("1_ivai2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 0)
+position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_5k631")
 
 [node name="CardSpriteHolder" type="Node2D" parent="."]
