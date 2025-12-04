@@ -30,6 +30,7 @@ func enter_room(node):
 			start_battle_from_node(node)
 		"buffed": 
 			print("Entering buffed encounter...")
+			start_battle_from_node(node,true)
 		"shop": 
 			print("Entering shop...")
 			enter_shop(node)
@@ -46,19 +47,18 @@ func enter_room(node):
 		
 			
 
-func start_battle_from_node(node):
+func start_battle_from_node(node, is_buffed := false):
 	state = GameState.BATTLE
-	
 	# hide the map instead of removing it
 	if map_scene:
 		map_scene.visible = false
-
+		
 	# load battle room
 	current_room = load("res://levels/battle/battle_room.tscn").instantiate()
 	get_tree().root.add_child(current_room)
 
 	# pass info to room and the global player
-	current_room.start_battle_from_node(node, player)
+	current_room.start_battle_from_node(node, player, is_buffed)
 
 func return_to_map():
 	if current_room:

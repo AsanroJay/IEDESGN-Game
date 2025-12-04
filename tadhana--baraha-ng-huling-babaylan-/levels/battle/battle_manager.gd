@@ -29,10 +29,15 @@ var turn_counter: int = 1
 var player_healthbar
 var enemy_healthbar
 
-func start_battle(battleroom, node_info, player_ref):
+var glow 
+var popup
+
+func start_battle(battleroom, node_info, player_ref, is_buffed):
 	# store battleroom reference
 	battleroom_ref = battleroom
-
+	glow = battleroom_ref.get_node("EnemyContainer/GlowEffect")
+	popup = battleroom_ref.get_node("BloodmoonPopup")
+	
 	# store player entity
 	player_entity = player_ref
 
@@ -59,6 +64,29 @@ func start_battle(battleroom, node_info, player_ref):
 	var enemy_spawn = battleroom_ref.get_node("EnemyContainer/EnemySpawn").global_position
 	enemy_node.global_position = enemy_spawn
 	
+	
+	glow.visible = false
+	popup.visible = false
+	#BUFFED FLAG
+	if is_buffed:
+		#TODO: Show blood moon overlay and continue button
+		
+		enemy_entity.max_hp = int(enemy_entity.max_hp * 1.3)
+		enemy_entity.hp = enemy_entity.max_hp
+		
+		enemy_entity.armor = int(enemy_entity.armor * 1.3)
+		# Buff attack if the enemy has an attack stat
+		#if enemy_entity.has_method("get_attack") or enemy_entity.has_method("set_attack"):
+			#enemy_entity.attack = int(enemy_entity.attack * 1.3)
+
+		print("\n===== BUFFED ENCOUNTER =====")
+		print("HP Buffed to:", enemy_entity.hp)
+		
+		apply_buffed_visuals()
+
+	
+
+	
 	#Reset stats
 	player_entity.hp = player_entity.max_hp
 	player_entity.mana = player_entity.max_mana
@@ -68,6 +96,8 @@ func start_battle(battleroom, node_info, player_ref):
 	#instantiate card engine
 	card_engine = CardEngineClass.new()
 	
+	if is_buffed:
+		await show_bloodmoon_popup()
 	#Start Battle Overlay
 	show_turn_overlay("[b][img=64x64]res://components/turn overlay/assets/battle_start.png[/img][color=yellow]BATTLE START![/color][/b]",1)
 
@@ -79,8 +109,52 @@ func start_battle(battleroom, node_info, player_ref):
 	
 	
 	print("Battle initialized successfully with enemy:", enemy_type)
+	
+# -----------------------------------------
+#  BUFFED ENCOUNTER LOGIC
+# -----------------------------------------
+func apply_buffed_visuals():
+	var bg = battleroom_ref.get_node("Background")
+	bg.texture = preload("res://levels/battle/assets/buffed_forest.png")
 
+	glow.visible = true
+	
+	var t = create_tween()
+	t.set_loops()        # infinite loop
+	t.tween_property(glow, "scale", Vector2(1.2, 1.2), 0.6)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(glow, "scale", Vector2(1.0, 1.0), 0.6)\
+		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
+func show_bloodmoon_popup() -> void:
+	popup.visible = true
+	popup.modulate.a = 1.0  # fully visible
+
+	# Hide all UI during popup
+	battleroom_ref.set_ui_visible(false)
+	enemy_node.visible = false
+	player_node.visible = false
+	glow.visible = false
+	
+	var tween = create_tween()
+
+	# Wait 1.5 seconds fully visible
+	tween.tween_interval(1.5)
+
+	# Fade out over 1.2 seconds
+	tween.tween_property(popup, "modulate:a", 0.0, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+
+	await tween.finished
+
+	popup.visible = false
+	enemy_node.visible = true
+	player_node.visible = true
+	glow.visible = true
+	battleroom_ref.set_ui_visible(true)
+
+# -----------------------------------------
+# TURN LOOP LOGIC
+# -----------------------------------------
 func battle_loop():
 	await start_player_turn()
 	
@@ -202,9 +276,9 @@ func generate_random_enemy(node_info):
 		7: ["default"],
 		8: ["default"],
 		9: ["default"],
-		10: ["default"],
-		11: ["default"],
-		12: ["default"]
+		10:["default"],
+		11:["default"],
+		12:["default"]
 	}
 
 	var list = layer_rules[node_info.row_index]

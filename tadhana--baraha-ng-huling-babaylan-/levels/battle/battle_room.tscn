@@ -1,8 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://dywmkr2eoj5m8"]
+[gd_scene load_steps=34 format=3 uid="uid://dywmkr2eoj5m8"]
 
 [ext_resource type="Script" uid="uid://do126ggh2pnsw" path="res://levels/battle/battle_room.gd" id="1_el3db"]
 [ext_resource type="Texture2D" uid="uid://d2658ri3w2vsm" path="res://levels/battle/assets/Level 1 - forest.png" id="2_tp6sv"]
 [ext_resource type="Script" uid="uid://bpua3l347sm3j" path="res://levels/battle/hand_container.gd" id="3_tp6sv"]
+[ext_resource type="Texture2D" uid="uid://dvpo6ssg1fnqf" path="res://levels/battle/assets/Buffed Enemy Effect.png" id="3_vy62k"]
 [ext_resource type="Texture2D" uid="uid://dbdrbpfodllsh" path="res://levels/level_assets/End Turn Button.PNG" id="4_r4tay"]
 [ext_resource type="Texture2D" uid="uid://d3oulld6kfkd" path="res://levels/battle/assets/Navigation Bar (Forest Level).PNG" id="4_tp6sv"]
 [ext_resource type="Texture2D" uid="uid://dts1rpy17v2sd" path="res://levels/level_assets/Draw Card Pile Icon.PNG" id="5_avb8i"]
@@ -12,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://cukq51l47mxrx" path="res://levels/level_assets/Exhaust Card Pile Icon.PNG" id="6_e3gt6"]
 [ext_resource type="Texture2D" uid="uid://c8atkyi8i7kic" path="res://levels/level_assets/Gold.PNG" id="7_2m8lf"]
 [ext_resource type="FontFile" uid="uid://oqpwikc7t54t" path="res://fonts/sundaymarket.otf" id="11_1dgad"]
+[ext_resource type="Texture2D" uid="uid://t02jl43te3ua" path="res://levels/battle/assets/Blood Moon Window Pop-up.png" id="14_po6yq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r4tay"]
 
@@ -81,6 +83,11 @@ position = Vector2(3, -1)
 
 [node name="EnemySpawn" type="Marker2D" parent="EnemyContainer"]
 position = Vector2(943, 444)
+
+[node name="GlowEffect" type="Sprite2D" parent="EnemyContainer"]
+position = Vector2(948.00006, 357)
+scale = Vector2(0.7382786, 0.7086805)
+texture = ExtResource("3_vy62k")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -291,6 +298,10 @@ shape = SubResource("RectangleShape2D_tp6sv")
 
 [node name="SnapPoint" type="Marker2D" parent="PlayArea"]
 position = Vector2(650, 300)
+
+[node name="BloodmoonPopup" type="Sprite2D" parent="."]
+position = Vector2(658, 338)
+texture = ExtResource("14_po6yq")
 
 [connection signal="pressed" from="UI/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="UI/OpenDrawPile" to="." method="_on_open_draw_pile_pressed"]

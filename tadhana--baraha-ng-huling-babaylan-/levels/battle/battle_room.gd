@@ -19,7 +19,7 @@ var exhaust_pile = []
 var show_pile_flag = false
 
 
-func start_battle_from_node(node_info, player_ref):
+func start_battle_from_node(node_info, player_ref, is_buffed):
 	# Create BattleManager instance
 	battle_manager = BattleManagerScene.new()
 
@@ -27,7 +27,7 @@ func start_battle_from_node(node_info, player_ref):
 	add_child(battle_manager)
 
 	# Begin battle
-	battle_manager.start_battle(self, node_info, player_ref)
+	battle_manager.start_battle(self, node_info, player_ref, is_buffed)
 	
 	gold_counter.text = str(player_ref.gold)
 
