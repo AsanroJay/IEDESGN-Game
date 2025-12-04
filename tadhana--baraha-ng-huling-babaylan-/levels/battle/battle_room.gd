@@ -9,6 +9,8 @@ var battle_manager
 var player
 var enemy 
 
+@onready var gold_counter = $NavbarTemp/GoldCounter
+
 #Deck Related Variables
 var deck = []        
 var draw_pile = []
@@ -26,6 +28,8 @@ func start_battle_from_node(node_info, player_ref):
 
 	# Begin battle
 	battle_manager.start_battle(self, node_info, player_ref)
+	
+	gold_counter.text = str(player_ref.gold)
 
 
 func _ready():
