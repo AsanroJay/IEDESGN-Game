@@ -10,9 +10,12 @@ var ShopCardItemScene = preload("res://components/shop card item/shop_card_item.
 @onready var shop_panel = $UI/ShopPanel
 @onready var shop_cards_container = $UI/ShopPanel/Panel/CardsContainer
 @onready var shop_info = $UI/ShopPanel/Panel/InfoLabel
+@onready var skip_button = $SkipButton
 
 
 var shop_inventory = []
+var reroll_cost = 30
+
 
 
 
@@ -30,6 +33,7 @@ func load_shop_room(node_info, player_ref):
 	player_node.global_position = spawn_point
 	
 	shop_panel.visible = false
+	skip_button.visible = true
 
 	
 
@@ -47,33 +51,49 @@ func _on_open_shop_pressed() -> void:
 	_show_shop_panel()
 	
 func reroll_cards():
-	#Empty array first
-	shop_inventory.clear()
+	if player_entity.gold < reroll_cost:
+		shop_info.text = "Not enough gold to reroll!"
+		return
+
+	player_entity.gold -= reroll_cost
+
+	# Regenerate new shop inventory + UI
+	_generate_shop_inventory()
+
+	shop_info.text = "Shop rerolled for %d gold!" % reroll_cost
+
 	
-	#shop_inventory	
+func get_random_shop_card() -> Dictionary:
+	var pool = CardDatabase.CARDS.keys()
+
+	# Pick a random card ID
+	var id = pool[randi() % pool.size()]
+
+	# Always deep-duplicate so effects don't overwrite the DB
+	var card = CardDatabase.CARDS[id].duplicate(true)
+
+	# Give shop price if missing
+	if not card.has("shop_cost"):
+		card["shop_cost"] = 24 + randi_range(10,15) * card["cost"]
+
+	return card
+
 
 func _generate_shop_inventory():
-	shop_inventory = [
-		CardDatabase.CARDS["default"].duplicate(true),
-		CardDatabase.CARDS["default"].duplicate(true),
-		CardDatabase.CARDS["default"].duplicate(true),
-		CardDatabase.CARDS["default"].duplicate(true),
-		CardDatabase.CARDS["default"].duplicate(true),
-		CardDatabase.CARDS["default"].duplicate(true),
-	]
+	shop_inventory.clear()
 
-	# Add default prices
-	for c in shop_inventory:
-		if not c.has("shop_cost"):
-			c["shop_cost"] = 24 + randi_range(10,15) * c["cost"]
+	# Generate 6 random cards
+	for i in range(6):
+		shop_inventory.append(get_random_shop_card())
 
-	# Clear UI container
+	# Clear UI
 	for child in shop_cards_container.get_children():
 		child.queue_free()
 
-	# Create shop UI buttons
+	# Spawn the cards into UI
 	for card_data in shop_inventory:
 		var item = create_shop_item(card_data)
+
 
 
 func create_shop_item(card_data):
@@ -99,6 +119,7 @@ func _attempt_buy(card_data):
 
 func _show_shop_panel():
 	shop_panel.visible = true
+	skip_button.visible = false
 
 
 func _on_hover_area_mouse_entered() -> void:
@@ -115,3 +136,12 @@ func _on_hover_area_mouse_exited() -> void:
 
 func _on_close_button_pressed() -> void:
 	shop_panel.visible = false
+	skip_button.visible = true
+
+
+func _on_reroll_button_pressed() -> void:
+	reroll_cards()
+
+
+func _on_skip_button_pressed() -> void:
+	GameManager.return_to_map()

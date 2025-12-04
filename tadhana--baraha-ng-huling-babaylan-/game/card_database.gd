@@ -1,6 +1,6 @@
 extends Node
 
-const CARDS = {
+const CARDS =  {
 	"default": {
 		"card_name": "Default",
 		"type": "attack",
@@ -268,8 +268,20 @@ const CARDS = {
 		"image_path": "res://cards/assets/hikap.png",
 		"property": "debuff",
 		"effects": [
-			["block_attack"],
+			["block",5],
 			["draw", 1]
+		],
+		"exhaust": false
+	},
+	
+	"kalasag": {
+		"card_name": "Kalasag",
+		"type": "spell",
+		"cost": 1,
+		"image_path": "res://cards/assets/kalasag.png",
+		"property": "debuff",
+		"effects": [
+			["block",5],
 		],
 		"exhaust": false
 	},
@@ -278,7 +290,7 @@ const CARDS = {
 		"card_name": "Basbas ng Mangkukulam",
 		"type": "spell",
 		"cost": 2,
-		"image_path": "res://cards/assets/basbas.png",
+		"image_path": "res://cards/assets/basbas_ng_mangkukulam.png",
 		"property": "debuff",
 		"effects": [
 			["apply_damage_taken_mult", 0.20],
@@ -287,11 +299,11 @@ const CARDS = {
 		"exhaust": false
 	},
 
-	"paglalano_ni_mayari": {
+	"tingin_ni_mayari": {
 		"card_name": "Paglalano ni Mayari",
 		"type": "spell",
 		"cost": 2,
-		"image_path": "res://cards/assets/paglalano.png",
+		"image_path": "res://cards/assets/tingin_ni_mayari.png",
 		"property": "debuff",
 		"effects": [
 			["enemy_miss_chance", 0.50]
@@ -315,7 +327,7 @@ const CARDS = {
 		"card_name": "Iyak ng Tiyanak",
 		"type": "spell",
 		"cost": 3,
-		"image_path": "res://cards/assets/iyak.png",
+		"image_path": "res://cards/assets/iyak_ng_tiyanak.png",
 		"property": "debuff",
 		"effects": [
 			["remove_enemy_armor"]

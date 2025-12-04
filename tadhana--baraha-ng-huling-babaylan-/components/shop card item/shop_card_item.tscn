@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctspyv8ge6exa"]
+[gd_scene load_steps=6 format=3 uid="uid://ctspyv8ge6exa"]
 
 [ext_resource type="Script" uid="uid://3pnb21hdfwdq" path="res://components/shop card item/shop_card_item.gd" id="1_dio12"]
+[ext_resource type="FontFile" uid="uid://d3n1x7wurslpp" path="res://fonts/sundaymarket-script.otf" id="2_y10mf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qeg46"]
+bg_color = Color(0.70980394, 0.105882354, 0, 0.8235294)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3idob"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_of10e"]
 
 [node name="ShopCardItem" type="VBoxContainer"]
 custom_minimum_size = Vector2(70, 100)
@@ -20,18 +28,27 @@ stretch_mode = 5
 [node name="CardName" type="Label" parent="."]
 custom_minimum_size = Vector2(70, 10)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_fonts/font = ExtResource("2_y10mf")
+theme_override_font_sizes/font_size = 15
 text = "Card Name"
 horizontal_alignment = 1
 
 [node name="CostLabel" type="Label" parent="."]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_fonts/font = ExtResource("2_y10mf")
+theme_override_font_sizes/font_size = 15
 text = "Cost"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BuyButton" type="Button" parent="."]
 layout_mode = 2
-theme_override_font_sizes/font_size = 11
+theme_override_fonts/font = ExtResource("2_y10mf")
+theme_override_font_sizes/font_size = 15
+theme_override_styles/normal = SubResource("StyleBoxFlat_qeg46")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qeg46")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qeg46")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3idob")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_of10e")
 text = "Buy"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dxcxnkeatlu8i"]
+[gd_scene load_steps=24 format=3 uid="uid://dxcxnkeatlu8i"]
 
 [ext_resource type="Script" uid="uid://dhx3a63hbojgf" path="res://levels/shop/shop.gd" id="1_2tlbo"]
 [ext_resource type="Texture2D" uid="uid://b4xkatxv8ptuv" path="res://levels/shop/assets/[SHOP] Level 1 - forest.png" id="2_7w5nn"]
@@ -7,8 +7,11 @@
 [ext_resource type="Texture2D" uid="uid://b6ahnjcowc7co" path="res://levels/shop/assets/Shop Window Pop-up UI.PNG" id="4_yvagp"]
 [ext_resource type="Texture2D" uid="uid://bwg1bk4j8gntv" path="res://levels/shop/assets/Close Button.PNG" id="5_56goy"]
 [ext_resource type="Texture2D" uid="uid://cv207s263gq4q" path="res://levels/shop/assets/Map.PNG" id="5_ab8xu"]
+[ext_resource type="Texture2D" uid="uid://b6lr2wahbgnnr" path="res://levels/shop/assets/Reroll Button.png" id="6_iu150"]
 [ext_resource type="Texture2D" uid="uid://gpjsp6epuj5y" path="res://levels/level_assets/Settings.PNG" id="6_sap14"]
+[ext_resource type="Texture2D" uid="uid://c2ptmxqmpsi23" path="res://levels/shop/assets/Shop Keeper Sprite.png" id="7_1rw7m"]
 [ext_resource type="Texture2D" uid="uid://c8atkyi8i7kic" path="res://levels/level_assets/Gold.PNG" id="7_ljrys"]
+[ext_resource type="Texture2D" uid="uid://btkxg14gwvllb" path="res://levels/shop/assets/SkipEncounter.PNG" id="12_1rw7m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7w5nn"]
 size = Vector2(361.76788, 401.19092)
@@ -23,6 +26,16 @@ texture = ExtResource("5_56goy")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rw7m"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ij3ee"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcvwx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2s8ig"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n7bk4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_do1m6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qqd32"]
 
 [node name="Shop" type="Node2D"]
 script = ExtResource("1_2tlbo")
@@ -146,14 +159,18 @@ expand_mode = 1
 
 [node name="RerollButton" type="Button" parent="UI/ShopPanel/Panel"]
 layout_mode = 0
-offset_left = 736.0
+offset_left = 728.0
 offset_top = 456.0
-offset_right = 872.0
-offset_bottom = 506.0
+offset_right = 2784.0
+offset_bottom = 2512.0
+scale = Vector2(0.033133473, 0.031536773)
 text = "Reroll
 "
+icon = ExtResource("6_iu150")
+icon_alignment = 1
 
 [node name="RemoveCardButton" type="Button" parent="UI/ShopPanel/Panel"]
+visible = false
 layout_mode = 0
 offset_left = 736.0
 offset_top = 376.0
@@ -168,6 +185,11 @@ offset_left = 400.0
 offset_top = 120.0
 offset_right = 440.0
 offset_bottom = 143.0
+
+[node name="ShopKeeperSprite" type="Sprite2D" parent="UI/ShopPanel/Panel"]
+position = Vector2(960, 480)
+scale = Vector2(0.45312506, 0.45555553)
+texture = ExtResource("7_1rw7m")
 
 [node name="NavbarTemp" type="TextureRect" parent="."]
 offset_left = -2.0
@@ -228,6 +250,20 @@ offset_bottom = 41.0
 texture = ExtResource("7_ljrys")
 expand_mode = 1
 
+[node name="SkipButton" type="Button" parent="."]
+offset_left = 1088.0
+offset_top = 512.0
+offset_right = 3144.0
+offset_bottom = 2568.0
+scale = Vector2(0.07038596, 0.07068745)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_tcvwx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_2s8ig")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_n7bk4")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_do1m6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qqd32")
+icon = ExtResource("12_1rw7m")
+icon_alignment = 1
+
 [connection signal="mouse_entered" from="ShopKeeperContainer/TextureRect" to="." method="_on_texture_rect_mouse_entered"]
 [connection signal="mouse_exited" from="ShopKeeperContainer/TextureRect" to="." method="_on_texture_rect_mouse_exited"]
 [connection signal="mouse_entered" from="ShopKeeperContainer/OpenShop" to="." method="_on_open_shop_mouse_entered"]
@@ -235,4 +271,6 @@ expand_mode = 1
 [connection signal="mouse_entered" from="ShopKeeperContainer/HoverArea" to="." method="_on_hover_area_mouse_entered"]
 [connection signal="mouse_exited" from="ShopKeeperContainer/HoverArea" to="." method="_on_hover_area_mouse_exited"]
 [connection signal="pressed" from="UI/ShopPanel/Panel/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="UI/ShopPanel/Panel/RerollButton" to="." method="_on_reroll_button_pressed"]
 [connection signal="pressed" from="NavbarTemp/Map Button" to="." method="_on_map_button_pressed"]
+[connection signal="pressed" from="SkipButton" to="." method="_on_skip_button_pressed"]
