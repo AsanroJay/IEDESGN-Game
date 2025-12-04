@@ -66,14 +66,14 @@ func _initialize_starting_deck():
 		deck.append(sipa)
 		
 	for i in range(2):
-		var sipa =    {
-		"card_name": "Iyak ng Tiyanak",
+		var sipa =   {
+		"card_name": "Pitik ng Barang",
 		"type": "spell",
-		"cost": 3,
-		"image_path": "res://cards/assets/iyak_ng_tiyanak.png",
+		"cost": 2,
+		"image_path": "res://cards/assets/pitik_ng_barang.png",
 		"property": "debuff",
 		"effects": [
-			["remove_enemy_armor"]
+			["confuse", 0.50]
 		],
 		"exhaust": false
 	}

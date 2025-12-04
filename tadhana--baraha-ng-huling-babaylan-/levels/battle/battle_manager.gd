@@ -92,8 +92,8 @@ func start_player_turn() -> void:
 	is_player_turn = true
 	card_input_enabled = true
 
-	if turn_counter > 1:
-		show_turn_overlay("[b][color=cyan]PLAYER TURN[/color][/b]", 0.4)
+	if turn_counter != 1:
+		show_turn_overlay("[b][color=yellow]PLAYER TURN[/color][/b]", 0.4)
 		await get_tree().create_timer(0.4).timeout 
 
 	# Reset mana
@@ -137,12 +137,38 @@ func start_enemy_turn() -> void:
 
 	# Wait for overlay + enemy action
 	await get_tree().create_timer(1.0).timeout
-	#enemy_attack()
+	enemy_attack()
 
    # End of enemy turn → back to player
 	print("Skip to player turn")
 	await start_player_turn()
 
+
+# -----------------------------
+# 		ENEMY AI FUNCTION LOGIC
+# -----------------------------
+func get_enemy_attack_target() -> Entity:
+	if enemy_entity.has_status("Confuse"):
+		if randf() < 0.5:
+			enemy_node.show_floating_text("REFLECTED!", Color.CYAN)
+			return enemy_entity   # enemy hits itself
+		
+	return player_entity
+
+func enemy_attack():
+	var target = get_enemy_attack_target()
+	var dmg = 5  # example
+
+	target.apply_damage(dmg)
+
+	if target == enemy_entity:
+		enemy_node.play_hit_animation()
+	else:
+		#player_node.play_hit_animation()
+		print("BENNN")
+
+	update_player_health_display()
+	update_enemy_health_display()
 	
 
 

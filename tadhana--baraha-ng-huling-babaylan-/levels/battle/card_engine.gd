@@ -192,7 +192,15 @@ func _process_effect(effect_name: String, params: Array, property, is_piercing, 
 			print("TODO: enemy_miss_chance")
 
 		"confuse":
-			print("TODO: confuse")
+			var turns = 2 #decrements at the start so effectively 1 turn
+			target.set_status("Confuse", turns)
+			print("Applied Confuse (next enemy action)")
+
+			if target == battle_manager.enemy_entity:
+				battle_manager.enemy_node.show_floating_text("Confused!", Color.CYAN)
+			else:
+				battle_manager.player_node.show_floating_text("Confused!", Color.CYAN)
+
 
 		"pierce_armor":
 			caster.set_status("Piercing", 1)
