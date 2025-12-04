@@ -25,7 +25,7 @@ func _initialize_starting_deck():
 		var atk = {
 			"name": "Attack",
 			"type": "attack",
-			"image_path": "res://cards/assets/default_card.png",
+			"image_path": "res://cards/assets/sibat.png",
 			"damage": 6,
 			"cost": 1
 		}

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxfm6d1flncwt"]
+[gd_scene load_steps=3 format=3 uid="uid://dxfm6d1flncwt"]
 
 [ext_resource type="Script" uid="uid://b0wjibgfof4dd" path="res://components/turn overlay/turn_overlay.gd" id="1_hd2ie"]
+[ext_resource type="FontFile" uid="uid://oqpwikc7t54t" path="res://fonts/sundaymarket.otf" id="2_3po2f"]
 
 [node name="TurnOverlay" type="CanvasLayer"]
 process_mode = 3
@@ -17,6 +18,11 @@ offset_right = -6.0
 offset_bottom = -14.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("2_3po2f")
+theme_override_fonts/bold_font = ExtResource("2_3po2f")
+theme_override_fonts/bold_italics_font = ExtResource("2_3po2f")
+theme_override_fonts/italics_font = ExtResource("2_3po2f")
+theme_override_fonts/mono_font = ExtResource("2_3po2f")
 theme_override_font_sizes/normal_font_size = 64
 theme_override_font_sizes/bold_font_size = 64
 theme_override_font_sizes/bold_italics_font_size = 64

@@ -22,9 +22,10 @@ offset_bottom = 533.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
 layout_mode = 0
-offset_top = 40.0
-offset_right = 850.0
-offset_bottom = 1952.0
+offset_left = 2.0
+offset_top = 60.0
+offset_right = 852.0
+offset_bottom = 1972.0
 horizontal_scroll_mode = 0
 
 [node name="GridContainer" type="GridContainer" parent="Panel/ScrollContainer"]
@@ -37,10 +38,11 @@ columns = 5
 
 [node name="TitleLabel" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 402.0
-offset_top = 11.0
-offset_right = 480.0
-offset_bottom = 34.0
+offset_left = 381.0
+offset_top = 8.0
+offset_right = 459.0
+offset_bottom = 31.0
+theme_override_font_sizes/font_size = 25
 
 [node name="CloseButton" type="Button" parent="Panel"]
 layout_mode = 0
