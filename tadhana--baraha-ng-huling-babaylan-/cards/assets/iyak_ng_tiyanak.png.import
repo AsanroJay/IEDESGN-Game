@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6rprc1qyk44q"
-path="res://.godot/imported/kulog_ng_kidlat.png-b9dfa1bd331c6e7dc3e3382ae3eef4f6.ctex"
+uid="uid://duwedapv783pb"
+path="res://.godot/imported/iyak_ng_tiyanak.png-b184e86c537d2fde90756da3ffceebbf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/assets/kulog_ng_kidlat.png"
-dest_files=["res://.godot/imported/kulog_ng_kidlat.png-b9dfa1bd331c6e7dc3e3382ae3eef4f6.ctex"]
+source_file="res://cards/assets/iyak_ng_tiyanak.png"
+dest_files=["res://.godot/imported/iyak_ng_tiyanak.png-b184e86c537d2fde90756da3ffceebbf.ctex"]
 
 [params]
 
