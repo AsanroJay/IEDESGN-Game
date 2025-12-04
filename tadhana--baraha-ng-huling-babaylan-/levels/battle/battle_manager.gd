@@ -13,15 +13,17 @@ var HealthBarScene = preload("res://components/health bar/health_bar.tscn")
 var CardScene = preload("res://cards/card.tscn")
 var ManaCountScene = preload("res://components/mana count/mana_counter.tscn")
 var TurnOverlayScene := preload("res://components/turn overlay/turn_overlay.tscn")
+var CoinTossScene := preload("res://components/coin_toss/coin_toss_overlay.tscn")
 
 
-var CardEngineClass = preload("res://levels/battle/card_engine.gd") # Update path
+var CardEngineClass = preload("res://levels/battle/card_engine.gd")
 var card_engine: CardEngine
+
 # Card system
 const HAND_LIMIT := 8
 var hand_cards: Array = []
 
-#Battle Loop Variables
+# Battle Loop Variables
 var is_player_turn := true
 var card_input_enabled := true
 var turn_counter: int = 1
@@ -31,6 +33,10 @@ var enemy_healthbar
 
 var glow 
 var popup
+
+# Coin toss state
+var pending_card_node = null
+var coin_toss_won := false
 
 func start_battle(battleroom, node_info, player_ref, is_buffed):
 	# store battleroom reference
@@ -69,22 +75,15 @@ func start_battle(battleroom, node_info, player_ref, is_buffed):
 	popup.visible = false
 	#BUFFED FLAG
 	if is_buffed:
-		#TODO: Show blood moon overlay and continue button
-		
 		enemy_entity.max_hp = int(enemy_entity.max_hp * 1.3)
 		enemy_entity.hp = enemy_entity.max_hp
 		
 		enemy_entity.armor = int(enemy_entity.armor * 1.3)
-		# Buff attack if the enemy has an attack stat
-		#if enemy_entity.has_method("get_attack") or enemy_entity.has_method("set_attack"):
-			#enemy_entity.attack = int(enemy_entity.attack * 1.3)
 
 		print("\n===== BUFFED ENCOUNTER =====")
 		print("HP Buffed to:", enemy_entity.hp)
 		
 		apply_buffed_visuals()
-
-	
 
 	
 	#Reset stats
@@ -95,6 +94,7 @@ func start_battle(battleroom, node_info, player_ref, is_buffed):
 	
 	#instantiate card engine
 	card_engine = CardEngineClass.new()
+	add_child(card_engine)
 	
 	if is_buffed:
 		await show_bloodmoon_popup()
@@ -106,7 +106,6 @@ func start_battle(battleroom, node_info, player_ref, is_buffed):
 	player_entity.draw_pile.shuffle()
 	draw_starting_hand(5)
 	battle_loop()
-	
 	
 	print("Battle initialized successfully with enemy:", enemy_type)
 	
@@ -120,7 +119,7 @@ func apply_buffed_visuals():
 	glow.visible = true
 	
 	var t = create_tween()
-	t.set_loops()        # infinite loop
+	t.set_loops()
 	t.tween_property(glow, "scale", Vector2(1.2, 1.2), 0.6)\
 		.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	t.tween_property(glow, "scale", Vector2(1.0, 1.0), 0.6)\
@@ -128,20 +127,15 @@ func apply_buffed_visuals():
 
 func show_bloodmoon_popup() -> void:
 	popup.visible = true
-	popup.modulate.a = 1.0  # fully visible
+	popup.modulate.a = 1.0
 
-	# Hide all UI during popup
 	battleroom_ref.set_ui_visible(false)
 	enemy_node.visible = false
 	player_node.visible = false
 	glow.visible = false
 	
 	var tween = create_tween()
-
-	# Wait 1.5 seconds fully visible
 	tween.tween_interval(1.5)
-
-	# Fade out over 1.2 seconds
 	tween.tween_property(popup, "modulate:a", 0.0, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 
 	await tween.finished
@@ -182,25 +176,19 @@ func start_player_turn() -> void:
 	
 	# Draw until hand has 6 cards
 	draw_until_hand_size(6)
-	
-
-
 
 func end_player_turn():
 	if !is_player_turn:
-		return # prevent double clicks
+		return
 	
 	print("Player ends turn.")
 	is_player_turn = false
 	
-	# Disable the button during enemy turn
 	battleroom_ref.get_node("UI/EndTurnButton").disabled = true
 
 	await start_enemy_turn()
 
-
 func start_enemy_turn() -> void:
-	# turn start effects (bleed, etc)
 	process_turn_start_effects(enemy_entity, enemy_node)
 
 	is_player_turn = false
@@ -209,33 +197,24 @@ func start_enemy_turn() -> void:
 	show_turn_overlay("[b][color=red]ENEMY TURN[/color][/b]", 0.4)
 	await get_tree().create_timer(1).timeout
 
-	# -----------------------------------------
-	#   Tingin ni Mayari: 50% chance to skip
-	# -----------------------------------------
 	if enemy_entity.has_status("MissChance"):
 		if randf() < 0.5:
 			enemy_node.show_floating_text("Missed!", Color.CYAN)
 			print("Enemy turn skipped due to Mayari")
 			
-			# Remove the status right away
 			enemy_entity.statuses.erase("MissChance")
 
-			# go back to player
 			await get_tree().create_timer(0.5).timeout
 			await start_player_turn()
 			return
 
-	# normal enemy action
 	await get_tree().create_timer(0.5).timeout
 	enemy_attack()
 
-	# remove status AFTER action
 	if enemy_entity.has_status("MissChance"):
 		enemy_entity.statuses.erase("MissChance")
 
 	await start_player_turn()
-
-
 
 # -----------------------------
 # 		ENEMY AI FUNCTION LOGIC
@@ -244,13 +223,13 @@ func get_enemy_attack_target() -> Entity:
 	if enemy_entity.has_status("Confuse"):
 		if randf() < 0.5:
 			enemy_node.show_floating_text("REFLECTED!", Color.CYAN)
-			return enemy_entity   # enemy hits itself
+			return enemy_entity
 		
 	return player_entity
 
 func enemy_attack():
 	var target = get_enemy_attack_target()
-	var dmg = 5  # example
+	var dmg = 5
 
 	target.apply_damage(dmg)
 	enemy_node.play_attack_animation()
@@ -262,8 +241,6 @@ func enemy_attack():
 
 	update_player_health_display()
 	update_enemy_health_display()
-	
-
 
 func generate_random_enemy(node_info):
 	var layer_rules = {
@@ -285,14 +262,11 @@ func generate_random_enemy(node_info):
 	var i = randi_range(0, list.size() - 1)
 	return list[i]
 
-
 func setup_ui():
-	# PLAYER HEALTH BAR
 	player_healthbar = HealthBarScene.instantiate()
 	battleroom_ref.get_node("UI/PlayerHUD").add_child(player_healthbar)
 	player_healthbar.set_hp(player_entity.hp, player_entity.max_hp)
 
-	# ENEMY HEALTH BAR
 	enemy_healthbar = HealthBarScene.instantiate()
 	battleroom_ref.get_node("UI/EnemyHUD").add_child(enemy_healthbar)
 	enemy_healthbar.set_hp(enemy_entity.hp, enemy_entity.max_hp)
@@ -301,36 +275,28 @@ func setup_ui():
 	battleroom_ref.get_node("UI/ManaContainer").add_child(mana_container)
 	mana_container.set_mana(player_entity.mana, player_entity.max_mana)
 
-
 func get_hand_container():
 	return battleroom_ref.get_node("UI/HandContainer")
 
-
-
 func draw_card():
-	# Limit reached
 	if hand_cards.size() >= HAND_LIMIT:
 		print("Hand is full!")
 		return
 
-	# Reshuffle discard if empty
 	if player_entity.draw_pile.is_empty():
 		reshuffle_discard_into_draw()
 
-	# If still empty → no cards
 	if player_entity.draw_pile.is_empty():
 		print("No cards left to draw.")
 		return
 
 	var card_data = player_entity.draw_pile.pop_front()
 	
-	
 	var card_node = CardScene.instantiate()
 	var hand = get_hand_container()
 	hand.add_child(card_node)
 	card_node.set_card(card_data)
 	
-	#Connect to play card logic
 	card_node.card_played.connect(_on_card_played)
 	
 	card_node.set_play_area(
@@ -340,13 +306,9 @@ func draw_card():
 	
 	card_node.battle_manager = self
 
-	
-
 	hand_cards.append(card_node)
 
 	hand.arrange_cards()
-
-
 
 func draw_starting_hand(amount = 5):
 	for i in range(amount):
@@ -356,7 +318,6 @@ func draw_until_hand_size(target_size: int) -> void:
 	var hand = battleroom_ref.get_node("UI/HandContainer")
 	while hand.get_child_count() < target_size:
 		draw_card()
-
 
 func reshuffle_discard_into_draw():
 	if player_entity.discard_pile.is_empty():
@@ -369,15 +330,13 @@ func reshuffle_discard_into_draw():
 
 	player_entity.discard_pile.clear()
 
-
-
 func remove_card_from_hand(card_node, exhausted: bool = false):
 	if card_node in hand_cards:
 		hand_cards.erase(card_node)
 	
 	if exhausted:
 		card_node.play_exhaust_animation()
-		await get_tree().create_timer(0.3).timeout # allow animation to finish
+		await get_tree().create_timer(0.3).timeout
 
 		player_entity.exhaust_pile.append(card_node.card_data)
 	else:
@@ -386,7 +345,6 @@ func remove_card_from_hand(card_node, exhausted: bool = false):
 	card_node.queue_free()
 
 	get_hand_container().arrange_cards()
-
 
 # -----------------------------
 # 		UI RELATED LOGIC
@@ -405,24 +363,32 @@ func update_enemy_health_display():
 func process_turn_start_effects(entity, entity_node):
 	var result = entity.resolve_turn_start_effects(self)
 
-	# --- BLEED ---
 	if result.get("bleed", 0) > 0:
 		entity_node.show_floating_text(
 			"Bleed  -" + str(result["bleed"]) + " HP",
 			Color.RED
 		)
 
-	# --- FUTURE EFFECTS ---
-	# if result.get("burn_damage", 0) > 0:
-	#     entity_node.show_floating_text("🔥" + str(result["burn_damage"]), Color.ORANGE)
-
-	# if result.get("poison_tick", 0) > 0:
-	#     entity_node.show_floating_text("☠ " + str(result["poison_tick"]), Color.GREEN)
-
-	# After animations → update UI
 	update_player_health_display()
 	update_enemy_health_display()
 
+# -----------------------------
+# 		COIN TOSS LOGIC
+# -----------------------------
+func show_coin_toss() -> bool:
+	var overlay = CoinTossScene.instantiate()
+	battleroom_ref.add_child(overlay)
+	
+	# Disable UI during coin toss
+	battleroom_ref.set_ui_visible(false)
+	
+	var result = await overlay.choice_made
+	
+	# Re-enable UI
+	battleroom_ref.set_ui_visible(true)
+	
+	var won = result[2]  # Third parameter is the 'won' boolean
+	return won
 
 # -----------------------------
 # 		CARD BATTLE LOGIC
@@ -435,12 +401,10 @@ func _on_card_played(card_node):
 
 	print("Card played:", card_data.get("card_name", "Unknown Card"))
 
-	# Prevent play during enemy turn
 	if not is_player_turn:
 		card_node.return_to_hand()
 		return
 
-	# Check mana cost
 	var cost = card_data.get("cost", 0)
 	if caster.mana < cost:
 		print("Not enough mana!")
@@ -452,22 +416,27 @@ func _on_card_played(card_node):
 	battleroom_ref.get_node("UI/ManaContainer").get_child(0).set_mana(caster.mana, caster.max_mana)
 
 	# ----------------------------------------------------
-	# 1. Play animations depending on type (no math here)
+	# COIN TOSS MECHANIC
+	# ----------------------------------------------------
+	coin_toss_won = await show_coin_toss()
+	
+	if coin_toss_won:
+		print("Coin toss WON! Effects will be doubled/applied.")
+	else:
+		print("Coin toss LOST! Effects will be skipped.")
+
+	# ----------------------------------------------------
+	# Play animations and apply effects
 	# ----------------------------------------------------
 	_play_card_animation(card_type, caster, target)
 
-	# ----------------------------------------------------
-	# 2. Apply all card effects using CardEngine (math only)
-	# ----------------------------------------------------
-	card_engine.resolve_effects(card_data, caster, target, self)
+	# Pass coin_toss_won to card engine
+	card_engine.resolve_effects(card_data, caster, target, self, coin_toss_won)
 
-	# ----------------------------------------------------
-	# 3. Update UI after math
-	# ----------------------------------------------------
 	_update_ui_after_effects()
 
 	# ----------------------------------------------------
-	# 4. Move card to discard or exhaust
+	# Move card to discard or exhaust
 	# ----------------------------------------------------
 	var exhausted := false
 	var effects = card_node.card_data.get("effects", [])
@@ -484,12 +453,10 @@ func _update_ui_after_effects():
 	player_healthbar.set_hp(player_entity.hp, player_entity.max_hp)
 	enemy_healthbar.set_hp(enemy_entity.hp, enemy_entity.max_hp)
 
-	# If your health bar shows block visually:
 	if player_healthbar.has_method("update_block"):
 		player_healthbar.update_block(player_entity.block)
 	if enemy_healthbar.has_method("update_block"):
 		enemy_healthbar.update_block(enemy_entity.block)
-
 
 func _play_card_animation(card_type: String, caster, target):
 	match card_type:
@@ -498,11 +465,10 @@ func _play_card_animation(card_type: String, caster, target):
 			target_node().play_hit_animation()
 
 		"defend":
-			player_node.play_add_block_animation(5) # no block number needed
+			player_node.play_add_block_animation(5)
 
 		"spell":
-			pass 
-			#TODO : player_node.play_spell_animation()
+			pass
 
 		_:
 			print("No animation for card type:", card_type)

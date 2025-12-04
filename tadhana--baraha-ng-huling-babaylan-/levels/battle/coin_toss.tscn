@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://104dpdo2jaf7"]
+
+[ext_resource type="Script" uid="uid://c8bmjp6fajrhd" path="res://levels/battle/coin_toss.gd" id="1_w4dmu"]
+
+[node name="CoinToss" type="Node"]
+script = ExtResource("1_w4dmu")
