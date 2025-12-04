@@ -10,6 +10,11 @@ var battle_room
 func set_entity(e):
 	entity = e
 	anim.play("idle")
+	entity.block_changed.connect(_on_block_changed)
+
+func _on_block_changed(new_block_value: int):
+	# This function is called when Entity.gain_block() is run
+	play_add_block_animation(new_block_value)
 	
 func play_attack_animation():
 	var tween = create_tween()

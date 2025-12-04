@@ -21,26 +21,51 @@ func _init() -> void:
 
 func _initialize_starting_deck():
 	# Attack cards
-	for i in range(4):
+	for i in range(3):
 		var atk = {
-			"name": "Attack",
-			"type": "attack",
-			"image_path": "res://cards/assets/sibat.png",
-			"damage": 6,
-			"cost": 1
-		}
+		"card_name": "Sibat",
+		"type": "attack",
+		"cost": 1,
+		"image_path": "res://cards/assets/sibat.png",
+		"property": "physical",
+		"effects": [
+			["damage", 5]
+		],
+		"exhaust": false
+	}
 		deck.append(atk)
 
 	# Defense cards
-	for i in range(4):
-		var def = {
-			"name": "Defend",
-			"type": "defend",
-			"image_path": "res://cards/assets/default_card.png",
-			"block": 5,
-			"cost": 1
+	for i in range(3):
+		var def=  {
+		"card_name": "Suntok ng Kapre",
+		"type": "attack",
+		"cost": 2,
+		"image_path": "res://cards/assets/suntok_ng_kapre.png",
+		"property": "physical",
+		"effects": [
+			["damage", 7],
+			["pierce_armor"]
+		],
+		"exhaust": false
 		}
 		deck.append(def)
+		
+	for i in range(3):
+		var sipa = {
+		"card_name": "Sipa ng Tikbalang",
+		"type": "attack",
+		"cost": 2,
+		"image_path": "res://cards/assets/sipa_ng_tikbalang.png",
+		"property": "physical",
+		"effects": [
+			["damage", 4],
+			["draw", 2]
+		],
+		"exhaust": false
+		}
+
+		deck.append(sipa)
 
 func add_block(block_amt):
 	block += block_amt

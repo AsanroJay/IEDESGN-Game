@@ -1,17 +1,16 @@
 extends Node
 class_name CardDB
 
-# Master dictionary of all cards
-var CARDS := {
+var CARDS = {
 	"default": {
 		"card_name": "Default",
 		"type": "attack",
 		"cost": 1,
 		"image_path": "res://cards/assets/default_card.png",
-		"damage": 6,
-		"block": 0,
 		"property": "physical",
-		"effect": null,
+		"effects": [
+			["damage", 6]
+		],
 		"exhaust": false
 	},
 
@@ -20,10 +19,10 @@ var CARDS := {
 		"type": "defend",
 		"cost": 1,
 		"image_path": "res://cards/assets/defend.png",
-		"damage": 0,
-		"block": 5,
-		"property": null,
-		"effect": null,
+		"property": "defense",
+		"effects": [
+			["block", 5]
+		],
 		"exhaust": false
 	},
 
@@ -35,10 +34,10 @@ var CARDS := {
 		"type": "attack",
 		"cost": 1,
 		"image_path": "res://cards/assets/sibat.png",
-		"damage": 5,
-		"block": 0,
 		"property": "physical",
-		"effect": null,
+		"effects": [
+			["damage", 5]
+		],
 		"exhaust": false
 	},
 
@@ -47,10 +46,11 @@ var CARDS := {
 		"type": "attack",
 		"cost": 2,
 		"image_path": "res://cards/assets/sipa_ng_tikbalang.png",
-		"damage": 4,
-		"block": 0,
 		"property": "physical",
-		"effect": ["draw", 2],
+		"effects": [
+			["damage", 4],
+			["draw", 2]
+		],
 		"exhaust": false
 	},
 
@@ -59,10 +59,11 @@ var CARDS := {
 		"type": "attack",
 		"cost": 2,
 		"image_path": "res://cards/assets/suntok_ng_kapre.png",
-		"damage": 7,
-		"block": 0,
 		"property": "physical",
-		"effect": ["pierce_armor"],
+		"effects": [
+			["damage", 7],
+			["pierce_armor"]
+		],
 		"exhaust": false
 	},
 
@@ -71,10 +72,11 @@ var CARDS := {
 		"type": "attack",
 		"cost": 2,
 		"image_path": "res://cards/assets/hiwa_ng_manananggal.png",
-		"damage": 4,
-		"block": 0,
 		"property": "physical",
-		"effect": ["bleed", 3],
+		"effects": [
+			["damage", 4],
+			["bleed", 3]
+		],
 		"exhaust": false
 	},
 
@@ -83,10 +85,10 @@ var CARDS := {
 		"type": "attack",
 		"cost": 3,
 		"image_path": "res://cards/assets/kagat_ng_bakunawa.png",
-		"damage": 0,
-		"block": 0,
 		"property": "physical",
-		"effect": ["bleed", 7],
+		"effects": [
+			["bleed", 7]
+		],
 		"exhaust": false
 	},
 
@@ -95,10 +97,11 @@ var CARDS := {
 		"type": "attack",
 		"cost": 3,
 		"image_path": "res://cards/assets/kagat_ng_aswang.png",
-		"damage": 7,
-		"block": 0,
 		"property": "physical",
-		"effect": ["lifesteal_unblocked"],
+		"effects": [
+			["damage", 7],
+			["lifesteal_unblocked"]
+		],
 		"exhaust": false
 	},
 
@@ -110,10 +113,10 @@ var CARDS := {
 		"type": "attack",
 		"cost": 1,
 		"image_path": "res://cards/assets/gaway.png",
-		"damage": 5,
-		"block": 0,
 		"property": "magic",
-		"effect": null,
+		"effects": [
+			["damage", 5]
+		],
 		"exhaust": false
 	},
 
@@ -122,10 +125,10 @@ var CARDS := {
 		"type": "spell",
 		"cost": 2,
 		"image_path": "res://cards/assets/kulam.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["flip_resistance"],
+		"property": "magic",
+		"effects": [
+			["flip_resistance"]
+		],
 		"exhaust": true
 	},
 
@@ -134,10 +137,10 @@ var CARDS := {
 		"type": "attack",
 		"cost": 2,
 		"image_path": "res://cards/assets/kulog_ng_kidlat.png",
-		"damage": 8,
-		"block": 0,
 		"property": "magic",
-		"effect": null,
+		"effects": [
+			["damage", 8]
+		],
 		"exhaust": false
 	},
 
@@ -146,10 +149,11 @@ var CARDS := {
 		"type": "spell",
 		"cost": 3,
 		"image_path": "res://cards/assets/baha.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["flood", 2, 3, "force_physical_next_turn"],
+		"property": "magic",
+		"effects": [
+			["flood", 2, 3],
+			["force_physical_next_turn"]
+		],
 		"exhaust": false
 	},
 
@@ -158,10 +162,11 @@ var CARDS := {
 		"type": "spell",
 		"cost": 3,
 		"image_path": "res://cards/assets/apoy.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["burn", 2, 3, "ignore_armor_next_attack"],
+		"property": "magic",
+		"effects": [
+			["burn", 2, 3],
+			["ignore_armor_next_attack"]
+		],
 		"exhaust": false
 	},
 
@@ -170,10 +175,11 @@ var CARDS := {
 		"type": "attack",
 		"cost": 3,
 		"image_path": "res://cards/assets/lindol.png",
-		"damage": 6,
-		"block": 0,
 		"property": "magic",
-		"effect": ["enemy_stun_next_turn"],
+		"effects": [
+			["damage", 6],
+			["enemy_stun_next_turn"]
+		],
 		"exhaust": false
 	},
 
@@ -185,10 +191,10 @@ var CARDS := {
 		"type": "spell",
 		"cost": 1,
 		"image_path": "res://cards/assets/hilot.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["heal", 5],
+		"property": "buff",
+		"effects": [
+			["heal", 5]
+		],
 		"exhaust": true
 	},
 
@@ -197,10 +203,10 @@ var CARDS := {
 		"type": "spell",
 		"cost": 1,
 		"image_path": "res://cards/assets/tagiyamo.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["cleanse"],
+		"property": "buff",
+		"effects": [
+			["cleanse"]
+		],
 		"exhaust": false
 	},
 
@@ -209,10 +215,10 @@ var CARDS := {
 		"type": "spell",
 		"cost": 1,
 		"image_path": "res://cards/assets/pagpag.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["return_exhausted"],
+		"property": "buff",
+		"effects": [
+			["return_exhausted"]
+		],
 		"exhaust": true
 	},
 
@@ -221,10 +227,10 @@ var CARDS := {
 		"type": "spell",
 		"cost": 2,
 		"image_path": "res://cards/assets/tulong.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["fetch_card_cost0"],
+		"property": "buff",
+		"effects": [
+			["fetch_card_cost0"]
+		],
 		"exhaust": false
 	},
 
@@ -233,10 +239,10 @@ var CARDS := {
 		"type": "spell",
 		"cost": 3,
 		"image_path": "res://cards/assets/dasal.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["add_random_cards_cost0", 2],
+		"property": "buff",
+		"effects": [
+			["add_random_cards_cost0", 2]
+		],
 		"exhaust": false
 	},
 
@@ -245,10 +251,10 @@ var CARDS := {
 		"type": "spell",
 		"cost": 3,
 		"image_path": "res://cards/assets/ginhawa.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["set_hand_cost_zero"],
+		"property": "buff",
+		"effects": [
+			["set_hand_cost_zero"]
+		],
 		"exhaust": false
 	},
 
@@ -260,10 +266,11 @@ var CARDS := {
 		"type": "spell",
 		"cost": 1,
 		"image_path": "res://cards/assets/hikap.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["block_attack", "draw", 1],
+		"property": "debuff",
+		"effects": [
+			["block_attack"],
+			["draw", 1]
+		],
 		"exhaust": false
 	},
 
@@ -272,10 +279,11 @@ var CARDS := {
 		"type": "spell",
 		"cost": 2,
 		"image_path": "res://cards/assets/basbas.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["increase_enemy_damage_taken", 1.20, "draw", 1],
+		"property": "debuff",
+		"effects": [
+			["increase_enemy_damage_taken", 1.20],
+			["draw", 1]
+		],
 		"exhaust": false
 	},
 
@@ -284,10 +292,10 @@ var CARDS := {
 		"type": "spell",
 		"cost": 2,
 		"image_path": "res://cards/assets/paglalano.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["enemy_miss_chance", 0.50],
+		"property": "debuff",
+		"effects": [
+			["enemy_miss_chance", 0.50]
+		],
 		"exhaust": false
 	},
 
@@ -296,10 +304,10 @@ var CARDS := {
 		"type": "spell",
 		"cost": 2,
 		"image_path": "res://cards/assets/kulam_ng_ugat.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["poison", 4, 3],
+		"property": "debuff",
+		"effects": [
+			["poison", 4, 3]
+		],
 		"exhaust": false
 	},
 
@@ -308,10 +316,10 @@ var CARDS := {
 		"type": "spell",
 		"cost": 3,
 		"image_path": "res://cards/assets/iyak.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["remove_enemy_armor"],
+		"property": "debuff",
+		"effects": [
+			["remove_enemy_armor"]
+		],
 		"exhaust": false
 	},
 
@@ -320,13 +328,15 @@ var CARDS := {
 		"type": "spell",
 		"cost": 2,
 		"image_path": "res://cards/assets/pitik.png",
-		"damage": 0,
-		"block": 0,
-		"property": null,
-		"effect": ["confuse", 0.50],
+		"property": "debuff",
+		"effects": [
+			["confuse", 0.50]
+		],
 		"exhaust": false
 	}
 }
+
+
 
 
 

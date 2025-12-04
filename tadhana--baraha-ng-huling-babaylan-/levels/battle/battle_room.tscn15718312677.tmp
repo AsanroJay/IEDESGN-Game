@@ -1,0 +1,298 @@
+[gd_scene load_steps=31 format=3 uid="uid://dywmkr2eoj5m8"]
+
+[ext_resource type="Script" uid="uid://do126ggh2pnsw" path="res://levels/battle/battle_room.gd" id="1_el3db"]
+[ext_resource type="Texture2D" uid="uid://d2658ri3w2vsm" path="res://levels/battle/assets/Level 1 - forest.png" id="2_tp6sv"]
+[ext_resource type="Script" uid="uid://bpua3l347sm3j" path="res://levels/battle/hand_container.gd" id="3_tp6sv"]
+[ext_resource type="Texture2D" uid="uid://dbdrbpfodllsh" path="res://levels/level_assets/End Turn Button.PNG" id="4_r4tay"]
+[ext_resource type="Texture2D" uid="uid://d3oulld6kfkd" path="res://levels/battle/assets/Navigation Bar (Forest Level).PNG" id="4_tp6sv"]
+[ext_resource type="Texture2D" uid="uid://dts1rpy17v2sd" path="res://levels/level_assets/Draw Card Pile Icon.PNG" id="5_avb8i"]
+[ext_resource type="Texture2D" uid="uid://cv207s263gq4q" path="res://levels/shop/assets/Map.PNG" id="5_jtw3m"]
+[ext_resource type="Texture2D" uid="uid://bl72om1fmn1mo" path="res://levels/level_assets/Discard Card Pile Icon.PNG" id="6_1dgad"]
+[ext_resource type="Texture2D" uid="uid://gpjsp6epuj5y" path="res://levels/level_assets/Settings.PNG" id="6_7qvo7"]
+[ext_resource type="Texture2D" uid="uid://cukq51l47mxrx" path="res://levels/level_assets/Exhaust Card Pile Icon.PNG" id="6_e3gt6"]
+[ext_resource type="Texture2D" uid="uid://c8atkyi8i7kic" path="res://levels/level_assets/Gold.PNG" id="7_2m8lf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r4tay"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_n0863"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avb8i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vkg2g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xjh17"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tp6sv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e3gt6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1dgad"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vy62k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pp1m8"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_jtw3m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_po6yq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vom6l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0mekw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gcv5o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dtood"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_i0b8v"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2m8lf"]
+fill_from = Vector2(0, 0.004672897)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tp6sv"]
+size = Vector2(238, 214.0625)
+
+[node name="BattleRoom" type="Node2D"]
+position = Vector2(8, 0)
+script = ExtResource("1_el3db")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_top = 40.0
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("2_tp6sv")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerContainer" type="Node2D" parent="."]
+
+[node name="PlayerNode" type="Node2D" parent="PlayerContainer"]
+
+[node name="PlayerSpawn" type="Marker2D" parent="PlayerContainer"]
+position = Vector2(272, 434)
+
+[node name="EnemyContainer" type="Node2D" parent="."]
+position = Vector2(1, -2)
+
+[node name="EnemyNode" type="Node2D" parent="EnemyContainer"]
+position = Vector2(3, -1)
+
+[node name="EnemySpawn" type="Marker2D" parent="EnemyContainer"]
+position = Vector2(943, 444)
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="PlayerHUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 281.0
+offset_top = 507.0
+offset_right = 506.0
+offset_bottom = 532.0
+metadata/_edit_use_anchors_ = true
+
+[node name="EnemyHUD" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 948.0
+offset_top = 518.0
+offset_right = 1173.0
+offset_bottom = 543.0
+
+[node name="HandContainer" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -251.0
+offset_right = 350.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("3_tp6sv")
+
+[node name="ManaContainer" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 240.0
+offset_top = 592.0
+offset_right = 302.0
+offset_bottom = 651.0
+
+[node name="EndTurnIcon" type="TextureRect" parent="UI"]
+offset_left = 1010.0
+offset_top = 527.0
+offset_right = 1160.0
+offset_bottom = 666.0
+mouse_filter = 2
+texture = ExtResource("4_r4tay")
+expand_mode = 1
+
+[node name="EndTurnButton" type="Button" parent="UI"]
+z_index = -2
+z_as_relative = false
+offset_left = 1012.0
+offset_top = 568.0
+offset_right = 1160.0
+offset_bottom = 624.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_r4tay")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_n0863")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_avb8i")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vkg2g")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xjh17")
+icon = SubResource("PlaceholderTexture2D_tp6sv")
+
+[node name="FloatingTextLayer" type="Node2D" parent="UI"]
+
+[node name="OpenDrawPile" type="Button" parent="UI"]
+z_index = -1
+offset_left = 1024.0
+offset_top = 648.0
+offset_right = 1071.0
+offset_bottom = 696.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_e3gt6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1dgad")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vy62k")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pp1m8")
+icon = SubResource("PlaceholderTexture2D_jtw3m")
+
+[node name="DrawIcon" type="TextureRect" parent="UI"]
+offset_left = 1024.0
+offset_top = 648.0
+offset_right = 1089.0
+offset_bottom = 713.0
+mouse_filter = 2
+texture = ExtResource("5_avb8i")
+expand_mode = 1
+
+[node name="OpenDiscardPile" type="Button" parent="UI"]
+z_index = -1
+offset_left = 120.0
+offset_top = 653.0
+offset_right = 168.0
+offset_bottom = 696.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_po6yq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vom6l")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_0mekw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pp1m8")
+
+[node name="DiscardIcon" type="TextureRect" parent="UI"]
+offset_left = 120.0
+offset_top = 648.0
+offset_right = 185.0
+offset_bottom = 713.0
+mouse_filter = 2
+texture = ExtResource("6_1dgad")
+expand_mode = 1
+
+[node name="OpenExhaustPile" type="Button" parent="UI"]
+z_index = -1
+offset_left = 1136.0
+offset_top = 632.0
+offset_right = 1184.0
+offset_bottom = 680.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_gcv5o")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_dtood")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_i0b8v")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pp1m8")
+
+[node name="ExhaustIcon" type="TextureRect" parent="UI"]
+offset_left = 1128.0
+offset_top = 624.0
+offset_right = 1193.0
+offset_bottom = 689.0
+mouse_filter = 2
+texture = ExtResource("6_e3gt6")
+expand_mode = 1
+
+[node name="NavbarTemp" type="TextureRect" parent="."]
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1279.0
+offset_bottom = 44.0
+texture = ExtResource("4_tp6sv")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Map Button" type="Button" parent="NavbarTemp"]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.084375
+anchor_top = -0.022222223
+anchor_right = 0.20431209
+anchor_bottom = 1.3039422
+offset_left = 1067.0
+offset_top = 2.0
+offset_right = 982.13654
+offset_bottom = 30.087349
+scale = Vector2(0.5826147, 0.45576385)
+icon = SubResource("GradientTexture2D_2m8lf")
+
+[node name="MapIcon" type="TextureRect" parent="NavbarTemp"]
+layout_mode = 0
+offset_left = 1175.0
+offset_top = 1.0
+offset_right = 1215.0
+offset_bottom = 41.0
+mouse_filter = 2
+texture = ExtResource("5_jtw3m")
+expand_mode = 1
+
+[node name="SettingsButton" type="Button" parent="NavbarTemp"]
+z_index = -1
+layout_mode = 0
+offset_left = 1223.0
+offset_top = 1.0
+offset_right = 1263.0
+offset_bottom = 41.0
+
+[node name="SettingsIcon" type="TextureRect" parent="NavbarTemp"]
+layout_mode = 0
+offset_left = 1223.0
+offset_top = 1.0
+offset_right = 1263.0
+offset_bottom = 41.0
+mouse_filter = 2
+texture = ExtResource("6_7qvo7")
+expand_mode = 1
+
+[node name="GoldCounter" type="Label" parent="NavbarTemp"]
+layout_mode = 0
+offset_left = 416.0
+offset_top = 1.0
+offset_right = 463.0
+offset_bottom = 42.0
+text = "99"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoldIcon" type="TextureRect" parent="NavbarTemp"]
+layout_mode = 0
+offset_left = 455.0
+offset_top = 1.0
+offset_right = 495.0
+offset_bottom = 41.0
+texture = ExtResource("7_2m8lf")
+expand_mode = 1
+
+[node name="PlayArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
+position = Vector2(649, 302)
+shape = SubResource("RectangleShape2D_tp6sv")
+
+[node name="SnapPoint" type="Marker2D" parent="PlayArea"]
+position = Vector2(650, 300)
+
+[connection signal="pressed" from="UI/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
+[connection signal="pressed" from="UI/OpenDrawPile" to="." method="_on_open_draw_pile_pressed"]
+[connection signal="pressed" from="UI/OpenDiscardPile" to="." method="_on_open_discard_pile_pressed"]
+[connection signal="pressed" from="UI/OpenExhaustPile" to="." method="_on_open_exhaust_pile_pressed"]
+[connection signal="pressed" from="NavbarTemp/Map Button" to="." method="_on_map_button_pressed"]
+[connection signal="area_entered" from="PlayArea" to="." method="_on_play_area_area_entered"]
+[connection signal="area_exited" from="PlayArea" to="." method="_on_play_area_area_exited"]

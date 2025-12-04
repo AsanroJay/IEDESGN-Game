@@ -14,6 +14,9 @@ var CardScene = preload("res://cards/card.tscn")
 var ManaCountScene = preload("res://components/mana count/mana_counter.tscn")
 var TurnOverlayScene := preload("res://components/turn overlay/turn_overlay.tscn")
 
+
+var CardEngineClass = preload("res://levels/battle/card_engine.gd") # Update path
+var card_engine: CardEngine
 # Card system
 const HAND_LIMIT := 8
 var hand_cards: Array = []
@@ -60,6 +63,9 @@ func start_battle(battleroom, node_info, player_ref):
 	player_entity.mana = player_entity.max_mana
 	# HUD
 	setup_ui()
+	
+	#instantiate card engine
+	card_engine = CardEngineClass.new()
 	
 	#Start Battle Overlay
 	show_turn_overlay("[b][img=64x64]res://components/turn overlay/assets/battle_start.png[/img][color=yellow]BATTLE START![/color][/b]",1)
@@ -241,62 +247,79 @@ func show_turn_overlay(text: String,duration):
 # 		CARD BATTLE LOGIC
 # -----------------------------
 func _on_card_played(card_node):
-	print("Card played: ", card_node.card_data)
+	var card_data = card_node.card_data
+	var card_type = card_data.get("type", "")
+	var caster = player_entity
+	var target = enemy_entity
 
-	# Check mana
-	var cost = card_node.card_data.get("cost", 0)
-	if player_entity.mana < cost:
-		print("Not enough mana!")
-		#TODO: implememt a text pop up saying not enough mana
+	print("Card played:", card_data.get("card_name", "Unknown Card"))
+
+	# Prevent play during enemy turn
+	if not is_player_turn:
 		card_node.return_to_hand()
-		
 		return
 
-	# Deduct mana
-	player_entity.mana -= cost
-	battleroom_ref.get_node("UI/ManaContainer").get_child(0).set_mana(player_entity.mana,player_entity.max_mana)
+	# Check mana cost
+	var cost = card_data.get("cost", 0)
+	if caster.mana < cost:
+		print("Not enough mana!")
+		card_node.return_to_hand()
+		return
 
-	# Apply effects depending on card type
-	var type = card_node.card_data.get("type", "")
+	# Spend mana
+	caster.mana -= cost
+	battleroom_ref.get_node("UI/ManaContainer").get_child(0).set_mana(caster.mana, caster.max_mana)
 
-	match type:
-		"attack":
-			_play_attack_card(card_node)
-		"defend":
-			#TODO: animation effect on block
-			_play_defend_card(card_node)
-		"spell":
-			#TODO: animation effect on spell
-			_play_spell_card(card_node)
-		_:
-			print("Unknown card type: ", type)
+	# ----------------------------------------------------
+	# 1. Play animations depending on type (no math here)
+	# ----------------------------------------------------
+	_play_card_animation(card_type, caster, target)
 
-	# Remove card from hand & move to discard
+	# ----------------------------------------------------
+	# 2. Apply all card effects using CardEngine (math only)
+	# ----------------------------------------------------
+	card_engine.resolve_effects(card_data, caster, target, self)
+
+	# ----------------------------------------------------
+	# 3. Update UI after math
+	# ----------------------------------------------------
+	_update_ui_after_effects()
+
+	# ----------------------------------------------------
+	# 4. Move card to discard
+	# ----------------------------------------------------
 	remove_card_from_hand(card_node)
 	get_hand_container().arrange_cards()
 
+func _update_ui_after_effects():
+	player_healthbar.set_hp(player_entity.hp, player_entity.max_hp)
+	enemy_healthbar.set_hp(enemy_entity.hp, enemy_entity.max_hp)
 
-func _play_attack_card(card_node):
-	var dmg = card_node.card_data.get("damage", 0)
-	print("Attack card deals ", dmg, " damage!")
-	
-	#PLAYER ANIMATION
-	player_node.play_attack_animation()
-	#ENEMY ANIMATIONS
-	enemy_entity.take_damage(dmg)
-	enemy_healthbar.set_hp(enemy_entity.hp, enemy_entity.max_hp) #healthbar 
-	enemy_node.play_hit_animation()
-	
-func _play_defend_card(card_node):
-	var block = card_node.card_data.get("block", 0)
-	print("Gained ", block, " block!")
-	player_entity.add_block(block)
-	player_node.play_add_block_animation(block)
+	# If your health bar shows block visually:
+	if player_healthbar.has_method("update_block"):
+		player_healthbar.update_block(player_entity.block)
+	if enemy_healthbar.has_method("update_block"):
+		enemy_healthbar.update_block(enemy_entity.block)
 
-func _play_spell_card(card_node):
-	print("Spell card activated: ", card_node.card_data["name"])
-	# Add  buff logic here
-	
+
+func _play_card_animation(card_type: String, caster, target):
+	match card_type:
+		"attack":
+			player_node.play_attack_animation()
+			target_node().play_hit_animation()
+
+		"defend":
+			player_node.play_add_block_animation(5) # no block number needed
+
+		"spell":
+			player_node.play_spell_animation()
+
+		_:
+			print("No animation for card type:", card_type)
+
+func target_node():
+	return enemy_node
+
 # -----------------------------
 # 		Returning Decks
 # -----------------------------
