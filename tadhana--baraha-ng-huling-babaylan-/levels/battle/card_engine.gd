@@ -111,8 +111,16 @@ func _process_effect(effect_name: String, params: Array, property, is_piercing, 
 		# REMOVE ARMOR / BLOCK
 		# ---------------------------------------------------------
 		"remove_enemy_armor":
-			target.block = 0
-			print("CardEngine: Removed enemy block.")
+			print("Before: ",target.armor)
+			target.armor = 0
+			print("After: ",target.armor)
+			
+			if caster == battle_manager.player_entity:
+				battle_manager.enemy_node.show_floating_text("Armor Broken!", Color.ORANGE, -60)
+			else:
+				battle_manager.player_node.show_floating_text("Armor Broken!", Color.ORANGE, -60)
+
+			print("CardEngine: Enemy armor removed!")
 
 		# ---------------------------------------------------------
 		# CLEANSE SELF DEBUFFS
@@ -134,10 +142,16 @@ func _process_effect(effect_name: String, params: Array, property, is_piercing, 
 		# ---------------------------------------------------------
 		# INCREASE enemy damage taken
 		# ---------------------------------------------------------
-		"increase_enemy_damage_taken":
-			var mult = params[0]
-			target.add_status("DamageTakenMult", mult)
-			print("CardEngine: Enemy damage taken multiplier increased:", mult)
+		"apply_damage_taken_mult":
+			var mult = params[0]   # ex: 0.20 = +20 percent
+			target.bonus_damage_taken = mult
+			print("Enemy takes +" + str(mult * 100) + "% more damage.")
+			
+			if caster == battle_manager.player_entity:
+				battle_manager.enemy_node.show_floating_text("Taking " + str(mult * 100) + "% more damage", Color.RED, -60)
+			else:
+				battle_manager.player_node.show_floating_text("Taking " + str(mult * 100) + "% more damage", Color.RED, -60)
+
 
 		# ---------------------------------------------------------
 		# MORE TODO EFFECTS

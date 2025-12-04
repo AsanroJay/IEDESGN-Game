@@ -281,7 +281,7 @@ const CARDS = {
 		"image_path": "res://cards/assets/basbas.png",
 		"property": "debuff",
 		"effects": [
-			["increase_enemy_damage_taken", 1.20],
+			["apply_damage_taken_mult", 0.20],
 			["draw", 1]
 		],
 		"exhaust": false

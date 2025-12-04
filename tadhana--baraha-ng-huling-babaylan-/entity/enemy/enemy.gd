@@ -22,24 +22,32 @@ func load_enemy_data(type):
 			"name": "Aswang",
 			"hp": 50,
 			"mana": 0,
+			"armor": 2,
+			"resistance":0,
 			"frames": "res://entity/enemy/animations/aswang.tres"
 		},
 		"manananggal": {
 			"name": "Manananggal",
 			"hp": 40,
 			"mana": 0,
+			"armor": 0,
+			"resistance":0,
 			"frames": "res://entity/enemy/animations/manananggal.tres"
 		},
 		"white_lady": {
 			"name": "White Lady",
 			"hp": 40,
 			"mana": 0,
+			"armor": 0,
+			"resistance":0,
 			"frames": "res://entity/enemy/animations/white_lady.tres"
 		},
 		"kapre": {
 			"name": "Kapre",
 			"hp": 40,
 			"mana": 0,
+			"armor": 4,
+			"resistance":0,
 			"frames": "res://entity/enemy/animations/kapre.tres"
 		}
 	}
@@ -49,6 +57,7 @@ func load_enemy_data(type):
 	hp = animation_data["hp"]
 	max_hp = animation_data["hp"]
 	mana = animation_data["mana"]
+	armor = animation_data["armor"]
 	
 func take_damage(damage):
 	print("Enemy taking " + str(damage) + "damage!")

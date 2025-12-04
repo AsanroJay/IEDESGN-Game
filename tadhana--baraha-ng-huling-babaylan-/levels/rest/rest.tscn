@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bks50ipobrfd"]
 
-[ext_resource type="Script" uid="uid://btt7qxulyhhg5" path="res://rest.gd" id="1_06rk4"]
+[ext_resource type="Script" path="res://rest.gd" id="1_06rk4"]
 [ext_resource type="Texture2D" uid="uid://chpg86hlqf6l7" path="res://levels/rest/assets/[REST} Level 1- Forest.png" id="2_06rk4"]
 [ext_resource type="Texture2D" uid="uid://d3oulld6kfkd" path="res://levels/battle/assets/Navigation Bar (Forest Level).PNG" id="6_i2ofy"]
 [ext_resource type="Texture2D" uid="uid://cv207s263gq4q" path="res://levels/shop/assets/Map.PNG" id="7_2c1xr"]
@@ -73,9 +73,10 @@ anchors_preset = -1
 anchor_left = 0.11015625
 anchor_right = 0.20636487
 anchor_bottom = 0.3887778
-offset_left = 1024.0
-offset_right = 940.85297
-offset_bottom = 21.505
+offset_left = 1035.0
+offset_top = -3.0
+offset_right = 951.85297
+offset_bottom = 18.505
 
 [node name="MapIcon" type="TextureRect" parent="NavbarTemp"]
 layout_mode = 0

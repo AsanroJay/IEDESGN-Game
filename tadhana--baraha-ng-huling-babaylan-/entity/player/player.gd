@@ -66,15 +66,14 @@ func _initialize_starting_deck():
 		deck.append(sipa)
 		
 	for i in range(2):
-		var sipa =  {
-		"card_name": "Kagat ng Aswang",
-		"type": "attack",
+		var sipa =    {
+		"card_name": "Iyak ng Tiyanak",
+		"type": "spell",
 		"cost": 3,
-		"image_path": "res://cards/assets/kagat_ng_aswang.png",
-		"property": "physical",
+		"image_path": "res://cards/assets/iyak_ng_tiyanak.png",
+		"property": "debuff",
 		"effects": [
-			["damage", 7],
-			["lifesteal_unblocked"]
+			["remove_enemy_armor"]
 		],
 		"exhaust": false
 	}

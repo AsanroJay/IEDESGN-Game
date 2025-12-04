@@ -18,69 +18,56 @@ var resistances := {
 
 var statuses := {}
 
+var bonus_damage_taken: float = 0.0 # 0.2 = +20%, 0.5 = +50%
+
+
 signal block_changed(new_block_value)
 
 
 
-# Updated to accept Property (physical/magic) and Piercing flag
 func apply_damage(amount: int, property: String = "physical", is_piercing: bool = false) -> int:
 	var multiplier: float = 1.0
-	
+
+	# TRUE DAMAGE (skip everything except direct HP loss)
 	if property == "true_damage":
-		var incoming_damage = amount    # raw amount
-		var damage_to_hp = amount   # fully bypass block
-		hp = max(0, hp - damage_to_hp)
-		last_unblocked_damage = damage_to_hp
+		var dmg = amount
+		hp = max(0, hp - dmg)
+		last_unblocked_damage = dmg
+		print(entity_name, " takes TRUE DAMAGE ", dmg, " → HP:", hp, " Block:", block)
+		return dmg
 
-		print(entity_name, " takes TRUE DAMAGE ", damage_to_hp, " → HP:", hp, " Block:", block)
-
-		if is_dead():
-			print(entity_name, " has been defeated!")
-
-		return damage_to_hp
-	
-	# 1. Check Global Modifiers (Vulnerable)
+	# Vulnerable
 	if statuses.has("Vulnerable"):
-		multiplier = 1.5 
-	
-	# --- 1b. Check Entity Resistance ---
-	var resistance_multiplier: float = resistances.get(property, 1.0)
-	
-	# Ensure True Damage (from DOTs) bypasses typical resistance/vulnerability checks, 
-	# but we keep the multiplier in the calculation just in case.
-	if property != "true_damage":
-		multiplier *= resistance_multiplier
-		
-		# You can add logic here for special statuses like 'FlipResistance'
-		if statuses.has("ResistanceFlip"):
-			# This would reverse the logic if property was Magic/Physical
-			pass
+		multiplier *= 1.5
 
+	# Resistance
+	var resistance_multiplier: float = resistances.get(property, 1.0)
+	multiplier *= resistance_multiplier
+
+	# Base damage
 	var incoming_damage = roundi(amount * multiplier)
+
+	# Damage Taken Multiplier (Basbas ng Mangkukulam)
+	if bonus_damage_taken > 0.0:
+		incoming_damage = roundi(incoming_damage * (1.0 + bonus_damage_taken))
+
+
 	var damage_to_hp = 0
-	
-	# 2. Calculate Block
+
+	# Block calc
 	if is_piercing:
-		# ... (Piercing logic remains the same)
 		damage_to_hp = incoming_damage
-		print(entity_name, " takes PIERCING ", property, " damage (ignores block).")
 	else:
-		# Standard block logic
 		damage_to_hp = max(0, incoming_damage - block)
 		block = max(0, block - incoming_damage)
 
-	# 3. Apply to HP
-	# ... (Rest of the function remains the same) ...
-
 	hp = max(0, hp - damage_to_hp)
 	last_unblocked_damage = damage_to_hp
-	
-	print(entity_name, " takes ", damage_to_hp, " damage (Type: ", property, ") → HP:", hp, " Block:", block)
 
-	if is_dead():
-		print(entity_name, " has been defeated!")
-		
+	print(entity_name, " takes ", damage_to_hp, " damage → HP:", hp, " Block:", block)
+
 	return damage_to_hp
+
 
 
 func heal(amount: int) -> void:

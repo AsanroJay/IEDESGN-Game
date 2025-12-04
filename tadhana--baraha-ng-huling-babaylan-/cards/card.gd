@@ -291,10 +291,10 @@ var CARDS = {
 		"card_name": "Basbas ng Mangkukulam",
 		"type": "spell",
 		"cost": 2,
-		"image_path": "res://cards/assets/basbas.png",
+		"image_path": "res://cards/assets/basbas_ng_mangkukulam.png",
 		"property": "debuff",
 		"effects": [
-			["increase_enemy_damage_taken", 1.20],
+			["apply_damage_taken_mult", 0.20],
 			["draw", 1]
 		],
 		"exhaust": false
@@ -328,7 +328,7 @@ var CARDS = {
 		"card_name": "Iyak ng Tiyanak",
 		"type": "spell",
 		"cost": 3,
-		"image_path": "res://cards/assets/iyak.png",
+		"image_path": "res://cards/assets/iyak_ng_tiyanak.png",
 		"property": "debuff",
 		"effects": [
 			["remove_enemy_armor"]
