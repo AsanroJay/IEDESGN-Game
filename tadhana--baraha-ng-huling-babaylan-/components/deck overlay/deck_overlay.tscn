@@ -3,38 +3,41 @@
 [ext_resource type="Script" uid="uid://ca7ah0puflxdx" path="res://components/deck overlay/deck_overlay.gd" id="1_bwvpo"]
 
 [node name="DeckOverlay" type="Node2D"]
+position = Vector2(203, 187)
 script = ExtResource("1_bwvpo")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_right = 519.0
 offset_bottom = 284.0
 color = Color(0.07058824, 0.07058824, 0.07058824, 0.6627451)
 
 [node name="Panel" type="Panel" parent="."]
-offset_left = 15.0
-offset_top = 18.0
-offset_right = 510.0
-offset_bottom = 277.0
+offset_left = 140.0
+offset_top = -187.0
+offset_right = 780.0
+offset_bottom = 533.0
 
 [node name="TitleLabel" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 205.0
-offset_top = -15.0
-offset_right = 283.0
-offset_bottom = 8.0
+offset_left = 217.0
+offset_top = 7.0
+offset_right = 295.0
+offset_bottom = 30.0
 
 [node name="GridContainer" type="GridContainer" parent="Panel"]
 layout_mode = 0
-offset_left = 57.0
-offset_top = 37.0
-offset_right = 446.0
-offset_bottom = 248.0
+offset_left = 54.0
+offset_top = 18.0
+offset_right = 443.0
+offset_bottom = 229.0
+columns = 3
 
-[node name="Close Button" type="Button" parent="Panel"]
+[node name="CloseButton" type="Button" parent="Panel"]
 layout_mode = 0
-offset_left = -9.0
-offset_top = 228.0
-offset_right = 41.0
-offset_bottom = 259.0
+offset_left = -117.0
+offset_top = 665.0
+offset_right = -67.0
+offset_bottom = 696.0
 text = "Close
 "

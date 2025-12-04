@@ -53,7 +53,7 @@ fill_from = Vector2(0, 0.004672897)
 size = Vector2(238, 214.0625)
 
 [node name="BattleRoom" type="Node2D"]
-position = Vector2(2, 0)
+position = Vector2(8, 0)
 script = ExtResource("1_el3db")
 
 [node name="Background" type="TextureRect" parent="."]

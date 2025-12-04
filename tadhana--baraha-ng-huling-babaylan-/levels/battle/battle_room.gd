@@ -3,10 +3,18 @@ class_name BattleRoom
 
 # Preload BattleManager (NOT entity nodes)
 var BattleManagerScene = preload("res://levels/battle/battle_manager.gd")
+var DeckOverlayScene = preload("res://components/deck overlay/deck_overlay.tscn")
 var battle_manager
 
 var player
 var enemy 
+
+#Deck Related Variables
+var deck = []        
+var draw_pile = []
+var discard_pile = []
+var exhaust_pile = []
+
 
 func start_battle_from_node(node_info, player_ref):
 	# Create BattleManager instance
@@ -21,6 +29,7 @@ func start_battle_from_node(node_info, player_ref):
 
 func _ready():
 	pass
+
 
 
 func _on_map_button_pressed():
@@ -44,15 +53,22 @@ func _on_end_turn_button_pressed() -> void:
 
 
 func _on_open_draw_pile_pressed() -> void:
-	#TODO: Open Draw Pile
-	pass
-
+	show_pile("Draw Pile", battle_manager.get_draw_pile())
 
 func _on_open_discard_pile_pressed() -> void:
-	#TODO: Open Discard Pile
-	pass 
-
+	show_pile("Discard Pile", battle_manager.get_discard_pile())
 
 func _on_open_exhaust_pile_pressed() -> void:
-	#TODO: Open Exhaust Pile
-	pass 
+	show_pile("Exhaust Pile", battle_manager.get_exhaust_pile())
+
+
+func show_pile(title: String, pile: Array):
+	var overlay = DeckOverlayScene.instantiate()
+	add_child(overlay)
+
+	overlay.open_overlay(title, pile)
+
+	# Destroy overlay when closed
+	overlay.overlay_closed.connect(func():
+		overlay.queue_free()
+	)

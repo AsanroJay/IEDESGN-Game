@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://csn6epqptd7x4"]
+
+[ext_resource type="Script" uid="uid://ct10oygvuxetj" path="res://components/deck overlay/deck_card.gd" id="1_2v3d8"]
+
+[node name="DeckCard" type="TextureButton"]
+offset_top = -1.0
+offset_right = 120.0
+offset_bottom = 179.0
+stretch_mode = 0
+script = ExtResource("1_2v3d8")

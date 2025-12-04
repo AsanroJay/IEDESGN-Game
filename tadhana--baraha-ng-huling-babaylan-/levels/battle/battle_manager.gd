@@ -296,3 +296,18 @@ func _play_defend_card(card_node):
 func _play_spell_card(card_node):
 	print("Spell card activated: ", card_node.card_data["name"])
 	# Add  buff logic here
+	
+# -----------------------------
+# 		Returning Decks
+# -----------------------------
+func get_draw_pile():
+	return player_entity.draw_pile
+
+func get_discard_pile():
+	return player_entity.discard_pile
+
+func get_exhaust_pile():
+	return player_entity.exhaust_pile
+
+func get_full_deck():
+	return player_entity.deck

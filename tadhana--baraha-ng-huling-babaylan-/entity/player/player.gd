@@ -4,6 +4,7 @@ class_name Player
 var sprite_path : String = "res://player/assets/player.png"
 var discard_pile = []
 var draw_pile = []
+var exhaust_pile = []
 var gold
 var max_mana
 #Constructor
