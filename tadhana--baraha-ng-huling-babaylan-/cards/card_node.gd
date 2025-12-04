@@ -204,3 +204,20 @@ func return_to_hand():
 	tween.parallel().tween_property(sprite_holder, "position", Vector2.ZERO, 0.2)
 
 	z_index = 0
+	
+func play_exhaust_animation():
+	var tween = create_tween()
+
+	# Slight scale punch (like a "poof")
+	tween.tween_property(self, "scale", scale * 1.1, 0.08)
+	tween.tween_property(self, "scale", scale * 0.6, 0.15)
+
+	# Random tile fade (using modulate noise)
+	var steps = 10
+	for i in range(steps):
+		await get_tree().create_timer(0.3).timeout
+		modulate = Color(1, 1, 1, 1.0 - float(i) / steps)
+
+	# Fully gone
+	await tween.finished
+	queue_free()

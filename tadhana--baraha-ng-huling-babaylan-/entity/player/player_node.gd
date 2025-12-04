@@ -10,6 +10,11 @@ var battle_room
 func set_entity(e):
 	entity = e
 	anim.play("idle")
+	entity.block_changed.connect(_on_block_changed)
+
+func _on_block_changed(new_block_value: int):
+	# This function is called when Entity.gain_block() is run
+	show_floating_text("+" + str(new_block_value) + " Block", Color.DEEP_SKY_BLUE)
 	
 func play_attack_animation():
 	var tween = create_tween()
@@ -21,11 +26,13 @@ func play_attack_animation():
 	# Snap back
 	tween.tween_property(self, "position", original_pos, 0.1)
 	
-func play_add_block_animation(amount: int):
-	var pop = FloatingText.instantiate()
+	
 
+	
+func show_floating_text(text: String, color: Color = Color.WHITE, y_offset := -60):
+	var pop = FloatingText.instantiate()
 	var ui_layer = battle_room.get_node("UI/FloatingTextLayer")
 	ui_layer.add_child(pop)
 
-	pop.global_position = global_position + Vector2(0, -50)
-	pop.show_text("+" + str(amount) + " Block", Color(0.3, 0.8, 1))
+	pop.global_position = global_position + Vector2(0, y_offset)
+	pop.show_text(text, color)

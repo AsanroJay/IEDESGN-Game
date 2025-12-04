@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6rprc1qyk44q"
-path="res://.godot/imported/kulog_ng_kidlat.png-b9dfa1bd331c6e7dc3e3382ae3eef4f6.ctex"
+uid="uid://ddyeg6vub2727"
+path="res://.godot/imported/kalasag.png-ad75497149f9d5fb280f41980dd13895.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cards/assets/kulog_ng_kidlat.png"
-dest_files=["res://.godot/imported/kulog_ng_kidlat.png-b9dfa1bd331c6e7dc3e3382ae3eef4f6.ctex"]
+source_file="res://cards/assets/kalasag.png"
+dest_files=["res://.godot/imported/kalasag.png-ad75497149f9d5fb280f41980dd13895.ctex"]
 
 [params]
 
