@@ -35,6 +35,7 @@ func enter_room(node):
 			enter_shop(node)
 		"rest": 
 			print("Entering rest site...")
+			enter_rest_site(node)
 		"mystery": 
 			print("Entering random encounter...")
 			generate_random_encounter(node)
@@ -94,8 +95,15 @@ func enter_shop(node):
 	current_room.load_shop_room(node,player)
 	
 func enter_rest_site(node):
-	pass
-
+	state = GameState.REST
+	
+	if map_scene:
+		map_scene.visible = false
+		
+	current_room = load("res://levels/rest/rest.tscn").instantiate()
+	get_tree().root.add_child(current_room)
+		
+	current_room.load_rest_room(node,player)
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	load_map()
