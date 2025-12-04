@@ -1,38 +1,21 @@
-[gd_scene load_steps=16 format=3 uid="uid://bks50ipobrfd"]
+[gd_scene load_steps=7 format=3 uid="uid://bks50ipobrfd"]
 
-[ext_resource type="Script" uid="uid://dhx3a63hbojgf" path="res://levels/shop/shop.gd" id="1_vmrjw"]
-[ext_resource type="Texture2D" uid="uid://b4xkatxv8ptuv" path="res://levels/shop/assets/[SHOP] Level 1 - forest.png" id="2_e55ed"]
-[ext_resource type="Texture2D" uid="uid://byu02uwjk8n6t" path="res://levels/shop/assets/ShopKeeper.png" id="3_06rk4"]
-[ext_resource type="Texture2D" uid="uid://b6ahnjcowc7co" path="res://levels/shop/assets/Shop Window Pop-up UI.PNG" id="4_dqd4w"]
-[ext_resource type="Texture2D" uid="uid://bwg1bk4j8gntv" path="res://levels/shop/assets/Close Button.PNG" id="5_j72g8"]
+[ext_resource type="Script" uid="uid://btt7qxulyhhg5" path="res://rest.gd" id="1_06rk4"]
+[ext_resource type="Texture2D" uid="uid://chpg86hlqf6l7" path="res://levels/rest/assets/[REST} Level 1- Forest.png" id="2_06rk4"]
 [ext_resource type="Texture2D" uid="uid://d3oulld6kfkd" path="res://levels/battle/assets/Navigation Bar (Forest Level).PNG" id="6_i2ofy"]
 [ext_resource type="Texture2D" uid="uid://cv207s263gq4q" path="res://levels/shop/assets/Map.PNG" id="7_2c1xr"]
 [ext_resource type="Texture2D" uid="uid://gpjsp6epuj5y" path="res://levels/level_assets/Settings.PNG" id="8_lqjxc"]
 [ext_resource type="Texture2D" uid="uid://c8atkyi8i7kic" path="res://levels/level_assets/Gold.PNG" id="9_r2myr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7w5nn"]
-size = Vector2(361.76788, 401.19092)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yvagp"]
-texture = ExtResource("5_j72g8")
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_56goy"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iu150"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rw7m"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ij3ee"]
-
-[node name="Shop" type="Node2D"]
+[node name="rest" type="Node2D"]
 position = Vector2(0, -2)
-script = ExtResource("1_vmrjw")
+script = ExtResource("1_06rk4")
 
 [node name="Background" type="TextureRect" parent="."]
 offset_top = 40.0
 offset_right = 1280.0
 offset_bottom = 720.0
-texture = ExtResource("2_e55ed")
+texture = ExtResource("2_06rk4")
 expand_mode = 1
 metadata/_edit_use_anchors_ = true
 
@@ -43,36 +26,28 @@ metadata/_edit_use_anchors_ = true
 [node name="PlayerSpawn" type="Marker2D" parent="PlayerContainer"]
 position = Vector2(291, 533)
 
-[node name="ShopKeeperContainer" type="Node2D" parent="."]
-position = Vector2(-439, -180)
-scale = Vector2(0.99434656, 0.996046)
-
-[node name="TextureRect" type="TextureRect" parent="ShopKeeperContainer"]
-visible = false
-offset_left = 904.0
-offset_top = 365.0
-offset_right = 1179.0
-offset_bottom = 565.0
-mouse_filter = 2
-texture = ExtResource("3_06rk4")
-expand_mode = 1
-
-[node name="OpenShop" type="Button" parent="ShopKeeperContainer"]
-z_index = -1
-offset_left = 903.0
-offset_top = 363.0
-offset_right = 922.4513
-offset_bottom = 381.28516
-scale = Vector2(18.773518, 20.558859)
-
-[node name="HoverArea" type="Area2D" parent="ShopKeeperContainer"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShopKeeperContainer/HoverArea"]
-position = Vector2(1088.2913, 549.3701)
-scale = Vector2(1, 1.0000001)
-shape = SubResource("RectangleShape2D_7w5nn")
-
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="RestButton" type="Button" parent="UI"]
+offset_left = 518.0
+offset_top = 500.0
+offset_right = 567.0
+offset_bottom = 531.0
+text = "HEAL"
+
+[node name="UpgradeButton" type="Button" parent="UI"]
+offset_left = 714.0
+offset_top = 497.0
+offset_right = 797.0
+offset_bottom = 528.0
+text = "UPGRADE
+"
+
+[node name="MessageLabel" type="Label" parent="UI"]
+offset_left = 463.0
+offset_top = 556.0
+offset_right = 798.0
+offset_bottom = 658.0
 
 [node name="PlayerHUD" type="Control" parent="UI"]
 layout_mode = 3
@@ -81,94 +56,6 @@ offset_left = 4.0
 offset_right = 44.0
 offset_bottom = 40.0
 mouse_filter = 2
-
-[node name="ShopPanel" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ColorRect" type="ColorRect" parent="UI/ShopPanel"]
-visible = false
-layout_mode = 0
-offset_left = 157.0
-offset_top = 77.0
-offset_right = 1072.0
-offset_bottom = 665.0
-color = Color(0.07058824, 0.07058824, 0.07058824, 0.6627451)
-
-[node name="Panel" type="Panel" parent="UI/ShopPanel"]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 80.0
-offset_right = 1083.0
-offset_bottom = 637.0
-
-[node name="PanelBackground" type="TextureRect" parent="UI/ShopPanel/Panel"]
-layout_mode = 0
-offset_left = 8.0
-offset_top = -8.0
-offset_right = 960.0
-offset_bottom = 592.0
-texture = ExtResource("4_dqd4w")
-
-[node name="CardsContainer" type="GridContainer" parent="UI/ShopPanel/Panel"]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 184.0
-offset_right = 696.0
-offset_bottom = 520.0
-columns = 3
-
-[node name="VScrollBar" type="VScrollBar" parent="UI/ShopPanel/Panel/CardsContainer"]
-layout_mode = 2
-
-[node name="CloseButton" type="Button" parent="UI/ShopPanel/Panel"]
-z_index = -1
-layout_mode = 0
-offset_left = -183.0
-offset_top = 514.0
-offset_right = -13.0
-offset_bottom = 577.0
-theme_override_styles/normal = SubResource("StyleBoxTexture_yvagp")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_56goy")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_iu150")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_1rw7m")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_ij3ee")
-
-[node name="CloseIcon" type="TextureRect" parent="UI/ShopPanel/Panel"]
-layout_mode = 0
-offset_left = -196.0
-offset_top = 476.0
-offset_bottom = 627.0
-mouse_filter = 2
-texture = ExtResource("5_j72g8")
-expand_mode = 1
-
-[node name="RerollButton" type="Button" parent="UI/ShopPanel/Panel"]
-layout_mode = 0
-offset_left = 736.0
-offset_top = 456.0
-offset_right = 872.0
-offset_bottom = 506.0
-text = "Reroll
-"
-
-[node name="RemoveCardButton" type="Button" parent="UI/ShopPanel/Panel"]
-layout_mode = 0
-offset_left = 736.0
-offset_top = 376.0
-offset_right = 872.0
-offset_bottom = 426.0
-text = "Remove Card
-"
-
-[node name="InfoLabel" type="Label" parent="UI/ShopPanel/Panel"]
-layout_mode = 0
-offset_left = 400.0
-offset_top = 120.0
-offset_right = 440.0
-offset_bottom = 143.0
 
 [node name="NavbarTemp" type="TextureRect" parent="."]
 offset_left = -2.0
@@ -229,11 +116,4 @@ offset_bottom = 41.0
 texture = ExtResource("9_r2myr")
 expand_mode = 1
 
-[connection signal="mouse_entered" from="ShopKeeperContainer/TextureRect" to="." method="_on_texture_rect_mouse_entered"]
-[connection signal="mouse_exited" from="ShopKeeperContainer/TextureRect" to="." method="_on_texture_rect_mouse_exited"]
-[connection signal="mouse_entered" from="ShopKeeperContainer/OpenShop" to="." method="_on_open_shop_mouse_entered"]
-[connection signal="pressed" from="ShopKeeperContainer/OpenShop" to="." method="_on_open_shop_pressed"]
-[connection signal="mouse_entered" from="ShopKeeperContainer/HoverArea" to="." method="_on_hover_area_mouse_entered"]
-[connection signal="mouse_exited" from="ShopKeeperContainer/HoverArea" to="." method="_on_hover_area_mouse_exited"]
-[connection signal="pressed" from="UI/ShopPanel/Panel/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="NavbarTemp/Map Button" to="." method="_on_map_button_pressed"]
