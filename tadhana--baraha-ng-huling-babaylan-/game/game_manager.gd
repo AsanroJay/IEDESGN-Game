@@ -4,7 +4,7 @@ var player
 var map_scene: Node = null
 var current_room: Node = null
 
-enum GameState { MAP, BATTLE, SHOP, REST, BOSS }
+enum GameState { MAP, BATTLE, SHOP, REST, BOSS, BUFFED }
 var state = GameState.MAP
 
 func load_map():
@@ -30,6 +30,7 @@ func enter_room(node):
 			start_battle_from_node(node)
 		"buffed": 
 			print("Entering buffed encounter...")
+			start_buffed_battle_from_node(node)
 		"shop": 
 			print("Entering shop...")
 			enter_shop(node)
@@ -47,6 +48,7 @@ func enter_room(node):
 			
 
 func start_battle_from_node(node):
+	print("GameManager: Starting NORMAL battle")
 	state = GameState.BATTLE
 	
 	# hide the map instead of removing it
@@ -59,6 +61,23 @@ func start_battle_from_node(node):
 
 	# pass info to room and the global player
 	current_room.start_battle_from_node(node, player)
+	print("GameManager: Normal battle room loaded and started")
+	
+func start_buffed_battle_from_node(node):
+	print("GameManager: Starting BUFFED battle")
+	state = GameState.BUFFED
+	
+	# hide the map instead of removing it
+	if map_scene:
+		map_scene.visible = false
+
+	# load battle room
+	current_room = load("res://levels/buffed battle/buffed_battle.tscn").instantiate()
+	get_tree().root.add_child(current_room)
+
+	# pass info to room and the global player (buffed battle room uses same method name)
+	current_room.start_battle_from_node(node, player)
+	print("GameManager: Buffed battle room loaded and started")
 
 func return_to_map():
 	if current_room:

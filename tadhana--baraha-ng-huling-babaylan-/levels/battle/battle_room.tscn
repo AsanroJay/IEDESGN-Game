@@ -1,10 +1,10 @@
 [gd_scene load_steps=31 format=3 uid="uid://dywmkr2eoj5m8"]
 
-[ext_resource type="Script" uid="uid://do126ggh2pnsw" path="res://levels/battle/battle_room.gd" id="1_el3db"]
-[ext_resource type="Texture2D" uid="uid://d2658ri3w2vsm" path="res://levels/battle/assets/Level 1 - forest.png" id="2_tp6sv"]
-[ext_resource type="Script" uid="uid://bpua3l347sm3j" path="res://levels/battle/hand_container.gd" id="3_tp6sv"]
+[ext_resource type="Script" uid="uid://do126ggh2pnsw" path="res://levels/battle/battle_room.gd" id="1_e3gt6"]
+[ext_resource type="Texture2D" uid="uid://d2658ri3w2vsm" path="res://levels/buffed battle/assets/Level 1 - forest.png" id="2_tp6sv"]
+[ext_resource type="Script" uid="uid://bpua3l347sm3j" path="res://levels/buffed battle/hand_container.gd" id="3_tp6sv"]
 [ext_resource type="Texture2D" uid="uid://dbdrbpfodllsh" path="res://levels/level_assets/End Turn Button.PNG" id="4_r4tay"]
-[ext_resource type="Texture2D" uid="uid://d3oulld6kfkd" path="res://levels/battle/assets/Navigation Bar (Forest Level).PNG" id="4_tp6sv"]
+[ext_resource type="Texture2D" uid="uid://d3oulld6kfkd" path="res://levels/buffed battle/assets/Navigation Bar (Forest Level).PNG" id="4_tp6sv"]
 [ext_resource type="Texture2D" uid="uid://dts1rpy17v2sd" path="res://levels/level_assets/Draw Card Pile Icon.PNG" id="5_avb8i"]
 [ext_resource type="Texture2D" uid="uid://cv207s263gq4q" path="res://levels/shop/assets/Map.PNG" id="5_jtw3m"]
 [ext_resource type="Texture2D" uid="uid://bl72om1fmn1mo" path="res://levels/level_assets/Discard Card Pile Icon.PNG" id="6_1dgad"]
@@ -54,7 +54,7 @@ size = Vector2(238, 214.0625)
 
 [node name="BattleRoom" type="Node2D"]
 position = Vector2(8, 0)
-script = ExtResource("1_el3db")
+script = ExtResource("1_e3gt6")
 
 [node name="Background" type="TextureRect" parent="."]
 offset_left = -8.0

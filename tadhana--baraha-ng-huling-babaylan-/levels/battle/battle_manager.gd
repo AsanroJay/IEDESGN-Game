@@ -1,5 +1,9 @@
 extends Node
 
+# UNIQUE IDENTIFIER FOR NORMAL BATTLE MANAGER
+const IS_NORMAL_BATTLE_MANAGER = true
+const BATTLE_TYPE = "NORMAL"
+
 var battleroom_ref
 
 var player_entity
@@ -30,6 +34,7 @@ var player_healthbar
 var enemy_healthbar
 
 func start_battle(battleroom, node_info, player_ref):
+	print("=== NORMAL BATTLE MANAGER START_BATTLE CALLED ===")
 	# store battleroom reference
 	battleroom_ref = battleroom
 
@@ -49,6 +54,22 @@ func start_battle(battleroom, node_info, player_ref):
 	# CREATE ENEMY ENTITY
 	var enemy_type = generate_random_enemy(node_info)
 	enemy_entity = Enemy.new(enemy_type)
+	
+	# CRITICAL: Always reset enemy to base stats for normal battle (never buffed)
+	# Get base stats directly from animation_data to ensure we're using the original values
+	var base_hp = int(enemy_entity.animation_data.get("hp", 10))
+	var base_armor = int(enemy_entity.animation_data.get("armor", 0))
+	
+	# Force reset to base stats (in case enemy was somehow buffed)
+	enemy_entity.max_hp = base_hp
+	enemy_entity.hp = base_hp
+	enemy_entity.armor = base_armor
+	enemy_entity.buff_multiplier = 1.0
+	
+	# Verify enemy has base stats
+	print("Normal battle enemy stats → HP:", enemy_entity.hp, "Max HP:", enemy_entity.max_hp, "Armor:", enemy_entity.armor, "Buff multiplier:", enemy_entity.buff_multiplier)
+	if enemy_entity.hp != base_hp or enemy_entity.max_hp != base_hp:
+		print("ERROR: Enemy stats don't match base stats! Base HP:", base_hp, "Actual HP:", enemy_entity.hp)
 
 	# CREATE ENEMY VISUAL NODE
 	enemy_node = EnemyNodeScene.instantiate()

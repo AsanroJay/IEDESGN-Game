@@ -2,7 +2,9 @@ extends Node2D
 class_name BattleRoom
 
 # Preload BattleManager (NOT entity nodes)
-var BattleManagerScene = preload("res://levels/battle/battle_manager.gd")
+# CRITICAL: This MUST be the normal battle manager, not the buffed one!
+const NORMAL_BATTLE_MANAGER_PATH = "res://levels/battle/battle_manager.gd"
+var BattleManagerScene = load(NORMAL_BATTLE_MANAGER_PATH) as GDScript
 var DeckOverlayScene = preload("res://components/deck overlay/deck_overlay.tscn")
 var battle_manager
 
@@ -18,8 +20,24 @@ var show_pile_flag = false
 
 
 func start_battle_from_node(node_info, player_ref):
+	print("=== NORMAL BATTLE ROOM START_BATTLE_FROM_NODE CALLED ===")
+	print("Normal BattleRoom: Preload path:", NORMAL_BATTLE_MANAGER_PATH)
+	print("Normal BattleRoom: BattleManagerScene is:", BattleManagerScene)
+	if BattleManagerScene:
+		print("Normal BattleRoom: BattleManagerScene resource_path:", BattleManagerScene.resource_path)
 	# Create BattleManager instance
 	battle_manager = BattleManagerScene.new()
+	print("Normal BattleRoom: Created battle_manager instance:", battle_manager)
+	print("Normal BattleRoom: battle_manager script path:", battle_manager.get_script().get_path())
+	
+	# Verify we got the correct manager
+	if battle_manager.has_method("get") and battle_manager.get("BATTLE_TYPE"):
+		var battle_type = battle_manager.get("BATTLE_TYPE")
+		print("Normal BattleRoom: Detected battle manager type:", battle_type)
+		if battle_type != "NORMAL":
+			print("ERROR! Wrong battle manager loaded! Expected NORMAL, got:", battle_type)
+	else:
+		print("WARNING: Could not verify battle manager type")
 
 	# Add it under the BattleRoom
 	add_child(battle_manager)
