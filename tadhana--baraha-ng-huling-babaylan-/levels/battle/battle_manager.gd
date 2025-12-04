@@ -161,14 +161,13 @@ func battle_loop():
 func start_player_turn() -> void:
 	process_turn_start_effects(player_entity,player_node)
 
-
-	
 	is_player_turn = true
 	card_input_enabled = true
 
 	if turn_counter != 1:
+		await get_tree().create_timer(1).timeout 
 		show_turn_overlay("[b][color=yellow]PLAYER TURN[/color][/b]", 0.4)
-		await get_tree().create_timer(0.4).timeout 
+		await get_tree().create_timer(1).timeout 
 
 	# Reset mana
 	battleroom_ref.get_node("UI/ManaContainer").get_child(0).set_mana(player_entity.max_mana, player_entity.max_mana)
@@ -176,6 +175,7 @@ func start_player_turn() -> void:
 	
 	#Reset block
 	player_entity.block = 0
+	turn_counter += 1
 	
 	#Reenable end turn button
 	battleroom_ref.get_node("UI/EndTurnButton").disabled = false
@@ -207,7 +207,7 @@ func start_enemy_turn() -> void:
 	card_input_enabled = false
 
 	show_turn_overlay("[b][color=red]ENEMY TURN[/color][/b]", 0.4)
-	await get_tree().create_timer(0.4).timeout
+	await get_tree().create_timer(1).timeout
 
 	# -----------------------------------------
 	#   Tingin ni Mayari: 50% chance to skip
