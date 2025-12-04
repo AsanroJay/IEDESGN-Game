@@ -12,12 +12,20 @@ var player_entity
 var player_node
 var action_available: bool = true # Flag to ensure only one action (Rest or Upgrade) is chosen
 
+
 # --- Node References (Adjust these paths to match your actual scene layout) ---
 
 # @onready var map_button = $"NavbarTemp/MapButton"
 @onready var rest_button = $UI/RestButton
 @onready var upgrade_button = $UI/UpgradeButton
-@onready var message_label = $UI/MessageLabel # For feedback (Ensure this node exists under UI)
+@onready var message_label = $UI/MessageLabel 
+@onready var continue_button = $ContinueButton
+
+
+var DeckOverlayScene = preload("res://components/deck overlay/deck_overlay.tscn")
+var deck_overlay_instance
+
+
 
 
 
@@ -35,8 +43,7 @@ func load_rest_room(_node_info, player_ref):
 	var spawn_point = get_node("PlayerContainer/PlayerSpawn").global_position
 	player_node.global_position = spawn_point
 	
-	
-	
+
 
 	
 	
@@ -44,7 +51,12 @@ func load_rest_room(_node_info, player_ref):
 	_update_ui_state()
 	rest_button.pressed.connect(_on_rest_button_pressed)
 	upgrade_button.pressed.connect(_on_upgrade_button_pressed)
-
+	
+	rest_button.visible = true
+	upgrade_button.visible = true
+	message_label.visible = true
+	continue_button.visible = false
+	
 	print("Rest Site initialized successfully.")
 
 
@@ -64,7 +76,11 @@ func _heal_player():
 		var heal_amount = floor(player_entity.max_hp * HEAL_PERCENTAGE)
 		
 		# Apply the healing directly, allowing HP to go over max_hp
-		player_entity.hp += heal_amount
+		
+		if (player_entity.hp + heal_amount) > player_entity.max_hp:
+			player_entity.hp = player_entity.max_hp
+		else:
+			player_entity.hp += heal_amount
 		var actual_heal = heal_amount # The amount healed is simply the calculated amount
 
 		# Optional: Update the visual node's health display if it has one
@@ -73,7 +89,7 @@ func _heal_player():
 		
 		# Disable future actions at this site
 		action_available = false
-		message_label.text = "Rested! Healed for %d HP. Your health may now exceed the normal maximum!" % actual_heal
+		message_label.text = "Rested! Healed for %d HP" % actual_heal
 		
 		print("DEBUG: Player HP AFTER REST: %d/%d" % [player_entity.hp, player_entity.max_hp])
 		
@@ -101,7 +117,7 @@ func _update_ui_state():
 		rest_button.text = "Rest (Heal %d HP)" % heal_for
 		rest_button.disabled = false
 			
-		message_label.text = "A quiet place to rest or hone your deck. Resting can now temporarily exceed your max HP."
+		message_label.text = "A quiet place to rest (heal) or hone your deck (upgrade)"
 		
 	else:
 		# Action has been taken, disable both
@@ -109,7 +125,8 @@ func _update_ui_state():
 		upgrade_button.text = "Upgrade (Used)"
 		rest_button.disabled = true
 		upgrade_button.disabled = true
-		message_label.text = "You have already chosen an action at this bonfire."
+		message_label.text = "You have already chosen an action."
+		continue_button.visible = true
 
 
 # --- Signal Handlers ---
@@ -120,19 +137,47 @@ func _on_rest_button_pressed():
 	_heal_player()
 
 func _on_upgrade_button_pressed():
-	# This is the placeholder for the future card upgrade action
 	if not action_available:
 		message_label.text = "Action already taken."
 		return
-		
-	# Mark the action as taken
+	
+	rest_button.visible = false
+	upgrade_button.visible = false
+	message_label.visible = false
+	
+	# Create overlay dynamically (same as in battleroom)
+	deck_overlay_instance = DeckOverlayScene.instantiate()
+	add_child(deck_overlay_instance)
+	
+	# Open overlay
+	deck_overlay_instance.open_overlay(
+		"Select a card to upgrade",
+		player_entity.deck,
+		true
+	)
+
+	# Connect signal
+	deck_overlay_instance.card_selected.connect(_on_upgrade_card_chosen)
+	deck_overlay_instance.overlay_closed.connect(_on_overlay_closed)
+
+
+func _on_upgrade_card_chosen(card_data):
+	# If no coin flag yet, add it
+	card_data["coin"] = 1
+
 	action_available = false
-	message_label.text = "Upgrade system is next! (Action taken)"
-	
-	# In a real game, you would show the card selection panel here.
-	# _show_upgrade_panel()
-	
+	message_label.text = "%s upgraded!" % card_data["card_name"]
+
 	_update_ui_state()
+
+func _on_overlay_closed():
+	if deck_overlay_instance:
+		deck_overlay_instance.queue_free()
+		deck_overlay_instance = null
+	
+	rest_button.visible = true
+	upgrade_button.visible = true
+	message_label.visible = true
 
 
 func _on_map_button_pressed() -> void:
@@ -140,4 +185,8 @@ func _on_map_button_pressed() -> void:
 	# This line assumes you have a map button connected to this script, 
 	# but it's commented out in your @onready section.
 	# If the map button is elsewhere, ensure the GameManager.return_to_map() is called correctly.
+	GameManager.return_to_map()
+
+
+func _on_continue_button_pressed() -> void:
 	GameManager.return_to_map()

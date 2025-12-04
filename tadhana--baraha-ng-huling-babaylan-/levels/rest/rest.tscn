@@ -1,11 +1,22 @@
-[gd_scene load_steps=7 format=3 uid="uid://bks50ipobrfd"]
+[gd_scene load_steps=13 format=3 uid="uid://bks50ipobrfd"]
 
-[ext_resource type="Script" path="res://rest.gd" id="1_06rk4"]
+[ext_resource type="Script" uid="uid://btt7qxulyhhg5" path="res://rest.gd" id="1_06rk4"]
 [ext_resource type="Texture2D" uid="uid://chpg86hlqf6l7" path="res://levels/rest/assets/[REST} Level 1- Forest.png" id="2_06rk4"]
 [ext_resource type="Texture2D" uid="uid://d3oulld6kfkd" path="res://levels/battle/assets/Navigation Bar (Forest Level).PNG" id="6_i2ofy"]
+[ext_resource type="Texture2D" uid="uid://dfb6febe5piml" path="res://levels/level_assets/Continue Button (1).png" id="7_00iij"]
 [ext_resource type="Texture2D" uid="uid://cv207s263gq4q" path="res://levels/shop/assets/Map.PNG" id="7_2c1xr"]
 [ext_resource type="Texture2D" uid="uid://gpjsp6epuj5y" path="res://levels/level_assets/Settings.PNG" id="8_lqjxc"]
 [ext_resource type="Texture2D" uid="uid://c8atkyi8i7kic" path="res://levels/level_assets/Gold.PNG" id="9_r2myr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h2pcl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vmrjw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e55ed"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dqd4w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j72g8"]
 
 [node name="rest" type="Node2D"]
 position = Vector2(0, -2)
@@ -44,10 +55,10 @@ text = "UPGRADE
 "
 
 [node name="MessageLabel" type="Label" parent="UI"]
-offset_left = 463.0
-offset_top = 556.0
-offset_right = 798.0
-offset_bottom = 658.0
+offset_left = 486.0
+offset_top = 551.0
+offset_right = 821.0
+offset_bottom = 653.0
 
 [node name="PlayerHUD" type="Control" parent="UI"]
 layout_mode = 3
@@ -117,4 +128,18 @@ offset_bottom = 41.0
 texture = ExtResource("9_r2myr")
 expand_mode = 1
 
+[node name="ContinueButton" type="Button" parent="."]
+offset_left = 992.00006
+offset_top = 474.0
+offset_right = 3040.0
+offset_bottom = 2522.0
+scale = Vector2(0.11225534, 0.11149188)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_h2pcl")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vmrjw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_e55ed")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_dqd4w")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_j72g8")
+icon = ExtResource("7_00iij")
+
 [connection signal="pressed" from="NavbarTemp/Map Button" to="." method="_on_map_button_pressed"]
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]
