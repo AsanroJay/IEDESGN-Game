@@ -67,13 +67,13 @@ func _initialize_starting_deck():
 		
 	for i in range(2):
 		var sipa =   {
-		"card_name": "Pitik ng Barang",
+		"card_name": "Paglalano ni Mayari",
 		"type": "spell",
 		"cost": 2,
-		"image_path": "res://cards/assets/pitik_ng_barang.png",
+		"image_path": "res://cards/assets/tingin_ni_mayari.png",
 		"property": "debuff",
 		"effects": [
-			["confuse", 0.50]
+			["enemy_miss_chance", 0.50]
 		],
 		"exhaust": false
 	}

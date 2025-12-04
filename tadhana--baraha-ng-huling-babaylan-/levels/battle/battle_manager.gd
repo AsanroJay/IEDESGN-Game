@@ -126,22 +126,41 @@ func end_player_turn():
 
 
 func start_enemy_turn() -> void:
-	process_turn_start_effects(enemy_entity,enemy_node)
-	
+	# turn start effects (bleed, etc)
+	process_turn_start_effects(enemy_entity, enemy_node)
+
 	is_player_turn = false
 	card_input_enabled = false
-	
-	
 
-	show_turn_overlay("[b][color=red]ENEMY TURN[/color][/b]",0.4)
+	show_turn_overlay("[b][color=red]ENEMY TURN[/color][/b]", 0.4)
+	await get_tree().create_timer(0.4).timeout
 
-	# Wait for overlay + enemy action
-	await get_tree().create_timer(1.0).timeout
+	# -----------------------------------------
+	#   Tingin ni Mayari: 50% chance to skip
+	# -----------------------------------------
+	if enemy_entity.has_status("MissChance"):
+		if randf() < 0.5:
+			enemy_node.show_floating_text("Missed!", Color.CYAN)
+			print("Enemy turn skipped due to Mayari")
+			
+			# Remove the status right away
+			enemy_entity.statuses.erase("MissChance")
+
+			# go back to player
+			await get_tree().create_timer(0.5).timeout
+			await start_player_turn()
+			return
+
+	# normal enemy action
+	await get_tree().create_timer(0.5).timeout
 	enemy_attack()
 
-   # End of enemy turn → back to player
-	print("Skip to player turn")
+	# remove status AFTER action
+	if enemy_entity.has_status("MissChance"):
+		enemy_entity.statuses.erase("MissChance")
+
 	await start_player_turn()
+
 
 
 # -----------------------------

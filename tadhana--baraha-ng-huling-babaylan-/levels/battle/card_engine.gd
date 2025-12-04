@@ -189,7 +189,16 @@ func _process_effect(effect_name: String, params: Array, property, is_piercing, 
 			print("TODO: block_attack")
 
 		"enemy_miss_chance":
-			print("TODO: enemy_miss_chance")
+			var chance = params[0]  # example: 0.5 for 50%
+			target.set_status("MissChance", 2)  # same logic as Confuse: 2 acts as 1
+
+			if target == battle_manager.enemy_entity:
+				battle_manager.enemy_node.show_floating_text("Mayari's Gaze!", Color.CYAN)
+			else:
+				battle_manager.player_node.show_floating_text("Mayari's Gaze!", Color.CYAN)
+
+			print("Enemy has", chance * 100, "% chance to miss next turn")
+
 
 		"confuse":
 			var turns = 2 #decrements at the start so effectively 1 turn

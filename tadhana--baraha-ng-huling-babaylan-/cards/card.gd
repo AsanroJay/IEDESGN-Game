@@ -300,11 +300,11 @@ var CARDS = {
 		"exhaust": false
 	},
 
-	"paglalano_ni_mayari": {
+	"tingin_ni_mayari": {
 		"card_name": "Paglalano ni Mayari",
 		"type": "spell",
 		"cost": 2,
-		"image_path": "res://cards/assets/paglalano.png",
+		"image_path": "res://cards/assets/tingin_ni_mayari.png",
 		"property": "debuff",
 		"effects": [
 			["enemy_miss_chance", 0.50]
