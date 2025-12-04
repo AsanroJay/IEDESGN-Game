@@ -179,11 +179,11 @@ func enemy_attack():
 	var dmg = 5  # example
 
 	target.apply_damage(dmg)
-
+	enemy_node.play_attack_animation()
 	if target == enemy_entity:
 		enemy_node.play_hit_animation()
 	else:
-		#player_node.play_hit_animation()
+		player_node.play_hit_animation()
 		print("BENNN")
 
 	update_player_health_display()
