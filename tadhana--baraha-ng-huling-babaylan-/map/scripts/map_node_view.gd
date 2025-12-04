@@ -15,7 +15,8 @@ func _gui_input(event):
 	if not clickable:
 		return
 	if event is InputEventMouseButton and event.pressed:
-		emit_signal("node_clicked", map_node)
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			emit_signal("node_clicked", map_node)
 
 func set_node_data(node):
 	map_node = node
