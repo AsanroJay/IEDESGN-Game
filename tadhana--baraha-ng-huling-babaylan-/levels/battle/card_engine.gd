@@ -131,6 +131,10 @@ func _process_effect(effect_name: String, params: Array, property, is_piercing, 
 		# ---------------------------------------------------------
 		"cleanse":
 			caster.statuses.clear()
+			if caster == battle_manager.player_entity:
+				battle_manager.player_node.show_floating_text("Cleansed All Status Effects", Color.GREEN, -60)
+			else:
+				battle_manager.enemy_node.show_floating_text("Cleansed All Status Effects", Color.GREEN, -60)
 			print("CardEngine: All debuffs cleansed.")
 
 		# ---------------------------------------------------------

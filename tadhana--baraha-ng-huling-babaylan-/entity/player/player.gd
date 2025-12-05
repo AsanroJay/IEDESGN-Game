@@ -50,30 +50,31 @@ func _initialize_starting_deck():
 	}
 		deck.append(atk)
 		
-	for i in range(3):
+	for i in range(1):
 		var sipa = {
-		"card_name": "Kagat ng Bakunawa",
-		"type": "attack",
-		"cost": 3,
-		"image_path": "res://cards/assets/kagat_ng_bakunawa.png",
-		"property": "physical",
+		"card_name": "Hilot",
+		"type": "spell",
+		"cost": 1,
+		"image_path": "res://cards/assets/hilot.png",
+		"property": "buff",
 		"effects": [
-			["bleed", 7]
+			["heal", 5],
+			["exhaust"]
 		],
-		"exhaust": false
+		"exhaust": true
 	}
 
 		deck.append(sipa)
 		
-	for i in range(2):
-		var sipa =   {
-		"card_name": "Paglalano ni Mayari",
+	for i in range(1):
+		var sipa =    {
+		"card_name": "Tagiyamo",
 		"type": "spell",
-		"cost": 2,
-		"image_path": "res://cards/assets/tingin_ni_mayari.png",
-		"property": "debuff",
+		"cost": 1,
+		"image_path": "res://cards/assets/tagiyamo.png",
+		"property": "buff",
 		"effects": [
-			["enemy_miss_chance", 0.50]
+			["cleanse"]
 		],
 		"exhaust": false
 	}
