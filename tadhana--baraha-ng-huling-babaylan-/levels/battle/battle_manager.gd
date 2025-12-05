@@ -30,6 +30,7 @@ var hand_cards: Array = []
 var is_player_turn := true
 var card_input_enabled := true
 var turn_counter: int = 1
+var enemy_turn_counter: int = 1
 
 var player_healthbar
 var enemy_healthbar
@@ -93,7 +94,6 @@ func start_battle(battleroom, node_info, player_ref, is_buffed):
 
 	
 	#Reset stats
-	player_entity.hp = player_entity.max_hp
 	player_entity.mana = player_entity.max_mana
 	# HUD
 	setup_ui()
@@ -244,7 +244,8 @@ func start_enemy_turn() -> void:
 	# remove status AFTER action
 	if enemy_entity.has_status("MissChance"):
 		enemy_entity.statuses.erase("MissChance")
-
+	
+	enemy_turn_counter += 1
 	await start_player_turn()
 
 
@@ -252,6 +253,51 @@ func start_enemy_turn() -> void:
 # -----------------------------
 # 		ENEMY AI FUNCTION LOGIC
 # -----------------------------
+func get_enemy_attack_pool(enemy_type):
+	match enemy_type:
+		"aswang":
+			return ["aswang_attack","aswang_lifesteal","aswang_block"].pick_random()
+
+		"kapre":
+			if enemy_turn_counter == 1:
+				return "kapre_club"
+			elif enemy_turn_counter == 2:
+				return ["kapre_block","kapre_heavy_block"].pick_random()
+			else:
+				return ["kapre_club", "kapre_block","kapre_heavy_block"].pick_random()
+
+		"sigbin":
+			return ["sigbin_charge","sigbin_scratch"].pick_random()
+
+		"manananggal":
+			return ["manananggal_bite","rupture"].pick_random()
+
+		"white_lady":
+			if enemy_turn_counter == 1:
+				return "white_lady_curse"
+			elif enemy_turn_counter == 2:
+				return "white_lady_attack"
+			elif enemy_turn_counter == 3:
+				return "white_lady_heal"
+			else:
+				return ["white_lady_heal","white_lady_curse","white_lady_attack"].pick_random()
+
+		"mangkukulam":
+			if enemy_turn_counter == 1:
+				return "mangkukulam_hex"
+			elif enemy_turn_counter == 2:
+				return "mangkukulam_bleed"
+			elif enemy_turn_counter == 3:
+				return "mangkukulam_heal"
+			elif enemy_turn_counter == 4:
+				return "mangkukulam_attack"
+			else:
+				return ["mangkukulam_attack","mangkukulam_gaze","mangkukulam_minor_heal"].pick_random()
+
+		_:
+			return "default_attack"
+			
+
 func get_enemy_attack_target() -> Entity:
 	if enemy_entity.has_status("Confuse"):
 		if randf() < 0.5:
@@ -262,34 +308,50 @@ func get_enemy_attack_target() -> Entity:
 
 func enemy_attack():
 	var target = get_enemy_attack_target()
-	var dmg = 5  # example
 
-	target.apply_damage(dmg)
-	enemy_node.play_attack_animation()
-	if target == enemy_entity:
-		enemy_node.play_hit_animation()
-	else:
-		player_node.play_hit_animation()
+	# Get ONE attack key 
+	var attack_key = get_enemy_attack_pool(enemy_entity.entity_name)
+
+	if not EnemyMoves.ATTACKS.has(attack_key):
+		push_error("Invalid enemy attack key: %s" % attack_key)
+		return
+
+	var attack_data = EnemyMoves.ATTACKS[attack_key]
+
+	print("Enemy uses:", attack_data["name"])
+
+	# Apply all effects through card engine
+	card_engine.resolve_effects(attack_data, enemy_entity, target, self)
+
+	# ANIMATIONS
+	if attack_data.type == "attack":
+		enemy_node.play_attack_animation()
+
+		if target == enemy_entity:
+			enemy_node.play_hit_animation()
+		else:
+			player_node.play_hit_animation()
 
 	update_player_health_display()
 	update_enemy_health_display()
+
 	
 
 
 func generate_random_enemy(node_info):
 	var layer_rules = {
-		1: ["kapre"],
-		2: ["sigbin"],
-		3: ["mangkukulam"],
-		4: ["default"],
-		5: ["default"],
-		6: ["default"],
-		7: ["default"],
+		1: ["aswang","manananggal","sigbin"],
+		2: ["aswang","manananggal","sigbin"],
+		3: ["aswang","manananggal","sigbin"],
+		4: ["aswang","manananggal","sigbin"],
+		5: ["kapre","manananggal","sigbin"],
+		6: ["white_lady","manananggal","sigbin"],
+		7: ["kapre", "white_lady"],
 		8: ["default"],
-		9: ["default"],
-		10:["default"],
+		9: ["kapre","white_lady","aswang"],
+		10:["kapre","white_lady","manananggal"],
 		11:["default"],
-		12:["default"]
+		12:["mangkukulam"]
 	}
 
 	var list = layer_rules[node_info.row_index]
@@ -508,9 +570,6 @@ func _play_card_animation(card_type: String, caster, target):
 			player_node.play_attack_animation()
 			target_node().play_hit_animation()
 
-		"defend":
-			player_node.play_add_block_animation(5) # no block number needed
-
 		"spell":
 			pass 
 			#TODO : player_node.play_spell_animation()
@@ -572,6 +631,9 @@ func end_battle_rewards() -> void:
 	var overlay = RewardOverlayScene.instantiate()
 	battleroom_ref.add_child(overlay)
 	current_reward_overlay = overlay
+	
+	#Reset player stats
+	player_entity.reset_battle_stats()
 
 	# Connect correctly (Godot 4)
 	overlay.reward_chosen.connect(_on_reward_selected)

@@ -82,3 +82,18 @@ func _initialize_starting_deck():
 
 func add_block(block_amt):
 	block += block_amt
+# Inside Entity.gd (or Player.gd)
+
+
+func reset_battle_stats():
+	# 1. Clear all temporary statuses
+	statuses.clear()
+	
+	# 2. Reset block
+	block = 0
+	
+	# 3. Reset mana
+	mana = max_mana 
+	
+	# NOTE: We do NOT reset HP here, as HP persistence is core to a roguelike!
+	print(entity_name, " battle stats and statuses have been reset.")

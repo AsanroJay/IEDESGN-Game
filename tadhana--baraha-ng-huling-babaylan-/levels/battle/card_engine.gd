@@ -68,6 +68,10 @@ func _process_effect(effect_name: String, params: Array, property, is_piercing, 
 		"block":
 			var amount = params[0]
 			caster.gain_block(amount)
+			if caster == battle_manager.player_entity:
+				battle_manager.player_node.show_floating_text("+" + str(amount) + " BLOCK", Color.BLUE, -60)
+			else:
+				battle_manager.enemy_node.show_floating_text("+" + str(amount) + " BLOCK", Color.BLUE, -60)
 			print("CardEngine: Gained", amount, "block.")
 
 		# ---------------------------------------------------------
@@ -78,7 +82,7 @@ func _process_effect(effect_name: String, params: Array, property, is_piercing, 
 			caster.heal(amount)
 			
 			if caster == battle_manager.player_entity:
-				battle_manager.player_node.show_floating_text("Healed +" + str(amount) + " HP", Color.GREEN, -60)
+				battle_manager.player_node.show_floating_text("Healed +" + str(amount) + " BLOCK", Color.GREEN, -60)
 			else:
 				battle_manager.enemy_node.show_floating_text("Healed +" + str(amount) + " HP", Color.GREEN, -60)
 
