@@ -17,6 +17,14 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": ExtResource("12_o7jof")
+}],
+"loop": true,
+"name": &"default_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": ExtResource("1_aeekn")
 }, {
 "duration": 1.0,
@@ -50,14 +58,6 @@ animations = [{
 "texture": ExtResource("11_cjk2n")
 }],
 "loop": true,
-"name": &"default",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("12_o7jof")
-}],
-"loop": true,
 "name": &"idle",
-"speed": 5.0
+"speed": 10.0
 }]

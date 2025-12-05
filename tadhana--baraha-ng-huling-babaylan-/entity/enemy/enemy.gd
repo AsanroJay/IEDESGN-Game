@@ -20,7 +20,7 @@ func load_enemy_data(type):
 		},
 		"aswang": {
 			"name": "Aswang",
-			"hp": 50,
+			"hp": 42,
 			"mana": 0,
 			"armor": 2,
 			"resistance":0,
@@ -28,7 +28,7 @@ func load_enemy_data(type):
 		},
 		"manananggal": {
 			"name": "Manananggal",
-			"hp": 40,
+			"hp": 30,
 			"mana": 0,
 			"armor": 0,
 			"resistance":0,
@@ -44,11 +44,27 @@ func load_enemy_data(type):
 		},
 		"kapre": {
 			"name": "Kapre",
-			"hp": 40,
+			"hp": 60,
 			"mana": 0,
-			"armor": 4,
+			"armor": 5,
 			"resistance":0,
 			"frames": "res://entity/enemy/animations/kapre.tres"
+		},
+			"sigbin": {
+			"name": "Kapre",
+			"hp": 40,
+			"mana": 0,
+			"armor": 2,
+			"resistance":0,
+			"frames": "res://entity/enemy/animations/sigbin.tres"
+		},
+			"mangkukulam": {
+			"name": "Kapre",
+			"hp": 55,
+			"mana": 0,
+			"armor": 0,
+			"resistance":0,
+			"frames": "res://entity/enemy/animations/mangkukulam.tres"
 		}
 	}
 

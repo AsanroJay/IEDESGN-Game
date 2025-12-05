@@ -1,0 +1,27 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://h68rwtiyudqg"]
+
+[ext_resource type="Texture2D" uid="uid://ccn3l13r8nymc" path="res://entity/enemy/assets/mangkukulam frames/Mangkukulam_Frame1.png" id="1_48w60"]
+[ext_resource type="Texture2D" uid="uid://d0pdhmewnerfl" path="res://entity/enemy/assets/mangkukulam frames/Mangkukulam_Frame2.png" id="2_576hi"]
+[ext_resource type="Texture2D" uid="uid://clex12o5wgrnn" path="res://entity/enemy/assets/mangkukulam frames/Mangkukulam_Frame3.png" id="3_2bvxe"]
+
+[resource]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_48w60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_576hi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2bvxe")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

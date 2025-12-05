@@ -1,0 +1,35 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://c7l0erqimujkj"]
+
+[ext_resource type="Texture2D" uid="uid://basqnelssi4c" path="res://entity/enemy/assets/sigbin frames/Sigbin_Frame1.png" id="1_rkrhx"]
+[ext_resource type="Texture2D" uid="uid://bmyqhohqol4ts" path="res://entity/enemy/assets/sigbin frames/Sigbin_Frame2.png" id="2_ljkhw"]
+[ext_resource type="Texture2D" uid="uid://384othild8gu" path="res://entity/enemy/assets/sigbin frames/Sigbin_Frame3.png" id="3_iu0xu"]
+[ext_resource type="Texture2D" uid="uid://dmb8psva6n1e7" path="res://entity/enemy/assets/sigbin frames/Sigbin_Frame4.png" id="4_nsv5f"]
+[ext_resource type="Texture2D" uid="uid://bu2vurslc7tsq" path="res://entity/enemy/assets/sigbin frames/Sigbin_Frame5.png" id="5_iw0g4"]
+
+[resource]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rkrhx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ljkhw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_iu0xu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_nsv5f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_iw0g4")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

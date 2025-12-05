@@ -1,0 +1,27 @@
+[gd_resource type="SpriteFrames" load_steps=4 format=3 uid="uid://bdgncuf74yj4u"]
+
+[ext_resource type="Texture2D" uid="uid://bboao82olst0e" path="res://entity/player/assets/Arbularyo_Frame1.png" id="1_ankrj"]
+[ext_resource type="Texture2D" uid="uid://n3tykr6bnble" path="res://entity/player/assets/Arbularyo_Frame2.png" id="2_xeb3s"]
+[ext_resource type="Texture2D" uid="uid://bgtxqq7t82nsw" path="res://entity/player/assets/Arbularyo_Frame3.png" id="3_om0e5"]
+
+[resource]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_ankrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xeb3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_om0e5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]

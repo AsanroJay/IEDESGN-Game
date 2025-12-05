@@ -15,6 +15,11 @@ var ManaCountScene = preload("res://components/mana count/mana_counter.tscn")
 var TurnOverlayScene := preload("res://components/turn overlay/turn_overlay.tscn")
 
 
+var RewardOverlayScene := preload("res://components/reward overlay/reward_overlay.tscn")
+var current_reward_overlay = null
+
+
+
 var CardEngineClass = preload("res://levels/battle/card_engine.gd") # Update path
 var card_engine: CardEngine
 # Card system
@@ -159,6 +164,10 @@ func battle_loop():
 	await start_player_turn()
 	
 func start_player_turn() -> void:
+	if enemy_entity.is_dead():
+		await end_battle_rewards()
+		return
+	
 	process_turn_start_effects(player_entity,player_node)
 
 	is_player_turn = true
@@ -200,6 +209,9 @@ func end_player_turn():
 
 
 func start_enemy_turn() -> void:
+	if enemy_entity.is_dead():
+		await end_battle_rewards()
+		return
 	# turn start effects (bleed, etc)
 	process_turn_start_effects(enemy_entity, enemy_node)
 
@@ -258,7 +270,6 @@ func enemy_attack():
 		enemy_node.play_hit_animation()
 	else:
 		player_node.play_hit_animation()
-		print("BENNN")
 
 	update_player_health_display()
 	update_enemy_health_display()
@@ -268,8 +279,8 @@ func enemy_attack():
 func generate_random_enemy(node_info):
 	var layer_rules = {
 		1: ["kapre"],
-		2: ["manananggal","aswang","kapre","white_lady"],
-		3: ["manananggal"],
+		2: ["sigbin"],
+		3: ["mangkukulam"],
 		4: ["default"],
 		5: ["default"],
 		6: ["default"],
@@ -489,7 +500,7 @@ func _update_ui_after_effects():
 		player_healthbar.update_block(player_entity.block)
 	if enemy_healthbar.has_method("update_block"):
 		enemy_healthbar.update_block(enemy_entity.block)
-
+		
 
 func _play_card_animation(card_type: String, caster, target):
 	match card_type:
@@ -524,3 +535,60 @@ func get_exhaust_pile():
 
 func get_full_deck():
 	return player_entity.deck
+
+# -----------------------------
+# 		Encounter Rewards
+# -----------------------------
+# -----------------------------
+# 		Encounter Rewards
+# -----------------------------
+func generate_reward_cards() -> Array:
+	var all_cards: Array = CardDatabase.CARDS.values()
+	var pool: Array = []
+
+	for c in all_cards:
+		pool.append(c)
+
+	pool.shuffle()
+
+	var reward_cards: Array = []
+	for i in range(min(3, pool.size())):
+		reward_cards.append(pool[i])
+
+	return reward_cards
+
+
+func end_battle_rewards() -> void:
+	print("=== BATTLE WON — SHOWING REWARDS ===")
+
+	card_input_enabled = false
+	is_player_turn = false
+
+	battleroom_ref.set_ui_visible(false)
+
+	var reward_cards = generate_reward_cards()
+
+	# Instantiate overlay
+	var overlay = RewardOverlayScene.instantiate()
+	battleroom_ref.add_child(overlay)
+	current_reward_overlay = overlay
+
+	# Connect correctly (Godot 4)
+	overlay.reward_chosen.connect(_on_reward_selected)
+
+	overlay.open_reward(reward_cards)
+
+
+func _on_reward_selected(card_data):
+	print("Reward chosen:", card_data["card_name"])
+
+	player_entity.deck.append(card_data)
+
+	if current_reward_overlay:
+		current_reward_overlay.queue_free()
+		current_reward_overlay = null
+
+	battleroom_ref.set_ui_visible(true)
+
+	await get_tree().create_timer(0.5).timeout
+	GameManager.return_to_map()

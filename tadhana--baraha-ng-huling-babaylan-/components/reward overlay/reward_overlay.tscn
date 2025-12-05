@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://nvpuxwe1lffl"]
+
+[ext_resource type="Script" uid="uid://csbx2u6l6x074" path="res://components/reward overlay/reward_overlay.gd" id="1_otr8x"]
+[ext_resource type="FontFile" uid="uid://oqpwikc7t54t" path="res://fonts/sundaymarket.otf" id="2_h3yi4"]
+
+[node name="RewardOverlay" type="CanvasLayer"]
+script = ExtResource("1_otr8x")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = 406.00003
+offset_top = 62.0
+offset_right = 446.00003
+offset_bottom = 102.0
+scale = Vector2(12.234464, 14.797098)
+
+[node name="TitleLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 10.870929
+offset_top = -0.2703234
+offset_right = 60.87093
+offset_bottom = 22.729677
+scale = Vector2(0.36221316, 0.32754406)
+theme_override_fonts/font = ExtResource("2_h3yi4")
+theme_override_font_sizes/font_size = 17
+text = "Spoils"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_trim_flags = 0
+justification_flags = 128
+
+[node name="CardContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 0.49041492
+offset_top = 10.137122
+offset_right = 39.918262
+offset_bottom = 30.614109

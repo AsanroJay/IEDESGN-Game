@@ -292,6 +292,7 @@ texture = ExtResource("7_2m8lf")
 expand_mode = 1
 
 [node name="PlayArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayArea"]
 position = Vector2(649, 302)
