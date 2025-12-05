@@ -2,30 +2,6 @@ extends Node
 class_name CardDB
 
 var CARDS = {
-	"default": {
-		"card_name": "Default",
-		"type": "attack",
-		"cost": 1,
-		"image_path": "res://cards/assets/default_card.png",
-		"property": "physical",
-		"effects": [
-			["damage", 6]
-		],
-		"exhaust": false
-	},
-
-	"defend": {
-		"card_name": "Defend",
-		"type": "defend",
-		"cost": 1,
-		"image_path": "res://cards/assets/defend.png",
-		"property": "defense",
-		"effects": [
-			["block", 5]
-		],
-		"exhaust": false
-	},
-
 	# ------------------------
 	# PHYSICAL ATTACK CARDS
 	# ------------------------
@@ -120,17 +96,6 @@ var CARDS = {
 		"exhaust": false
 	},
 
-	"kulam": {
-		"card_name": "Kulam",
-		"type": "spell",
-		"cost": 2,
-		"image_path": "res://cards/assets/kulam.png",
-		"property": "magic",
-		"effects": [
-			["flip_resistance"]
-		],
-		"exhaust": true
-	},
 
 	"kulog_ng_kidlat": {
 		"card_name": "Kulog ng Kidlat",
@@ -144,44 +109,8 @@ var CARDS = {
 		"exhaust": false
 	},
 
-	"baha_ni_magwayen": {
-		"card_name": "Baha ni Magwayen",
-		"type": "spell",
-		"cost": 3,
-		"image_path": "res://cards/assets/baha_ni_magwayen.png",
-		"property": "magic",
-		"effects": [
-			["flood", 2, 3],
-			["force_physical_next_turn"]
-		],
-		"exhaust": false
-	},
 
-	"apoy_ni_agui": {
-		"card_name": "Apoy ni Agui",
-		"type": "spell",
-		"cost": 3,
-		"image_path": "res://cards/assets/apoy_ni_agui.png",
-		"property": "magic",
-		"effects": [
-			["burn", 2, 3],
-			["ignore_armor_next_attack"]
-		],
-		"exhaust": false
-	},
 
-	"lindol_ni_panlinugon": {
-		"card_name": "Lindol ni Panlinugon",
-		"type": "attack",
-		"cost": 3,
-		"image_path": "res://cards/assets/lindol_ni_panlinugon.png",
-		"property": "magic",
-		"effects": [
-			["damage", 6],
-			["enemy_stun_next_turn"]
-		],
-		"exhaust": false
-	},
 
 	# ------------------------
 	# BUFF SPELL CARDS
@@ -211,53 +140,8 @@ var CARDS = {
 		"exhaust": false
 	},
 
-	"pagpag": {
-		"card_name": "Pagpag",
-		"type": "spell",
-		"cost": 1,
-		"image_path": "res://cards/assets/pagpag.png",
-		"property": "buff",
-		"effects": [
-			["return_exhausted"]
-		],
-		"exhaust": true
-	},
 
-	"tulong_ng_duwende": {
-		"card_name": "Tulong ng Duwende",
-		"type": "spell",
-		"cost": 2,
-		"image_path": "res://cards/assets/tulong_ng_duwende.png",
-		"property": "buff",
-		"effects": [
-			["fetch_card_cost0"]
-		],
-		"exhaust": false
-	},
 
-	"dasal_para_kay_anagolay": {
-		"card_name": "Dasal para kay Anagolay",
-		"type": "spell",
-		"cost": 3,
-		"image_path": "res://cards/assets/dasal_para_kay_anagolay.png",
-		"property": "buff",
-		"effects": [
-			["add_random_cards_cost0", 2]
-		],
-		"exhaust": false
-	},
-
-	"ginhawa_ng_anino": {
-		"card_name": "Ginhawa ng Anino",
-		"type": "spell",
-		"cost": 3,
-		"image_path": "res://cards/assets/ginhawa_ng_anino.png",
-		"property": "buff",
-		"effects": [
-			["set_hand_cost_zero"]
-		],
-		"exhaust": false
-	},
 
 	# ------------------------
 	# DEBUFF SPELL CARDS
@@ -308,18 +192,6 @@ var CARDS = {
 		"property": "debuff",
 		"effects": [
 			["enemy_miss_chance", 0.50]
-		],
-		"exhaust": false
-	},
-
-	"kulam_ng_ugat": {
-		"card_name": "Kulam ng Ugat",
-		"type": "spell",
-		"cost": 2,
-		"image_path": "res://cards/assets/kulam_ng_ugat.png",
-		"property": "debuff",
-		"effects": [
-			["poison", 4, 3]
 		],
 		"exhaust": false
 	},
