@@ -86,6 +86,24 @@ func generate_random_encounter(node):
 		print("Random encounter room: Rest Site")
 		enter_rest_site(node)
 
+func player_died():
+	print("GAME OVER! Player has died.")
+	# Clean up the current battle scene
+	if current_room:
+		current_room.queue_free()
+		current_room = null
+	
+	# Hide the map if it was still around, and unload everything
+	if map_scene:
+		map_scene.queue_free()
+		map_scene = null
+
+	get_tree().change_scene_to_file("res://levels/main_menu/main_menu.tscn")
+	
+	# Reset game state and player data for a fresh start
+	player = null
+	state = GameState.MENU # Assuming you have a MENU state in your enum
+
 func enter_shop(node):
 	state = GameState.SHOP
 	

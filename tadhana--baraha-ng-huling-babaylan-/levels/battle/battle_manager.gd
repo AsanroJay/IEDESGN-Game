@@ -115,6 +115,11 @@ func start_battle(battleroom, node_info, player_ref, is_buffed):
 	
 	print("Battle initialized successfully with enemy:", enemy_type)
 	
+	
+func is_player_dead():
+	if player_entity.hp <= 0:
+		return true
+	return false
 # -----------------------------------------
 #  BUFFED ENCOUNTER LOGIC
 # -----------------------------------------
@@ -164,6 +169,9 @@ func battle_loop():
 	await start_player_turn()
 	
 func start_player_turn() -> void:
+	if is_player_dead():
+		GameManager.player_died()
+	
 	if enemy_entity.is_dead():
 		await end_battle_rewards()
 		return
@@ -196,6 +204,9 @@ func start_player_turn() -> void:
 
 
 func end_player_turn():
+	if is_player_dead():
+		GameManager.player_died()
+		
 	if !is_player_turn:
 		return # prevent double clicks
 	
@@ -209,6 +220,9 @@ func end_player_turn():
 
 
 func start_enemy_turn() -> void:
+	if is_player_dead():
+		GameManager.player_died()
+		
 	if enemy_entity.is_dead():
 		await end_battle_rewards()
 		return
