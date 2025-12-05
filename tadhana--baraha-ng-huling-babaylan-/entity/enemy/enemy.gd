@@ -19,7 +19,7 @@ func load_enemy_data(type):
 			"frames": "res://entity/enemy/animations/default_frames.tres"
 		},
 		"aswang": {
-			"name": "Aswang",
+			"name": "aswang",
 			"hp": 42,
 			"mana": 0,
 			"armor": 2,
@@ -27,7 +27,7 @@ func load_enemy_data(type):
 			"frames": "res://entity/enemy/animations/aswang.tres"
 		},
 		"manananggal": {
-			"name": "Manananggal",
+			"name": "manananggal",
 			"hp": 30,
 			"mana": 0,
 			"armor": 0,
@@ -35,7 +35,7 @@ func load_enemy_data(type):
 			"frames": "res://entity/enemy/animations/manananggal.tres"
 		},
 		"white_lady": {
-			"name": "White Lady",
+			"name": "white_lady",
 			"hp": 40,
 			"mana": 0,
 			"armor": 0,
@@ -43,7 +43,7 @@ func load_enemy_data(type):
 			"frames": "res://entity/enemy/animations/white_lady.tres"
 		},
 		"kapre": {
-			"name": "Kapre",
+			"name": "kapre",
 			"hp": 60,
 			"mana": 0,
 			"armor": 5,
@@ -51,7 +51,7 @@ func load_enemy_data(type):
 			"frames": "res://entity/enemy/animations/kapre.tres"
 		},
 			"sigbin": {
-			"name": "Kapre",
+			"name": "sigbin",
 			"hp": 40,
 			"mana": 0,
 			"armor": 2,
@@ -59,7 +59,7 @@ func load_enemy_data(type):
 			"frames": "res://entity/enemy/animations/sigbin.tres"
 		},
 			"mangkukulam": {
-			"name": "Kapre",
+			"name": "mangkukulam",
 			"hp": 55,
 			"mana": 0,
 			"armor": 0,
