@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dywmkr2eoj5m8"]
+[gd_scene load_steps=36 format=3 uid="uid://dywmkr2eoj5m8"]
 
 [ext_resource type="Script" uid="uid://do126ggh2pnsw" path="res://levels/battle/battle_room.gd" id="1_el3db"]
 [ext_resource type="Texture2D" uid="uid://d2658ri3w2vsm" path="res://levels/battle/assets/Level 1 - forest.png" id="2_tp6sv"]
@@ -54,6 +54,12 @@ fill_from = Vector2(0, 0.004672897)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tp6sv"]
 size = Vector2(238, 214.0625)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_po6yq"]
+bg_color = Color(0.671429, 0, 0.04485386, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qeg46"]
+bg_color = Color(0.70980394, 0.105882354, 0, 0.8235294)
 
 [node name="BattleRoom" type="Node2D"]
 position = Vector2(8, 0)
@@ -306,6 +312,17 @@ visible = false
 position = Vector2(658, 338)
 texture = ExtResource("14_po6yq")
 
+[node name="ClaimRewards" type="Button" parent="."]
+offset_left = 541.0
+offset_top = 596.0
+offset_right = 701.0
+offset_bottom = 646.0
+theme_override_fonts/font = ExtResource("11_1dgad")
+theme_override_styles/normal = SubResource("StyleBoxFlat_po6yq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qeg46")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qeg46")
+text = "Claim Rewards"
+
 [connection signal="pressed" from="UI/EndTurnButton" to="." method="_on_end_turn_button_pressed"]
 [connection signal="pressed" from="UI/OpenDrawPile" to="." method="_on_open_draw_pile_pressed"]
 [connection signal="pressed" from="UI/OpenDiscardPile" to="." method="_on_open_discard_pile_pressed"]
@@ -313,3 +330,4 @@ texture = ExtResource("14_po6yq")
 [connection signal="pressed" from="NavbarTemp/Map Button" to="." method="_on_map_button_pressed"]
 [connection signal="area_entered" from="PlayArea" to="." method="_on_play_area_area_entered"]
 [connection signal="area_exited" from="PlayArea" to="." method="_on_play_area_area_exited"]
+[connection signal="pressed" from="ClaimRewards" to="." method="_on_claim_rewards_pressed"]

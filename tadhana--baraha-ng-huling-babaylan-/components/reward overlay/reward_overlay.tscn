@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://nvpuxwe1lffl"]
+[gd_scene load_steps=6 format=3 uid="uid://nvpuxwe1lffl"]
 
 [ext_resource type="Script" uid="uid://csbx2u6l6x074" path="res://components/reward overlay/reward_overlay.gd" id="1_otr8x"]
 [ext_resource type="FontFile" uid="uid://oqpwikc7t54t" path="res://fonts/sundaymarket.otf" id="2_h3yi4"]
+[ext_resource type="Script" uid="uid://ct10oygvuxetj" path="res://components/deck overlay/deck_card.gd" id="3_8lhw4"]
+[ext_resource type="Texture2D" uid="uid://cpgnjn5ql2u05" path="res://levels/level_assets/Rewards Window.png" id="3_h3yi4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8lhw4"]
 
 [node name="RewardOverlay" type="CanvasLayer"]
 script = ExtResource("1_otr8x")
@@ -12,8 +16,10 @@ offset_top = 62.0
 offset_right = 446.00003
 offset_bottom = 102.0
 scale = Vector2(12.234464, 14.797098)
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8lhw4")
 
 [node name="TitleLabel" type="Label" parent="Panel"]
+visible = false
 layout_mode = 0
 offset_left = 10.870929
 offset_top = -0.2703234
@@ -28,9 +34,36 @@ vertical_alignment = 1
 autowrap_trim_flags = 0
 justification_flags = 128
 
-[node name="CardContainer" type="HBoxContainer" parent="Panel"]
+[node name="PanelBackground" type="TextureRect" parent="Panel"]
 layout_mode = 0
-offset_left = 0.49041492
-offset_top = 10.137122
-offset_right = 39.918262
-offset_bottom = 30.614109
+offset_left = -3.1059816
+offset_top = -4.1900105
+offset_right = 646.89404
+offset_bottom = 795.81
+scale = Vector2(0.07068332, 0.055336416)
+texture = ExtResource("3_h3yi4")
+
+[node name="CardContainer" type="GridContainer" parent="Panel"]
+custom_minimum_size = Vector2(120, 180)
+layout_mode = 0
+offset_left = 0.8173617
+offset_top = 16.354559
+offset_right = 120.81736
+offset_bottom = 196.35455
+scale = Vector2(0.3237735, 0.12308017)
+columns = 3
+
+[node name="DeckCard" type="VBoxContainer" parent="Panel/CardContainer"]
+layout_mode = 2
+script = ExtResource("3_8lhw4")
+metadata/_custom_type_script = "uid://ct10oygvuxetj"
+
+[node name="DeckCard2" type="VBoxContainer" parent="Panel/CardContainer"]
+layout_mode = 2
+script = ExtResource("3_8lhw4")
+metadata/_custom_type_script = "uid://ct10oygvuxetj"
+
+[node name="DeckCard3" type="VBoxContainer" parent="Panel/CardContainer"]
+layout_mode = 2
+script = ExtResource("3_8lhw4")
+metadata/_custom_type_script = "uid://ct10oygvuxetj"

@@ -617,40 +617,86 @@ func generate_reward_cards() -> Array:
 	return reward_cards
 
 
+#func end_battle_rewards() -> void:
+	#print("=== BATTLE WON — SHOWING REWARDS ===")
+		#
+#
+	#
+	#card_input_enabled = false
+	#is_player_turn = false
+#
+	#battleroom_ref.set_ui_visible(false)
+	#player_node.is_visble = false
+	#enemy_node.is_visible = false
+	#battleroom_ref.claim_rewards.visible = true
+#
+	#var reward_cards = generate_reward_cards()
+#
+	### Instantiate overlay
+	##var overlay = RewardOverlayScene.instantiate()
+	##battleroom_ref.add_child(overlay)
+	##current_reward_overlay = overlay
+	#
+	##Reset player stats
+	#player_entity.reset_battle_stats()
+#
+	### Connect correctly (Godot 4)
+	##overlay.reward_chosen.connect(_on_reward_selected)
+##
+	##overlay.open_reward(reward_cards)
 func end_battle_rewards() -> void:
 	print("=== BATTLE WON — SHOWING REWARDS ===")
-
+		
 	card_input_enabled = false
 	is_player_turn = false
 
 	battleroom_ref.set_ui_visible(false)
+	player_node.visible = false
+	enemy_node.visible = false
 
-	var reward_cards = generate_reward_cards()
+	# Show claim reward button
+	battleroom_ref.claim_rewards.visible = true
 
-	# Instantiate overlay
-	var overlay = RewardOverlayScene.instantiate()
-	battleroom_ref.add_child(overlay)
-	current_reward_overlay = overlay
-	
-	#Reset player stats
+	# Reset stats after the battle
 	player_entity.reset_battle_stats()
-
-	# Connect correctly (Godot 4)
-	overlay.reward_chosen.connect(_on_reward_selected)
-
-	overlay.open_reward(reward_cards)
+	
 
 
-func _on_reward_selected(card_data):
-	print("Reward chosen:", card_data["card_name"])
+func _on_claim_rewards_pressed() -> void:
+	print("=== CLAIM REWARD PRESSED ===")
 
-	player_entity.deck.append(card_data)
+	# Hide button so player can't double-claim
+	battleroom_ref.claim_rewards.visible = false
 
-	if current_reward_overlay:
-		current_reward_overlay.queue_free()
-		current_reward_overlay = null
+	# --- RANDOM GOLD ---
+	var gold_reward = randi_range(10, 30)
+	player_entity.gold += gold_reward
+	battleroom_ref.gold_counter.text = str(player_entity.gold)
+	print("Gained gold:", gold_reward)
 
-	battleroom_ref.set_ui_visible(true)
+	# --- RANDOM CARD ---
+	var all_cards: Array = CardDatabase.CARDS.values()
+	var random_card = all_cards.pick_random()
+	player_entity.deck.append(random_card)
+	print("Gained card:", random_card["card_name"])
 
+
+	# Return to map
 	await get_tree().create_timer(0.5).timeout
 	GameManager.return_to_map()
+
+	# Restore UI
+	battleroom_ref.set_ui_visible(true)
+#func _on_reward_selected(card_data):
+	#print("Reward chosen:", card_data["card_name"])
+#
+	#player_entity.deck.append(card_data)
+#
+	#if current_reward_overlay:
+		#current_reward_overlay.queue_free()
+		#current_reward_overlay = null
+#
+	#battleroom_ref.set_ui_visible(true)
+#
+	#await get_tree().create_timer(0.5).timeout
+	#GameManager.return_to_map()

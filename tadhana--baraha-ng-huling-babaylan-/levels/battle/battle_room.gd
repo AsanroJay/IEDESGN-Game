@@ -10,6 +10,7 @@ var player
 var enemy 
 
 @onready var gold_counter = $NavbarTemp/GoldCounter
+@onready var claim_rewards = $ClaimRewards
 
 #Deck Related Variables
 var deck = []        
@@ -30,6 +31,7 @@ func start_battle_from_node(node_info, player_ref, is_buffed):
 	battle_manager.start_battle(self, node_info, player_ref, is_buffed)
 	
 	gold_counter.text = str(player_ref.gold)
+	claim_rewards.visible = false
 
 
 func _ready():
@@ -86,3 +88,7 @@ func show_pile(title: String, pile: Array):
 	)
 func set_ui_visible(is_visible: bool):
 	$UI.visible = is_visible
+
+
+func _on_claim_rewards_pressed() -> void:
+	battle_manager._on_claim_rewards_pressed()
