@@ -1,0 +1,40 @@
+[gd_scene load_steps=9 format=3 uid="uid://dkkhn1giwlahe"]
+
+[ext_resource type="Script" uid="uid://dh21cw10a2vsa" path="res://levels/main_menu/main_menu.gd" id="1_qbtdg"]
+[ext_resource type="Texture2D" uid="uid://dlj1pjemtpndf" path="res://levels/main_menu/assets/Title Card with Bg.png" id="1_u4e7g"]
+[ext_resource type="Texture2D" uid="uid://d0tnwumgcnrpk" path="res://levels/main_menu/assets/Start Button.png" id="2_qbtdg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_86fa0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h370v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qhxwq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vxpir"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dedsy"]
+
+[node name="MainMenu" type="Node2D"]
+script = ExtResource("1_qbtdg")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_u4e7g")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="."]
+offset_left = 490.99997
+offset_top = 492.0
+offset_right = 2547.0
+offset_bottom = 2548.0
+scale = Vector2(0.14989077, 0.14929754)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_86fa0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_h370v")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qhxwq")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vxpir")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dedsy")
+icon = ExtResource("2_qbtdg")
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

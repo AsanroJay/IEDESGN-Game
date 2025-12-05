@@ -27,7 +27,7 @@ var ATTACKS := {
 		"type": "attack",
 		"property": "physical",
 		"effects": [
-			["damage", 7],
+			["damage", 5],
 			["lifesteal_unblocked"]
 			
 		]

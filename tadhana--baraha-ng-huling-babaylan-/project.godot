@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Tadhana: Baraha ng Huling Babaylan"
-run/main_scene="uid://bv525pq6kkxm5"
+run/main_scene="uid://dkkhn1giwlahe"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

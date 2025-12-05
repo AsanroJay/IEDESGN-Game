@@ -4,9 +4,12 @@ var player
 var map_scene: Node = null
 var current_room: Node = null
 
-enum GameState { MAP, BATTLE, SHOP, REST, BOSS }
+enum GameState { MAP, BATTLE, SHOP, REST, BOSS , MENU}
 var state = GameState.MAP
 
+func start_game():
+	load_map()
+	
 func load_map():
 	if player == null:
 		player = Player.new()
@@ -105,5 +108,3 @@ func enter_rest_site(node):
 		
 	current_room.load_rest_room(node,player)
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	load_map()
